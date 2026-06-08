@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resources | National Wild Pig Task Force</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="resources">
+<div data-layout="header"></div>
+
+<section class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('assets/nwptf-pig.jpg');"></div>
+  <div class="wrap">
+    <div class="kicker">Resources</div>
+    <h1>Tools, guidance, and references for wild pig management</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <p>A growing library of materials for researchers, policymakers, and land managers. Filter by type to find what fits your work.</p>
+    </div>
+
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="guide">Guides</button>
+      <button class="filter-btn" data-filter="research">Research</button>
+      <button class="filter-btn" data-filter="policy">Policy</button>
+      <button class="filter-btn" data-filter="data">Data and maps</button>
+    </div>
+
+    <div class="resource-grid" id="resourceGrid">
+      <div class="resource-card" data-type="guide">
+        <span class="tag">Guide</span>
+        <h3>Trapping best practices</h3>
+        <p>Field-tested approaches to whole-sounder trapping, equipment selection, and avoiding common mistakes.</p>
+        <a href="#">View guide</a>
+      </div>
+      <div class="resource-card" data-type="guide">
+        <span class="tag">Guide</span>
+        <h3>Damage identification and reporting</h3>
+        <p>How to recognize wild pig damage and document it for agencies and management programs.</p>
+        <a href="#">View guide</a>
+      </div>
+      <div class="resource-card" data-type="research">
+        <span class="tag">Research</span>
+        <h3>Population ecology literature</h3>
+        <p>A curated set of peer-reviewed studies on reproduction, movement, and population dynamics.</p>
+        <a href="#">Browse studies</a>
+      </div>
+      <div class="resource-card" data-type="research">
+        <span class="tag">Research</span>
+        <h3>Disease surveillance findings</h3>
+        <p>Summaries of research on diseases carried by wild pigs and the risks to livestock and people.</p>
+        <a href="#">Read summaries</a>
+      </div>
+      <div class="resource-card" data-type="policy">
+        <span class="tag">Policy</span>
+        <h3>Management policy briefings</h3>
+        <p>Plain-language briefings on regulatory options and the economics of wild pig control.</p>
+        <a href="#">View briefings</a>
+      </div>
+      <div class="resource-card" data-type="data">
+        <span class="tag">Data and maps</span>
+        <h3>Distribution and range maps</h3>
+        <p>Visual references showing where wild pig populations are established and expanding.</p>
+        <a href="#">Open maps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>Have a resource to contribute?</h2>
+    <p>The library grows through the members who use it. Share research, guidance, or tools with the Task Force.</p>
+    <a href="mailto:nwptf.chair@gmail.com" class="btn btn-dark">Submit a resource</a>
+  </div>
+</section>
+
+<div data-layout="footer"></div>
+<script src="assets/layout.js"></script>
+<script>
+(function () {
+  var bar = document.getElementById('filterBar');
+  var cards = document.querySelectorAll('#resourceGrid .resource-card');
+  bar.addEventListener('click', function (e) {
+    var btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    bar.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    var f = btn.getAttribute('data-filter');
+    cards.forEach(function (c) {
+      c.style.display = (f === 'all' || c.getAttribute('data-type') === f) ? '' : 'none';
+    });
+  });
+})();
+</script>
+</body>
+</html>
