@@ -53,7 +53,7 @@
       '<div class="footer-top">' +
         '<div class="footer-brand">' +
           '<img src="assets/nwptf-logo-light.png" srcset="assets/nwptf-logo-light.png 1x, assets/nwptf-logo-light@2x.png 2x" alt="National Wild Pig Task Force">' +
-          '<p>A technical, scientific, and leadership alliance of state, federal, provincial, and private partners working to reduce and eventually eradicate free-ranging wild pigs in North America.</p>' +
+          '<p>A technical, scientific, and leadership alliance of federal, tribal, provincial, state, and private partners working to control, reduce the damage caused by, and eradicate free-ranging wild pigs in North America.</p>' +
         '</div>' +
         '<div class="footer-col">' +
           '<h4>Explore</h4>' +
