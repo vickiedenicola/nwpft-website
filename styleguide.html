@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Brand Style Guide | National Wild Pig Task Force</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="">
+<div data-layout="header"></div>
+
+<section class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('assets/nwptf-pig.jpg');"></div>
+  <div class="wrap">
+    <div class="kicker">Internal reference</div>
+    <h1>Brand style guide</h1>
+  </div>
+</section>
+
+<!-- LOGO -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><div class="kicker">Logo</div><h2>The mark</h2>
+      <p>The NWPTF logo combines a brown wild-pig illustration with the wordmark. Use the dark version on light backgrounds and the light version on dark (moss) backgrounds. Always preserve clear space and never recolor the mark.</p>
+    </div>
+    <div class="sg-row">
+      <div style="background:var(--paper);border:1px solid var(--line);padding:1.5rem;"><img src="assets/nwptf-logo.png" alt="NWPTF logo (dark)" style="height:90px;width:auto;"></div>
+      <div style="background:var(--moss-deep);padding:1.5rem;"><img src="assets/nwptf-logo-light.png" alt="NWPTF logo (light)" style="height:90px;width:auto;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- COLOR -->
+<section class="section section-tan">
+  <div class="wrap">
+    <div class="section-head"><div class="kicker">Color</div><h2>Palette</h2>
+      <p>An earthy palette of greens, tan, and rust. Colors are defined as CSS custom properties in <code>:root</code>.</p>
+    </div>
+    <div class="sg-swatches">
+      <div class="sg-swatch"><div class="sg-chip" style="background:#3a4a2f"></div><div class="sg-meta"><strong>Moss</strong><code>--moss · #3a4a2f</code></div></div>
+      <div class="sg-swatch"><div class="sg-chip" style="background:#2b3723"></div><div class="sg-meta"><strong>Moss Deep</strong><code>--moss-deep · #2b3723</code></div></div>
+      <div class="sg-swatch"><div class="sg-chip" style="background:#5c6b45"></div><div class="sg-meta"><strong>Olive</strong><code>--olive · #5c6b45</code></div></div>
+      <div class="sg-swatch"><div class="sg-chip" style="background:#c79a5b"></div><div class="sg-meta"><strong>Tan</strong><code>--tan · #c79a5b</code></div></div>
+      <div class="sg-swatch"><div class="sg-chip" style="background:#a8552e"></div><div class="sg-meta"><strong>Rust</strong><code>--rust · #a8552e</code></div></div>
+      <div class="sg-swatch"><div class="sg-chip" style="background:#f4ede0"></div><div class="sg-meta"><strong>Bone</strong><code>--bone · #f4ede0</code></div></div>
+      <div class="sg-swatch"><div class="sg-chip" style="background:#ffffff"></div><div class="sg-meta"><strong>Paper</strong><code>--paper · #ffffff</code></div></div>
+      <div class="sg-swatch"><div class="sg-chip" style="background:#23271d"></div><div class="sg-meta"><strong>Ink</strong><code>--ink · #23271d</code></div></div>
+      <div class="sg-swatch"><div class="sg-chip" style="background:#4a5040"></div><div class="sg-meta"><strong>Ink Soft</strong><code>--ink-soft · #4a5040</code></div></div>
+      <div class="sg-swatch"><div class="sg-chip" style="background:#e3ddcf"></div><div class="sg-meta"><strong>Line</strong><code>--line · #e3ddcf</code></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TYPOGRAPHY -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><div class="kicker">Typography</div><h2>Type scale</h2>
+      <p><strong>Playfair Display</strong> (serif) for headings; <strong>Source Sans 3</strong> (sans-serif) for body and UI. Loaded from Google Fonts.</p>
+    </div>
+    <div class="sg-type prose" style="max-width:820px;">
+      <div class="kicker">Kicker / eyebrow label</div>
+      <h1 style="margin:0.4rem 0;">Heading 1 — Playfair Display</h1>
+      <h2 style="margin:0.4rem 0;">Heading 2 — Playfair Display</h2>
+      <h3 style="margin:0.4rem 0;">Heading 3 — Playfair Display</h3>
+      <p>Body text is set in Source Sans 3 at 17px with a 1.6 line height. It carries the bulk of the content and is tuned for comfortable reading across the site. <a href="#">Inline links</a> use the rust accent.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BUTTONS -->
+<section class="section section-tan">
+  <div class="wrap">
+    <div class="section-head"><div class="kicker">Components</div><h2>Buttons</h2></div>
+    <div class="sg-row">
+      <a href="#" class="btn btn-primary">Primary (rust)</a>
+      <a href="#" class="btn btn-dark">Dark (moss)</a>
+    </div>
+    <div class="sg-row" style="background:var(--moss-deep);padding:1.4rem;">
+      <a href="#" class="btn btn-primary">Primary on dark</a>
+      <a href="#" class="btn btn-ghost">Ghost (on dark)</a>
+    </div>
+  </div>
+</section>
+
+<!-- TAGS + CARDS -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><div class="kicker">Components</div><h2>Tags &amp; cards</h2></div>
+    <div class="sg-row">
+      <span class="tag" style="display:inline-block;font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;color:var(--olive);background:var(--bone);padding:0.25rem 0.6rem;border-radius:2px;">Resource tag</span>
+      <span style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--rust);font-weight:700;">News tag</span>
+    </div>
+    <div class="paths" style="margin-top:1.4rem;">
+      <div class="path-card"><h3>Card heading</h3><p>Cards use a white surface, a 1px line border, and a colored top or left accent that shifts to rust on hover.</p><a href="#">Call to action</a></div>
+      <div class="value-card"><h3>Value card</h3><p>A bordered card with a tan left rule, used for supporting points and value statements.</p></div>
+      <div class="subcommittee"><h3>Subcommittee</h3><div class="chair">Chair: <strong>Name</strong><br>Affiliation</div></div>
+    </div>
+  </div>
+</section>
+
+<div data-layout="footer"></div>
+<script src="assets/layout.js"></script>
+</body>
+</html>

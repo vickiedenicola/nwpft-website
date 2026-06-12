@@ -29,12 +29,13 @@
   }
 
   var headerHTML =
+    '<a class="skip-link" href="#main-content">Skip to content</a>' +
     '<div class="topbar"><div class="wrap">' +
       '<span class="topbar-left">Science-based management of invasive wild pigs across North America</span>' +
       socialRow('topbar-social') +
     '</div></div>' +
     '<header class="site-header"><div class="wrap">' +
-      '<a class="site-logo" href="index.html"><img src="assets/nwptf-logo.png" srcset="assets/nwptf-logo.png 1x, assets/nwptf-logo@2x.png 2x" alt="National Wild Pig Task Force"></a>' +
+      '<a class="site-logo" href="index.html"><img src="assets/nwptf-logo.png" srcset="assets/nwptf-logo.png 1x, assets/nwptf-logo@2x.png 2x" width="900" height="349" alt="National Wild Pig Task Force"></a>' +
       '<button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">' +
         '<span></span><span></span><span></span>' +
       '</button>' +
@@ -45,6 +46,7 @@
         navLink('research.html', 'Research', 'research') +
         navLink('governance.html', 'Governance', 'governance') +
         navLink('about.html', 'About', 'about') +
+        navLink('contact.html', 'Contact', 'contact') +
       '</nav>' +
     '</div></header>';
 
@@ -52,7 +54,7 @@
     '<footer class="site-footer"><div class="wrap">' +
       '<div class="footer-top">' +
         '<div class="footer-brand">' +
-          '<img src="assets/nwptf-logo-light.png" srcset="assets/nwptf-logo-light.png 1x, assets/nwptf-logo-light@2x.png 2x" alt="National Wild Pig Task Force">' +
+          '<img src="assets/nwptf-logo-light.png" srcset="assets/nwptf-logo-light.png 1x, assets/nwptf-logo-light@2x.png 2x" width="900" height="349" loading="lazy" alt="National Wild Pig Task Force">' +
           '<p>A technical, scientific, and leadership alliance of federal, tribal, provincial, state, and private partners working to control, reduce the damage caused by, and eradicate free-ranging wild pigs in North America.</p>' +
         '</div>' +
         '<div class="footer-col">' +
@@ -63,6 +65,7 @@
           '<a href="research.html">Research</a>' +
           '<a href="governance.html">Governance</a>' +
           '<a href="about.html">About</a>' +
+          '<a href="contact.html">Contact</a>' +
         '</div>' +
         '<div class="footer-col">' +
           '<h4>Connect</h4>' +
@@ -80,6 +83,14 @@
   if (h) h.outerHTML = headerHTML;
   var f = document.querySelector('[data-layout="footer"]');
   if (f) f.outerHTML = footerHTML;
+
+  // Give the first content section a target for the skip link
+  var firstSection = document.querySelector('.site-header ~ section, .site-header + section');
+  if (!firstSection) firstSection = document.querySelector('section');
+  if (firstSection && !document.getElementById('main-content')) {
+    firstSection.id = 'main-content';
+    firstSection.setAttribute('tabindex', '-1');
+  }
 
   // Mobile nav toggle
   var toggle = document.querySelector('.nav-toggle');
