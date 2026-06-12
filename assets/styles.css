@@ -487,6 +487,7 @@ a.news-card:hover .news-thumb { transform: scale(1.04); }
 .person .role { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rust); font-weight: 700; margin-bottom: 0.45rem; }
 .person h3 { font-size: 1.12rem; margin-bottom: 0.2rem; }
 .person .org { font-size: 0.9rem; color: var(--ink-soft); }
+.person h3.tbd { color: var(--ink-soft); font-weight: 600; font-style: italic; opacity: 0.65; }
 .subcommittees { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin-top: 1rem; }
 .subcommittee { background: var(--bone); border-left: 4px solid var(--tan); padding: 1.4rem 1.6rem; }
 .subcommittee h3 { font-size: 1.2rem; margin-bottom: 0.3rem; }
