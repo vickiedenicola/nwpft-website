@@ -40,9 +40,9 @@
       '</button>' +
       '<nav class="site-nav">' +
         navLink('index.html', 'Home', 'home') +
-        navLink('#', 'The Issue', 'issue') +
+        navLink('issue.html', 'The Issue', 'issue') +
         navLink('resources.html', 'Resources', 'resources') +
-        navLink('#', 'Research', 'research') +
+        navLink('research.html', 'Research', 'research') +
         navLink('governance.html', 'Governance', 'governance') +
         navLink('about.html', 'About', 'about') +
       '</nav>' +
@@ -58,7 +58,9 @@
         '<div class="footer-col">' +
           '<h4>Explore</h4>' +
           '<a href="index.html">Home</a>' +
+          '<a href="issue.html">The Issue</a>' +
           '<a href="resources.html">Resources</a>' +
+          '<a href="research.html">Research</a>' +
           '<a href="governance.html">Governance</a>' +
           '<a href="about.html">About</a>' +
         '</div>' +
