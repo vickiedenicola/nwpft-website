@@ -260,7 +260,7 @@ img { max-width: 100%; display: block; }
 /* ---------- SECTION SHELL ---------- */
 .section { padding: 5rem 0; }
 .section-tan { background: var(--bone); }
-.section-head { max-width: 680px; margin-bottom: 3rem; }
+.section-head { margin-bottom: 3rem; }
 .section-head .kicker {
   font-size: 0.8rem;
   letter-spacing: 0.14em;
@@ -270,7 +270,7 @@ img { max-width: 100%; display: block; }
   margin-bottom: 0.8rem;
 }
 .section-head h2 { font-size: clamp(1.9rem, 3.5vw, 2.8rem); margin-bottom: 1rem; }
-.section-head p { color: var(--ink-soft); font-size: 1.1rem; }
+.section-head p { color: var(--ink-soft); font-size: 1.1rem; max-width: 680px; }
 
 /* ---------- AUDIENCE PATHWAYS ---------- */
 .paths { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; }
@@ -301,9 +301,9 @@ img { max-width: 100%; display: block; }
 }
 .impact-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
 .impact-bg::after { content: ''; position: absolute; inset: 0; background: rgba(43,55,35,0.82); }
-.impact .wrap { position: relative; z-index: 2; padding: 5rem 2rem; max-width: 760px; }
+.impact .wrap { position: relative; z-index: 2; padding: 5rem 2rem; max-width: 980px; }
 .impact h2 { color: var(--bone); font-size: clamp(1.9rem, 3.5vw, 2.7rem); margin-bottom: 1.2rem; }
-.impact p { font-size: 1.15rem; color: rgba(244,237,224,0.9); margin-bottom: 1rem; }
+.impact p { font-size: 1.15rem; color: rgba(244,237,224,0.9); margin-bottom: 1rem; max-width: 720px; }
 
 /* ---------- NEWS ---------- */
 .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; }
