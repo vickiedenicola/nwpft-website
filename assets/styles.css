@@ -361,7 +361,14 @@ a.news-card:hover .news-thumb { transform: scale(1.04); }
   gap: 2.5rem;
   padding-bottom: 3rem;
 }
-.footer-brand img { height: 78px; margin-bottom: 1.2rem; }
+.footer-brand img {
+  height: 96px;
+  width: auto;
+  margin-bottom: 1.2rem;
+  background: var(--bone);
+  padding: 14px 20px;
+  border-radius: 6px;
+}
 .footer-brand p { font-size: 0.95rem; max-width: 320px; }
 .footer-col h4 {
   color: var(--tan);

@@ -5,12 +5,15 @@ visual version lives at [`styleguide.html`](styleguide.html).
 
 ## Logo
 
-- **Files:** `assets/nwptf-logo.png` (dark, for light backgrounds) and
-  `assets/nwptf-logo-light.png` (for dark/moss backgrounds). 2× Retina variants
-  (`@2x`) are provided and wired via `srcset`.
+- **File:** `assets/nwptf-logo.png` (full color) with a 2× Retina variant
+  (`nwptf-logo@2x.png`), wired via `srcset`.
 - A brown wild-pig illustration paired with the wordmark; "PIG" is set in tan.
-- **Do:** preserve clear space; use the light version only on dark backgrounds.
-- **Don't:** recolor, stretch, add effects, or place the dark logo on a busy/dark photo.
+- **On light backgrounds:** use the logo directly (e.g., the header).
+- **On dark backgrounds:** place the full-color logo on a **bone "chip"**
+  (bone background, ~14–20px padding, 6px radius) rather than recoloring it — see
+  the footer. This keeps the pig and wordmark crisp. (A recolored light variant
+  exists but is deprecated because the pig's detail washes out.)
+- **Don't:** recolor, stretch, add effects, or place the logo directly on a busy/dark photo.
 - **Favicon / app icon:** `favicon.ico`, `assets/favicon-32.png`,
   `assets/apple-touch-icon.png` — the pig mark on a bone background.
 
