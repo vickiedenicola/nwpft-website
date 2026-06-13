@@ -69,7 +69,7 @@
         '</div>' +
         '<div class="footer-col">' +
           '<h4>Connect</h4>' +
-          '<a href="mailto:nwptf.chair@gmail.com">nwptf.chair@gmail.com</a>' +
+          '<a href="contact.html">Send us a message</a>' +
           socialRow('footer-social') +
         '</div>' +
       '</div>' +

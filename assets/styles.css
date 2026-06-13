@@ -415,7 +415,7 @@ a.news-card:hover .news-thumb { transform: scale(1.04); }
 .page-hero-bg::after { content:''; position:absolute; inset:0; background: linear-gradient(120deg, var(--moss-deep) 30%, rgba(43,55,35,0.5)); }
 .page-hero .wrap { position: relative; z-index: 2; padding: 4.5rem 2rem; }
 .page-hero .kicker { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--tan); font-weight: 700; margin-bottom: 0.8rem; }
-.page-hero h1 { color: var(--bone); font-size: clamp(2.2rem, 4.5vw, 3.4rem); max-width: 760px; }
+.page-hero h1 { color: var(--bone); font-size: clamp(2.2rem, 4.5vw, 3.4rem); max-width: 1040px; }
 .prose { max-width: 760px; }
 .prose h2 { font-size: 1.8rem; margin: 2.5rem 0 1rem; }
 .prose p { margin-bottom: 1.2rem; color: var(--ink-soft); }
