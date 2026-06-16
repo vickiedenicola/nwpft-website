@@ -45,6 +45,7 @@
         navLink('issue.html', 'The Issue', 'issue') +
         navLink('resources.html', 'Resources', 'resources') +
         navLink('research.html', 'Research', 'research') +
+        navLink('events.html', 'Events', 'events') +
         navLink('governance.html', 'Governance', 'governance') +
         navLink('about.html', 'About', 'about') +
         navLink('contact.html', 'Contact', 'contact') +
@@ -64,6 +65,7 @@
           '<a href="issue.html">The Issue</a>' +
           '<a href="resources.html">Resources</a>' +
           '<a href="research.html">Research</a>' +
+          '<a href="events.html">Events</a>' +
           '<a href="governance.html">Governance</a>' +
           '<a href="about.html">About</a>' +
           '<a href="contact.html">Contact</a>' +
