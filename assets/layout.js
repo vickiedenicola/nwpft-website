@@ -48,7 +48,6 @@
         navLink('events.html', 'Events', 'events') +
         navLink('governance.html', 'Governance', 'governance') +
         navLink('about.html', 'About', 'about') +
-        navLink('contact.html', 'Contact', 'contact') +
       '</nav>' +
     '</div></header>';
 
