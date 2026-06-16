@@ -100,6 +100,8 @@ img { max-width: 100%; display: block; }
 }
 .topbar a { color: rgba(244, 237, 224, 0.8); text-decoration: none; }
 .topbar a:hover { color: var(--bone); }
+.topbar-right { display: inline-flex; align-items: center; gap: 1.2rem; }
+.topbar-feedback { font-weight: 700; letter-spacing: 0.04em; }
 
 /* social icon rows (topbar + footer) */
 .topbar-social, .footer-social { display: inline-flex; align-items: center; gap: 0.85rem; }
@@ -526,13 +528,14 @@ a.news-card:hover .news-thumb { transform: scale(1.04); }
 .contact-form { display: grid; gap: 1.1rem; }
 .form-field { display: flex; flex-direction: column; gap: 0.4rem; }
 .form-field label { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); }
-.form-field input, .form-field textarea {
+.form-field input, .form-field textarea, .form-field select {
   font-family: 'Source Sans 3', sans-serif; font-size: 1rem; color: var(--ink);
   background: var(--paper); border: 1px solid var(--line); border-radius: 2px;
   padding: 0.7rem 0.85rem; width: 100%; transition: border-color 0.2s;
 }
-.form-field input:focus, .form-field textarea:focus { outline: none; border-color: var(--olive); box-shadow: 0 0 0 3px rgba(92,107,69,0.15); }
+.form-field input:focus, .form-field textarea:focus, .form-field select:focus { outline: none; border-color: var(--olive); box-shadow: 0 0 0 3px rgba(92,107,69,0.15); }
 .form-field textarea { resize: vertical; }
+.form-field input[type="file"] { padding: 0.55rem 0.85rem; cursor: pointer; }
 .contact-form .btn { justify-self: start; cursor: pointer; }
 
 /* ---------- STYLE GUIDE ---------- */

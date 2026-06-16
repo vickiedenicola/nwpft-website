@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Site Feedback | National Wild Pig Task Force</title>
+<meta name="description" content="Review the National Wild Pig Task Force website: report a bug or share a suggestion.">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="feedback">
+<div data-layout="header"></div>
+
+<section class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('assets/nwptf-pig.jpg');"></div>
+  <div class="wrap">
+    <div class="kicker">Site Feedback</div>
+    <h1>Help us improve the new website</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap contact-layout">
+    <div class="contact-intro">
+      <h2>Found a bug or have an idea?</h2>
+      <p>We&rsquo;re reviewing the redesigned site and your eyes help a lot. Tell us about anything that looks off, doesn&rsquo;t work, or could be better.</p>
+      <p class="contact-direct">A screenshot is worth a thousand words. If you can grab one of the issue, attach it below. Your device, browser, and the page address are filled in automatically.</p>
+    </div>
+
+    <form class="contact-form" action="https://formspree.io/f/xlgkvwpo" method="POST" enctype="multipart/form-data">
+      <div class="form-field">
+        <label for="ff-type">Type of feedback</label>
+        <select id="ff-type" name="type" required>
+          <option value="" disabled selected>Choose one&hellip;</option>
+          <option value="Bug / something is broken">Bug / something is broken</option>
+          <option value="Suggestion / idea">Suggestion / idea</option>
+          <option value="Content / wording or facts">Content / wording or facts</option>
+          <option value="Design / layout">Design / layout</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label for="ff-page">Which page is this about?</label>
+        <input id="ff-page" type="text" name="page" placeholder="e.g. Home, Resources, or paste the address">
+      </div>
+
+      <div class="form-field">
+        <label for="ff-message">Details</label>
+        <textarea id="ff-message" name="message" rows="6" placeholder="What did you expect, and what happened? Steps to reproduce a bug are helpful." required></textarea>
+      </div>
+
+      <div class="form-field">
+        <label for="ff-screenshot">Screenshot (optional)</label>
+        <input id="ff-screenshot" type="file" name="screenshot" accept="image/*">
+      </div>
+
+      <div class="form-field">
+        <label for="ff-name">Your name (optional)</label>
+        <input id="ff-name" type="text" name="name" autocomplete="name">
+      </div>
+      <div class="form-field">
+        <label for="ff-email">Email (optional, so we can follow up)</label>
+        <input id="ff-email" type="email" name="email" autocomplete="email">
+      </div>
+
+      <!-- Auto-filled by JS so reviewers don't have to report their setup -->
+      <input type="hidden" id="ff-device" name="device">
+      <input type="hidden" id="ff-browser" name="browser">
+      <input type="hidden" id="ff-screen" name="screen_size">
+      <input type="hidden" id="ff-current-url" name="submitted_from">
+
+      <!-- honeypot: hidden from people, catches bots -->
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;">
+      <input type="hidden" name="_subject" value="New site feedback from the NWPTF website">
+      <input type="hidden" name="_next" value="https://vickiedenicola.github.io/nwpft-website/feedback-thanks.html">
+
+      <button type="submit" class="btn btn-primary">Send feedback</button>
+    </form>
+  </div>
+</section>
+
+<div data-layout="footer"></div>
+<script src="assets/layout.js"></script>
+<script>
+(function () {
+  // Detect device type from viewport + user agent
+  function deviceType() {
+    var ua = navigator.userAgent;
+    if (/Tablet|iPad/i.test(ua) || (/Android/i.test(ua) && !/Mobile/i.test(ua))) return 'Tablet';
+    if (/Mobi|Android|iPhone|iPod/i.test(ua)) return 'Mobile';
+    return 'Desktop';
+  }
+
+  // Detect browser name + version (order matters — check specific before generic)
+  function browserName() {
+    var ua = navigator.userAgent, m;
+    if ((m = ua.match(/Edg\/([\d.]+)/)))            return 'Edge ' + m[1];
+    if ((m = ua.match(/OPR\/([\d.]+)/)))            return 'Opera ' + m[1];
+    if (/CriOS/.test(ua) && (m = ua.match(/CriOS\/([\d.]+)/))) return 'Chrome (iOS) ' + m[1];
+    if (/FxiOS/.test(ua) && (m = ua.match(/FxiOS\/([\d.]+)/))) return 'Firefox (iOS) ' + m[1];
+    if ((m = ua.match(/Firefox\/([\d.]+)/)))        return 'Firefox ' + m[1];
+    if (/Chrome/.test(ua) && (m = ua.match(/Chrome\/([\d.]+)/))) return 'Chrome ' + m[1];
+    if (/Safari/.test(ua) && (m = ua.match(/Version\/([\d.]+)/))) return 'Safari ' + m[1];
+    return ua; // fall back to the raw string so nothing is lost
+  }
+
+  var byId = function (id) { return document.getElementById(id); };
+  byId('ff-device').value = deviceType();
+  byId('ff-browser').value = browserName();
+  byId('ff-screen').value = window.innerWidth + '×' + window.innerHeight +
+    ' (window), ' + screen.width + '×' + screen.height + ' (screen)';
+
+  // The page the reviewer came from is the most likely subject of the report.
+  var ref = document.referrer;
+  byId('ff-current-url').value = ref || window.location.href;
+  var pageField = byId('ff-page');
+  if (ref && !pageField.value) pageField.value = ref;
+})();
+</script>
+</body>
+</html>

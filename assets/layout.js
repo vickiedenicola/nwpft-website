@@ -32,7 +32,10 @@
     '<a class="skip-link" href="#main-content">Skip to content</a>' +
     '<div class="topbar"><div class="wrap">' +
       '<span class="topbar-left">Science-based management of invasive wild pigs across North America</span>' +
-      socialRow('topbar-social') +
+      '<span class="topbar-right">' +
+        '<a class="topbar-feedback" href="feedback.html">Site Feedback</a>' +
+        socialRow('topbar-social') +
+      '</span>' +
     '</div></div>' +
     '<header class="site-header"><div class="wrap">' +
       '<a class="site-logo" href="index.html"><img src="assets/nwptf-logo.png" srcset="assets/nwptf-logo.png 1x, assets/nwptf-logo@2x.png 2x" width="900" height="349" alt="National Wild Pig Task Force"></a>' +
@@ -70,6 +73,7 @@
         '<div class="footer-col">' +
           '<h4>Connect</h4>' +
           '<a href="contact.html">Send us a message</a>' +
+          '<a href="feedback.html">Share site feedback</a>' +
           socialRow('footer-social') +
         '</div>' +
       '</div>' +
