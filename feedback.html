@@ -98,7 +98,7 @@
     return 'Desktop';
   }
 
-  // Detect browser name + version (order matters — check specific before generic)
+  // Detect browser name + version (order matters: check specific before generic)
   function browserName() {
     var ua = navigator.userAgent, m;
     if ((m = ua.match(/Edg\/([\d.]+)/)))            return 'Edge ' + m[1];
