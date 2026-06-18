@@ -547,6 +547,14 @@ a.news-card:hover .news-thumb { transform: scale(1.04); }
 .event-feature .event-meta { color: var(--rust); font-weight: 700; letter-spacing: 0.03em; margin-bottom: 0.9rem; }
 .event-feature p:last-child { color: var(--ink-soft); margin: 0; }
 
+/* Emphasis callout (e.g., a key point within a section) */
+.callout {
+  background: var(--paper); border: 1px solid var(--line); border-left: 5px solid var(--rust);
+  border-radius: 4px; padding: 1.6rem 2rem; margin-top: 1.8rem;
+}
+.callout h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+.callout p { color: var(--ink-soft); margin: 0; }
+
 /* Featured (highlighted) resource card */
 .resource-card.feature { display: block; border-left: 5px solid var(--rust); margin-bottom: 2rem; }
 .resource-card.feature .tag { background: var(--rust); color: var(--bone); }
