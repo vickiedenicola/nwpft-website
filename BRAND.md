@@ -64,12 +64,62 @@ avoid light text below ~78% opacity for normal-size copy (WCAG AA 4.5:1).
 
 ## Voice & tone
 
-- **Authoritative but plain.** Science-based, never sensational. Explain impact
-  in concrete terms (crops, water, wildlife, disease, dollars).
-- **Coordinated and collective.** Emphasize partnership across agencies, states,
-  and disciplines — "no single agency or state can manage the problem alone."
-- **Action-oriented.** Point readers to resources, research, and ways to participate.
-- Use "wild pigs" / "feral swine" interchangeably; both are accepted.
+NWPTF is the steady, science-based voice in the room. Wild pigs are a topic
+people joke about and panic about; our job is to be the credible source that
+neither jokes nor panics. We convene the conversation rather than fight to be
+part of it. Three words anchor the voice:
+
+- **Authoritative.** Speak with the confidence of an organization that
+  coordinates the science and the partners. Don't justify our existence or sound
+  defensive. State things plainly because we know them.
+- **Accessible.** Write in plain language. Professionals and policymakers both
+  reward clarity, and jargon makes us sound less credible, not more. Say "crosses
+  property lines, jurisdictions, and disciplines," not "operates within a
+  multi-stakeholder landscape-scale framework."
+- **Human.** Credit the people doing the work: researchers, agency biologists,
+  landowners. Warmth comes from being matter-of-fact and from caring about
+  people, not from punchlines. A little dry wit is welcome; jokes for the sake of
+  jokes are not.
+
+**Always:** lead with what's true and useful; credit the field and the partners,
+not ourselves; keep sentences clean and direct; sound like a knowledgeable
+colleague.
+
+**Never:** out-joke or out-snark entertainment coverage; use bureaucratic or
+academic jargon where a plain word works; sound like we're proving we belong;
+**use em dashes** (use commas, colons, or periods instead).
+
+**Audience priority:** 1) natural resource professionals, 2) policymakers
+(both primary), 3) landowners (tertiary). Write for the first two by default;
+when landowners are the point, name them directly.
+
+Use "wild pigs" / "feral swine" interchangeably; both are accepted.
+
+### By channel
+
+- **Website** (most formal). Authoritative and clear, reserved, informative over
+  conversational. Complete declarative sentences; lead each section with its main
+  point. Humor minimal to none — this is the reference layer. Every page should
+  leave a policymaker with something to act on or cite.
+- **Facebook** (most casual). Warm, plain-spoken, light dry wit welcome. A
+  relaxed opening line is fine. Name the people behind the work. Close with a real
+  call to action that invites engagement. Keep posts tight: lead, point, payoff,
+  prompt. Flag strong-language/sensitive source content with a viewer-discretion note.
+- **LinkedIn** (professional). Credible, warmer than the website but more measured
+  than Facebook. Open with the substance, not a joke. Frame issues around
+  coordination, jurisdictions, and turning science into practice. Close with a
+  professional CTA (follow for research, or point to nwptf.org once inner pages
+  are live).
+
+| | Website | Facebook | LinkedIn |
+|---|---|---|---|
+| Register | Most formal | Most casual | Professional |
+| Humor | None | Light, dry | Minimal, dry |
+| Opening | The main point | A relaxed hook is fine | The substance |
+| Call to action | Use/cite the resource | Invite conversation | Follow / nwptf.org |
+| Primary job | Establish credibility | Build community | Reach professionals |
+
+Across all three: authoritative, accessible, human. No em dashes.
 
 ## Layout
 
