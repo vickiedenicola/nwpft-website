@@ -569,6 +569,15 @@ a.news-card:hover .news-thumb { transform: scale(1.04); }
 .sg-meta code { font-size: 0.78rem; color: var(--ink-soft); }
 .sg-row { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin: 1.2rem 0; }
 
+/* Research page: tighter intro under the hero */
+.section-intro { padding-top: 3.25rem; padding-bottom: 3.25rem; }
+.section-intro .prose { max-width: 860px; }
+.section-intro .prose p { font-size: 1.12rem; }
+
+/* Research page: grouped study headings */
+.research-group { font-size: 1.5rem; margin: 2.6rem 0 1.1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); }
+.research-group:first-of-type { margin-top: 2rem; }
+
 /* Voice & tone */
 .sg-voice-words { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1.4rem 0; }
 .sg-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; margin-top: 1rem; }
