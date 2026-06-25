@@ -74,7 +74,6 @@
           '<a href="events.html">Events</a>' +
           '<a href="governance.html">Governance</a>' +
           '<a href="about.html">About</a>' +
-          '<a href="contact.html">Contact</a>' +
         '</div>' +
         '<div class="footer-col">' +
           '<h4>Connect</h4>' +
