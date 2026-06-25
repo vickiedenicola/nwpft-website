@@ -211,9 +211,28 @@ img { max-width: 100%; display: block; }
 }
 @media (prefers-reduced-motion: reduce) { .hero-video { display: none; } }
 
-/* responsive background images: small file on phones, large on wider screens */
-.hero-bg, .page-hero-bg, .impact-bg { background-image: var(--bg-sm); }
-@media (min-width: 861px) { .hero-bg, .page-hero-bg, .impact-bg { background-image: var(--bg-lg); } }
+/* Hero / page-header / impact background images.
+   Defined in the stylesheet (not inline) so relative URLs resolve against
+   assets/styles.css reliably in every browser. Small files by default,
+   large versions on wider screens. */
+.hero-bg { background-image: url('hero-home-poster-sm.jpg'); background-position: center 50%; }
+body[data-page="issue"] .page-hero-bg { background-image: url('hero-issue-sm.jpg'); background-position: center 48%; }
+body[data-page="about"] .page-hero-bg { background-image: url('hero-about-sm.jpg'); background-position: center 72%; }
+body[data-page="resources"] .page-hero-bg { background-image: url('hero-resources-sm.jpg'); background-position: center 50%; }
+body[data-page="research"] .page-hero-bg { background-image: url('hero-research-sm.jpg'); background-position: center 82%; }
+body[data-page="events"] .page-hero-bg { background-image: url('hero-home-sm.jpg'); background-position: center 45%; }
+body[data-page="contact"] .page-hero-bg { background-image: url('hero-contact-sm.jpg'); background-position: center 55%; }
+.impact-bg { background-image: url('impact-damage-sm.jpg'); }
+@media (min-width: 861px) {
+  .hero-bg { background-image: url('hero-home-poster.jpg'); }
+  body[data-page="issue"] .page-hero-bg { background-image: url('hero-issue.jpg'); }
+  body[data-page="about"] .page-hero-bg { background-image: url('hero-about.jpg'); }
+  body[data-page="resources"] .page-hero-bg { background-image: url('hero-resources.jpg'); }
+  body[data-page="research"] .page-hero-bg { background-image: url('hero-research.jpg'); }
+  body[data-page="events"] .page-hero-bg { background-image: url('hero-home.jpg'); }
+  body[data-page="contact"] .page-hero-bg { background-image: url('hero-contact.jpg'); }
+  .impact-bg { background-image: url('impact-damage.jpg'); }
+}
 .hero .wrap { position: relative; z-index: 3; padding-top: 6rem; padding-bottom: 6rem; }
 .hero-inner { max-width: 900px; }
 .hero h1 {

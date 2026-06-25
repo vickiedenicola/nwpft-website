@@ -77,7 +77,6 @@
         '</div>' +
         '<div class="footer-col">' +
           '<h4>Connect</h4>' +
-          '<a href="contact.html">Send us a message</a>' +
           socialRow('footer-social') +
         '</div>' +
       '</div>' +
