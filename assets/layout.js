@@ -29,7 +29,7 @@
   var headerHTML =
     '<a class="skip-link" href="#main-content">Skip to content</a>' +
     '<div class="topbar"><div class="wrap">' +
-      '<span class="topbar-left">Science-based management of invasive wild pigs across North America</span>' +
+      '<span class="topbar-left">Science-based control of invasive wild pigs across North America</span>' +
       '<span class="topbar-right">' +
         '<a class="topbar-feedback" href="feedback.html">Site Feedback</a>' +
         socialRow('topbar-social') +
