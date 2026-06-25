@@ -109,10 +109,18 @@ img { max-width: 100%; display: block; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.2s, transform 0.2s;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s, transform 0.2s;
 }
-.topbar-social a { color: rgba(244, 237, 224, 0.75); }
-.topbar-social a:hover { color: var(--tan); transform: translateY(-1px); }
+.topbar-social { gap: 0.55rem; }
+.topbar-social a {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(244, 237, 224, 0.35);
+  color: var(--bone);
+}
+.topbar-social svg { width: 16px; height: 16px; }
+.topbar-social a:hover { background: var(--tan); border-color: var(--tan); color: var(--moss-deep); transform: translateY(-1px); }
 .footer-social { margin-top: 0.4rem; }
 .footer-social a { color: rgba(244, 237, 224, 0.7); }
 .footer-social a:hover { color: var(--tan); transform: translateY(-1px); }

@@ -22,7 +22,7 @@
     return '<span class="' + cls + '">' +
       socialA('https://www.facebook.com/NationalWildPigTaskForce', 'Facebook', 'facebook') +
       socialA('https://www.instagram.com/nationalwildpigtaskforce', 'Instagram', 'instagram') +
-      socialA('https://www.linkedin.com/company/national-wild-pig-task-force', 'LinkedIn', 'linkedin') +
+      socialA('https://www.linkedin.com/company/nwptf', 'LinkedIn', 'linkedin') +
     '</span>';
   }
 
