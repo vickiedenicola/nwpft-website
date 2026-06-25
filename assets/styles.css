@@ -102,6 +102,7 @@ img { max-width: 100%; display: block; }
 .topbar a:hover { color: var(--bone); }
 .topbar-right { display: inline-flex; align-items: center; gap: 1.2rem; }
 .topbar-feedback { font-weight: 700; letter-spacing: 0.04em; }
+.topbar-connect { font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.72rem; color: var(--tan); }
 
 /* social icon rows (topbar + footer) */
 .topbar-social, .footer-social { display: inline-flex; align-items: center; gap: 0.85rem; }

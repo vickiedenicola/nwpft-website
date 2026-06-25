@@ -32,6 +32,7 @@
       '<span class="topbar-left">Science-based control of invasive wild pigs across North America</span>' +
       '<span class="topbar-right">' +
         '<a class="topbar-feedback" href="feedback.html">Site Feedback</a>' +
+        '<span class="topbar-connect">Connect</span>' +
         socialRow('topbar-social') +
       '</span>' +
     '</div></div>' +
