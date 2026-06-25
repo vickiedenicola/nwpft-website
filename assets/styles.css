@@ -188,17 +188,28 @@ img { max-width: 100%; display: block; }
   position: absolute;
   inset: 0;
   background-size: cover;
-  background-position: center right;
-  opacity: 0.95;
+  background-position: center;
+  opacity: 1;
+  z-index: 0;
 }
-.hero-bg::after {
-  content: '';
+.hero-video {
   position: absolute;
   inset: 0;
-  /* keep the text side (left) readable, let the pig show through on the right */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 50%;
+  z-index: 1;
+}
+/* gradient scrim above the media, below the text, keeps the left side readable */
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
   background: linear-gradient(100deg, rgba(43,55,35,0.85) 20%, rgba(43,55,35,0.42) 58%, rgba(43,55,35,0.1) 100%);
 }
-.hero .wrap { position: relative; z-index: 2; padding-top: 6rem; padding-bottom: 6rem; }
+@media (prefers-reduced-motion: reduce) { .hero-video { display: none; } }
+.hero .wrap { position: relative; z-index: 3; padding-top: 6rem; padding-bottom: 6rem; }
 .hero-inner { max-width: 900px; }
 .hero h1 {
   color: var(--bone);
