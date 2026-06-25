@@ -6,7 +6,7 @@
 <title>National Wild Pig Task Force</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <meta name="description" content="The National Wild Pig Task Force coordinates a science-based response to invasive wild pigs across North America, connecting researchers, agencies, and land managers.">
 <link rel="canonical" href="https://vickiedenicola.github.io/nwpft-website/">
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -31,10 +31,8 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg" style="background-image:url('assets/hero-home-poster.jpg');background-position:center 50%;"></div>
-  <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/hero-home-poster.jpg" aria-hidden="true">
-    <source src="assets/hero-home.mp4" type="video/mp4">
-  </video>
+  <div class="hero-bg" style="--bg-sm:url('assets/hero-home-poster-sm.jpg');--bg-lg:url('assets/hero-home-poster.jpg');background-position:center 50%;"></div>
+  <video class="hero-video" autoplay muted loop playsinline preload="none" poster="assets/hero-home-poster.jpg" aria-hidden="true" data-src="assets/hero-home.mp4"></video>
   <div class="hero-scrim"></div>
   <div class="wrap">
     <div class="hero-inner">
@@ -93,7 +91,7 @@
 
 <!-- IMPACT BAND -->
 <section class="impact">
-  <div class="impact-bg" style="background-image:url('assets/impact-damage.jpg');"></div>
+  <div class="impact-bg" style="--bg-sm:url('assets/impact-damage-sm.jpg');--bg-lg:url('assets/impact-damage.jpg');"></div>
   <div class="wrap">
     <h2>Wild pigs don&rsquo;t recognize boundaries</h2>
     <p>Wild pigs damage crops, degrade water quality, threaten native wildlife, and carry diseases that affect livestock and people. Their range continues to expand, and no single agency or state can control the problem alone.</p>
@@ -160,5 +158,20 @@
 
 <div data-layout="footer"></div>
 <script src="assets/layout.js"></script>
+<script>
+// Load and play the hero video only on larger screens and when motion is allowed,
+// so phones never download the clip (saves bandwidth, improves load time).
+(function () {
+  var v = document.querySelector('.hero-video');
+  if (!v || !v.dataset.src) return;
+  var bigEnough = window.matchMedia('(min-width: 861px)').matches;
+  var allowsMotion = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (bigEnough && allowsMotion) {
+    v.src = v.dataset.src;
+    var p = v.play();
+    if (p && p.catch) { p.catch(function () {}); }
+  }
+})();
+</script>
 </body>
 </html>

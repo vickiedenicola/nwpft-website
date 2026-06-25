@@ -1,3 +1,5 @@
 User-agent: *
 Disallow: /styleguide.html
 Disallow: /styleguide
+
+Sitemap: https://vickiedenicola.github.io/nwpft-website/sitemap.xml
