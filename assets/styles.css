@@ -689,6 +689,10 @@ a.news-card:hover .news-thumb { transform: scale(1.04); }
     border-bottom: 1px solid var(--line);
   }
   .site-nav a:last-child { border-bottom: none; }
+  /* Shift the hero image left so the pig sits in view, not cropped off the right edge */
+  .hero-bg { background-position: 72% 50%; }
+  /* Give "One continent." its own line on narrow screens */
+  .hero h1 .hero-line { display: block; white-space: nowrap; }
   .stat-row { grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
   .stat .num { font-size: 2rem; }
   .paths, .news-grid, .value-grid { grid-template-columns: 1fr; }
