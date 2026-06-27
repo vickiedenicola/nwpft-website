@@ -56,6 +56,11 @@
       <p>Published work and authoritative references, grouped by focus area and listed newest first. More guides and data are on the <a href="resources.html">Resources</a> page.</p>
     </div>
 
+    <div class="pub-search">
+      <input type="search" id="pub-search-input" class="pub-search-input" placeholder="Search by title, author, topic, or year…" autocomplete="off" aria-label="Search research publications">
+      <p class="pub-search-status" role="status" aria-live="polite"></p>
+    </div>
+
     <details class="pub-cat" open>
       <summary>Management &amp; control<span class="pub-cat-count">10 studies</span></summary>
       <p class="pub-cat-intro">Evaluating the effectiveness of trapping, toxicants, and other tools, from whole-sounder removal to coordinated, multi-agency operations.</p>
@@ -341,5 +346,57 @@
 
 <div data-layout="footer"></div>
 <script src="assets/layout.js"></script>
+<script>
+// Client-side search over the publication list. Reads the existing DOM, so any
+// study added to the page later is automatically searchable — no index to maintain.
+(function () {
+  var input = document.getElementById('pub-search-input');
+  if (!input) return;
+  var status = document.querySelector('.pub-search-status');
+  var cats = Array.prototype.slice.call(document.querySelectorAll('.pub-cat'));
+  var pubs = Array.prototype.slice.call(document.querySelectorAll('.pub'));
+
+  // Remember each category's initial open/closed state and pre-compute search text.
+  var openByDefault = cats.map(function (c) { return c.hasAttribute('open'); });
+  pubs.forEach(function (p) {
+    p._text = (p.textContent || '').toLowerCase().replace(/\s+/g, ' ');
+  });
+
+  function reset() {
+    pubs.forEach(function (p) { p.hidden = false; });
+    cats.forEach(function (c, i) {
+      c.hidden = false;
+      if (openByDefault[i]) { c.setAttribute('open', ''); } else { c.removeAttribute('open'); }
+    });
+    status.textContent = '';
+  }
+
+  function run() {
+    var raw = input.value.trim();
+    if (!raw) { reset(); return; }
+    var terms = raw.toLowerCase().split(/\s+/);
+    var matches = 0;
+    pubs.forEach(function (p) {
+      var hit = terms.every(function (t) { return p._text.indexOf(t) !== -1; });
+      p.hidden = !hit;
+      if (hit) { matches++; }
+    });
+    cats.forEach(function (c) {
+      var visible = c.querySelectorAll('.pub:not([hidden])').length;
+      c.hidden = visible === 0;
+      if (visible > 0) { c.setAttribute('open', ''); }
+    });
+    status.textContent = matches
+      ? matches + (matches === 1 ? ' study matches “' : ' studies match “') + raw + '”'
+      : 'No studies match “' + raw + '”. Try fewer or different terms.';
+  }
+
+  var timer;
+  input.addEventListener('input', function () {
+    clearTimeout(timer);
+    timer = setTimeout(run, 120);
+  });
+})();
+</script>
 </body>
 </html>

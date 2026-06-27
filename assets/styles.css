@@ -627,6 +627,22 @@ a.news-card:hover .news-thumb { transform: scale(1.04); }
 .org-list p { margin: 0.35rem 0 0; color: var(--ink-soft); font-size: 0.95rem; }
 
 /* Research page: collapsible publication categories */
+/* research search */
+.pub-search { margin: 0 0 1.6rem; }
+.pub-search-input {
+  width: 100%;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--paper);
+  color: var(--ink);
+}
+.pub-search-input:focus { outline: none; border-color: var(--rust); box-shadow: 0 0 0 3px rgba(168, 85, 46, 0.15); }
+.pub-search-status { margin: 0.6rem 0 0; color: var(--ink-soft); font-size: 0.92rem; min-height: 1.2em; }
+.pub[hidden], .pub-cat[hidden] { display: none; }
+
 .pub-cat { border-top: 1px solid var(--line); }
 .pub-cat:last-of-type { border-bottom: 1px solid var(--line); }
 .pub-cat > summary {
