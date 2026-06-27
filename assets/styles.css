@@ -215,7 +215,7 @@ img { max-width: 100%; display: block; }
    Defined in the stylesheet (not inline) so relative URLs resolve against
    assets/styles.css reliably in every browser. Small files by default,
    large versions on wider screens. */
-.hero-bg { background-image: url('hero-home-poster-sm.jpg'); background-position: center 50%; }
+.hero-bg { background-image: url('hero-home-sm.jpg'); background-position: center 45%; }
 body[data-page="issue"] .page-hero-bg { background-image: url('hero-issue-sm.jpg'); background-position: center 48%; }
 body[data-page="about"] .page-hero-bg { background-image: url('hero-about-sm.jpg'); background-position: center 72%; }
 body[data-page="resources"] .page-hero-bg { background-image: url('hero-resources-sm.jpg'); background-position: center 50%; }
@@ -224,7 +224,7 @@ body[data-page="events"] .page-hero-bg { background-image: url('hero-home-sm.jpg
 body[data-page="contact"] .page-hero-bg { background-image: url('hero-contact-sm.jpg'); background-position: center 55%; }
 .impact-bg { background-image: url('impact-damage-sm.jpg'); }
 @media (min-width: 861px) {
-  .hero-bg { background-image: url('hero-home-poster.jpg'); }
+  .hero-bg { background-image: url('hero-home.jpg'); }
   body[data-page="issue"] .page-hero-bg { background-image: url('hero-issue.jpg'); }
   body[data-page="about"] .page-hero-bg { background-image: url('hero-about.jpg'); }
   body[data-page="resources"] .page-hero-bg { background-image: url('hero-resources.jpg'); }
@@ -240,7 +240,7 @@ body[data-page="contact"] .page-hero-bg { background-image: url('hero-contact-sm
   font-size: clamp(2rem, 4.2vw, 3.2rem);
   margin-bottom: 1.4rem;
 }
-.hero h1 .accent { color: var(--tan); font-style: italic; white-space: nowrap; }
+.hero h1 .accent { display: block; margin-top: 0.15em; color: var(--tan); font-style: italic; white-space: nowrap; }
 .hero p {
   font-size: 1.2rem;
   color: rgba(244, 237, 224, 0.88);
@@ -690,6 +690,14 @@ a.news-card:hover .news-thumb { transform: scale(1.04); }
     border-bottom: 1px solid var(--line);
   }
   .site-nav a:last-child { border-bottom: none; }
+  /* On phones the video never loads; hide it so its poster doesn't cover
+     the responsive hero background image. */
+  .hero-video { display: none; }
+  /* Zoom and raise the image so a dark pig sits behind the tan heading line,
+     keeping "A coordinated response." readable instead of washed out on grass. */
+  .hero-bg { background-size: auto 150%; background-position: center 85%; }
+  /* Give "One continent." its own line on narrow screens */
+  .hero h1 .hero-line { display: block; white-space: nowrap; }
   .stat-row { grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
   .stat .num { font-size: 2rem; }
   .paths, .news-grid, .value-grid { grid-template-columns: 1fr; }
