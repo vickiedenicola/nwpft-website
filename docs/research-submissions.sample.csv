@@ -1,0 +1,6 @@
+Timestamp,Title,URL,Authors,Journal,Year,Category,Note,Submitter name,Submitter email,Status
+2026-06-20 09:14:00,Sample approved study on coordinated removal,https://example.com/study-a,Doe & Smith,Journal of Wildlife Management,2024,Management & control,A short plain-language summary of what the study found.,Jane Doe,jane@example.com,Approved
+2026-06-21 11:02:00,Disease surveillance approaches in feral swine,https://example.com/study-b,Brown et al.,Journal of Animal Science,2022,Disease & health,Reviews surveillance methods and gaps.,Sam Lee,sam@example.com,Approved
+2026-06-22 14:30:00,Pending study that should not appear yet,https://example.com/study-c,Pending Author,Some Journal,2025,Spread & human dimensions,This row is awaiting review and must stay hidden.,Pat Roe,pat@example.com,Pending
+2026-06-23 08:00:00,Study with an unrecognized category,https://example.com/study-d,Misc Author,Unknown Source,2023,Totally Made-Up Category,Should be skipped because the category does not match.,Lee Kim,lee@example.com,Approved
+2026-06-24 16:45:00,"Approved entry with no link, comma in title",,No-Link Author,Field Notes,2021,Ecology & impacts on wildlife,Renders as plain text when no valid link is provided.,Alex Poe,alex@example.com,Approved

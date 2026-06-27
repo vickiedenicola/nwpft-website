@@ -347,26 +347,31 @@
 <div data-layout="footer"></div>
 <script src="assets/layout.js"></script>
 <script>
-// Client-side search over the publication list. Reads the existing DOM, so any
-// study added to the page later is automatically searchable — no index to maintain.
+// Client-side search over the publication list. Re-queries the DOM on each
+// search, so any study added to the page later — by hand or by the submissions
+// loader below — is automatically searchable, with no index to maintain.
 (function () {
   var input = document.getElementById('pub-search-input');
   if (!input) return;
   var status = document.querySelector('.pub-search-status');
-  var cats = Array.prototype.slice.call(document.querySelectorAll('.pub-cat'));
-  var pubs = Array.prototype.slice.call(document.querySelectorAll('.pub'));
 
-  // Remember each category's initial open/closed state and pre-compute search text.
-  var openByDefault = cats.map(function (c) { return c.hasAttribute('open'); });
-  pubs.forEach(function (p) {
-    p._text = (p.textContent || '').toLowerCase().replace(/\s+/g, ' ');
+  // Record each category's default open/closed state once (categories are stable).
+  Array.prototype.forEach.call(document.querySelectorAll('.pub-cat'), function (c) {
+    if (!('openDefault' in c.dataset)) { c.dataset.openDefault = c.hasAttribute('open') ? '1' : '0'; }
   });
 
+  function pubs() { return document.querySelectorAll('.pub'); }
+  function cats() { return document.querySelectorAll('.pub-cat'); }
+  function textOf(p) {
+    if (!p._text) { p._text = (p.textContent || '').toLowerCase().replace(/\s+/g, ' '); }
+    return p._text;
+  }
+
   function reset() {
-    pubs.forEach(function (p) { p.hidden = false; });
-    cats.forEach(function (c, i) {
+    Array.prototype.forEach.call(pubs(), function (p) { p.hidden = false; });
+    Array.prototype.forEach.call(cats(), function (c) {
       c.hidden = false;
-      if (openByDefault[i]) { c.setAttribute('open', ''); } else { c.removeAttribute('open'); }
+      if (c.dataset.openDefault === '1') { c.setAttribute('open', ''); } else { c.removeAttribute('open'); }
     });
     status.textContent = '';
   }
@@ -376,12 +381,12 @@
     if (!raw) { reset(); return; }
     var terms = raw.toLowerCase().split(/\s+/);
     var matches = 0;
-    pubs.forEach(function (p) {
-      var hit = terms.every(function (t) { return p._text.indexOf(t) !== -1; });
+    Array.prototype.forEach.call(pubs(), function (p) {
+      var hit = terms.every(function (t) { return textOf(p).indexOf(t) !== -1; });
       p.hidden = !hit;
       if (hit) { matches++; }
     });
-    cats.forEach(function (c) {
+    Array.prototype.forEach.call(cats(), function (c) {
       var visible = c.querySelectorAll('.pub:not([hidden])').length;
       c.hidden = visible === 0;
       if (visible > 0) { c.setAttribute('open', ''); }
@@ -396,7 +401,11 @@
     clearTimeout(timer);
     timer = setTimeout(run, 120);
   });
+
+  // Re-run an active search once the submissions loader injects approved entries.
+  document.addEventListener('research:updated', function () { if (input.value.trim()) { run(); } });
 })();
 </script>
+<script src="assets/research-submissions.js"></script>
 </body>
 </html>
