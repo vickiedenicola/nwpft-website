@@ -29,7 +29,7 @@
   'use strict';
 
   // <-- Paste your published-to-web CSV URL between the quotes to go live.
-  var SHEET_CSV_URL = '';
+  var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSgnGXcQcfWn32obr2j9aZR-0-MH68GWo84z3e3ymhe_4JNm2qA1rfS7ApPEVY09br5fW9RqyM0uCY-/pub?gid=0&single=true&output=csv';
 
   if (!SHEET_CSV_URL) { return; }
 
