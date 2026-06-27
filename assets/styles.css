@@ -396,6 +396,7 @@ a.news-card:hover .news-thumb { transform: scale(1.04); }
 .cta .wrap { padding: 4.5rem 2rem; }
 .cta h2 { color: var(--bone); font-size: clamp(1.9rem, 3.5vw, 2.7rem); margin-bottom: 1rem; }
 .cta p { font-size: 1.15rem; color: rgba(244,237,224,0.92); max-width: 560px; margin: 0 auto 2rem; }
+.cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
 /* ---------- FOOTER ---------- */
 .site-footer { background: var(--moss-deep); color: rgba(244, 237, 224, 0.7); }
@@ -641,6 +642,7 @@ a.news-card:hover .news-thumb { transform: scale(1.04); }
 }
 .pub-search-input:focus { outline: none; border-color: var(--rust); box-shadow: 0 0 0 3px rgba(168, 85, 46, 0.15); }
 .pub-search-status { margin: 0.6rem 0 0; color: var(--ink-soft); font-size: 0.92rem; min-height: 1.2em; }
+.pub-suggest { margin: 0.4rem 0 1.6rem; color: var(--ink-soft); font-size: 0.95rem; }
 .pub[hidden], .pub-cat[hidden] { display: none; }
 
 .pub-cat { border-top: 1px solid var(--line); }
