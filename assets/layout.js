@@ -2,6 +2,18 @@
 (function () {
   var page = document.body.getAttribute('data-page') || '';
 
+  // ---- Google Analytics (GA4) — production domain only ----
+  if (/(^|\.)nwptf\.org$/.test(location.hostname)) {
+    var ga = document.createElement('script');
+    ga.async = true;
+    ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-MV419JDSVW';
+    document.head.appendChild(ga);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', 'G-MV419JDSVW');
+  }
+
   function navLink(href, label, key) {
     var cls = (key === page) ? ' class="active"' : '';
     return '<a href="' + href + '"' + cls + '>' + label + '</a>';
