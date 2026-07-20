@@ -55,5 +55,5 @@ Typography: Playfair Display (headings) and Source Sans 3 (body) loaded from Goo
 
 ## Pre-launch notes
 
-- Homepage statistics (35+ states, 6M+ pigs, $2.5B damage) are placeholder figures — need replacement with NWPTF's current data.
+- Homepage statistics (31+ states/territories, 6M+ pigs, $2.5B damage) are placeholder figures — need replacement with NWPTF's current data.
 - News cards on the homepage are sample content, not live articles.
