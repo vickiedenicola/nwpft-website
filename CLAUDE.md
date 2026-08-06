@@ -30,10 +30,30 @@ Pages do **not** contain their own header or footer markup. Instead, each page i
 | File | `data-page` | Notes |
 |---|---|---|
 | `index.html` | `home` | Hero, stat strip, audience pathway cards, impact band, news grid, CTA |
-| `about.html` | `about` | Page hero, prose content, value cards, CTA |
+| `issue.html` | `issue` | The Issue — background on wild pig impacts |
 | `resources.html` | `resources` | Page hero, filter bar + resource cards with inline JS filter logic |
+| `research.html` | `research` | **Featured research** — hand-written curated studies in static HTML, grouped in `<details>` category blocks, with an inline search script |
+| `publications.html` | `research` | **Publication archive** — the full literature collection, rendered from `assets/publications.csv` by `assets/publications.js` with theme/year/access filters and paging |
+| `events.html` | `events` | Meetings and conferences |
+| `about.html` | `about` | Page hero, prose content, value cards, CTA |
+| `governance.html` | — | Subcommittees and objectives |
+| `contact.html`, `credits.html`, `feedback.html`, `styleguide.html` | — | Supporting pages |
 
-Several nav items (The Issue, Research, News) link to `#` — those pages are not yet built.
+### Research section
+
+Two pages, one relationship: `research.html` is a small editorial selection with a
+written note per study; `publications.html` is the complete archive. Featured
+entries also appear in the archive (`featured=yes` in the CSV), so the archive is
+always the full picture.
+
+Policy: **link out by DOI, host almost nothing** — DOIs are permanent, and being
+free to read is not permission to republish. Never paste in publisher abstracts;
+the `note` column is one original sentence. Full detail, including how to hand the
+archive over to a published Google Sheet, is in `docs/publication-archive.md`.
+
+To add papers, edit `assets/publications.csv` — not the HTML. The main nav keeps a
+single "Research" link to `research.html`; the archive is reached from that page
+and the footer.
 
 ### Styling
 

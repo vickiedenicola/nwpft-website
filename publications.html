@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Publication Archive | National Wild Pig Task Force</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<meta name="description" content="A searchable archive of peer-reviewed wild pig research, filterable by year, theme, and access, maintained by the National Wild Pig Task Force Research Subcommittee.">
+<link rel="canonical" href="https://nwptf.org/publications">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg"><link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="National Wild Pig Task Force">
+<meta property="og:title" content="Publication Archive | National Wild Pig Task Force">
+<meta property="og:description" content="A searchable archive of peer-reviewed wild pig research, filterable by year, theme, and access.">
+<meta property="og:url" content="https://nwptf.org/publications">
+<meta property="og:image" content="https://nwptf.org/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Publication Archive | National Wild Pig Task Force">
+<meta name="twitter:description" content="A searchable archive of peer-reviewed wild pig research.">
+<meta name="twitter:image" content="https://nwptf.org/assets/og-image.jpg">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="research">
+<div data-layout="header"></div>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="wrap">
+    <div class="kicker">Research</div>
+    <h1>Publication archive</h1>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="section section-intro">
+  <div class="wrap">
+    <div class="prose">
+      <p>Every peer-reviewed study in the Task Force&rsquo;s wild pig literature collection, searchable and filterable by year, theme, and access. Titles link to the publisher&rsquo;s version of record by DOI, so the link keeps working even when a journal reorganizes its site.</p>
+      <p>Looking for a short, curated starting point instead? The <a href="research.html">Featured research</a> page highlights the studies most worth a manager&rsquo;s time, each with a plain-language summary.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHIVE -->
+<section class="section section-tan">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Full archive</div>
+      <h2>Search the literature</h2>
+      <p>The Research Subcommittee is working back through the literature year by year. Coverage is complete for 2025 and expanding; older work is being added as it is reviewed.</p>
+    </div>
+
+    <div class="pub-search">
+      <input type="search" id="repo-search" class="pub-search-input" placeholder="Search by title, author, journal, topic, or region…" autocomplete="off" aria-label="Search the publication archive">
+    </div>
+
+    <div class="repo-filters">
+      <label class="repo-field">
+        <span>Theme</span>
+        <select id="repo-theme" aria-label="Filter by theme"><option value="">All themes</option></select>
+      </label>
+      <label class="repo-field">
+        <span>Year</span>
+        <select id="repo-year" aria-label="Filter by year"><option value="">All years</option></select>
+      </label>
+      <label class="repo-field">
+        <span>Access</span>
+        <select id="repo-access" aria-label="Filter by access">
+          <option value="">Any access</option>
+          <option value="open">Open access</option>
+          <option value="sub">Subscription</option>
+          <option value="none">Not recorded</option>
+        </select>
+      </label>
+      <button type="button" id="repo-reset" class="repo-reset" hidden>Clear filters</button>
+    </div>
+
+    <p class="pub-search-status" id="repo-status" role="status" aria-live="polite"></p>
+
+    <div id="pub-repo" hidden>
+      <ol class="pub-list" id="repo-list"></ol>
+      <p class="repo-empty" id="repo-empty" hidden>No papers match those filters. Try clearing one, or search for fewer terms.</p>
+      <button type="button" class="btn btn-ghost repo-more" id="repo-more" hidden>Show more</button>
+    </div>
+
+    <p class="repo-error" id="repo-error" hidden>The archive could not be loaded just now. Please refresh, or <a href="contact.html">let us know</a> if it keeps happening.</p>
+
+    <p class="pub-suggest">Know a peer-reviewed study we&rsquo;re missing? <a href="https://forms.gle/1R4oTqH9RViuLKAD6" target="_blank" rel="noopener">Suggest a study &rarr;</a></p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="wrap">
+    <h2>Help build the archive</h2>
+    <p>The Research Subcommittee is compiling wild pig literature from 1958 to the present. If you work in this field and want to help review, categorize, or contribute studies, we&rsquo;d welcome you.</p>
+    <div class="cta-actions">
+      <a href="https://forms.gle/1R4oTqH9RViuLKAD6" target="_blank" rel="noopener" class="btn btn-dark">Suggest a study</a>
+      <a href="contact.html" class="btn btn-ghost">Contact the Task Force</a>
+    </div>
+  </div>
+</section>
+
+<div data-layout="footer"></div>
+<script src="assets/layout.js"></script>
+<script src="assets/publications.js"></script>
+</body>
+</html>

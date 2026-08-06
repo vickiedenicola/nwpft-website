@@ -137,7 +137,10 @@
     if (p.authors || p.journal || p.year) {
       var cite = document.createElement('div');
       cite.className = 'pub-cite';
-      if (p.authors) { cite.appendChild(document.createTextNode(p.authors + '. ')); }
+      // "Cuevas et al." already ends in a period — don't double it up.
+      if (p.authors) {
+        cite.appendChild(document.createTextNode(p.authors.replace(/\.\s*$/, '') + '. '));
+      }
       if (p.journal) {
         var em = document.createElement('em');
         em.textContent = p.journal;

@@ -82,7 +82,8 @@
           '<a href="index.html">Home</a>' +
           '<a href="issue.html">The Issue</a>' +
           '<a href="resources.html">Resources</a>' +
-          '<a href="research.html">Research</a>' +
+          '<a href="research.html">Featured research</a>' +
+          '<a href="publications.html">Publication archive</a>' +
           '<a href="events.html">Events</a>' +
           '<a href="governance.html">Governance</a>' +
           '<a href="about.html">About</a>' +
