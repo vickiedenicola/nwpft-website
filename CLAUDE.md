@@ -75,5 +75,6 @@ Typography: Playfair Display (headings) and Source Sans 3 (body) loaded from Goo
 
 ## Pre-launch notes
 
-- Homepage statistics (31+ states/territories, 6M+ pigs, $2.5B damage) are placeholder figures — need replacement with NWPTF's current data.
+- The stat strip on `index.html` and `issue.html` carries two figures, both sourced in a footnote beneath it. Any figure added there needs a citation in that same footnote list. `.stat-row` auto-fits, so two or three both lay out correctly.
+- A population estimate ("6M+ feral swine in the U.S.") was removed in August 2026 — USDA was uncomfortable with the number. Do not reintroduce a national population figure without checking first.
 - News cards on the homepage are sample content, not live articles.

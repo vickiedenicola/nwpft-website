@@ -263,9 +263,10 @@ body[data-page="contact"] .page-hero-bg { background-image: url('hero-contact-sm
   border-top: 3px solid var(--tan);
 }
 .stats .wrap { padding-top: 2.6rem; padding-bottom: 1.8rem; }
+/* auto-fit so the strip stays balanced whether it carries two stats or three */
 .stat-row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1rem;
 }
 .stat { text-align: center; }
@@ -776,7 +777,7 @@ a.news-card:hover .news-thumb { transform: scale(1.04); }
   .hero h1 .hero-line { display: block; white-space: nowrap; }
   /* Let the tan line sit on its own line and wrap, so it isn't clipped on phones */
   .hero h1 .accent { display: block; white-space: normal; }
-  .stat-row { grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+  .stat-row { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.6rem; }
   .stat .num { font-size: 2rem; }
   .paths, .news-grid, .value-grid { grid-template-columns: 1fr; }
   .people-grid, .subcommittees { grid-template-columns: 1fr; }
