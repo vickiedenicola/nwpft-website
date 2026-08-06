@@ -777,8 +777,15 @@ a.news-card:hover .news-thumb { transform: scale(1.04); }
   .hero h1 .hero-line { display: block; white-space: nowrap; }
   /* Let the tan line sit on its own line and wrap, so it isn't clipped on phones */
   .hero h1 .accent { display: block; white-space: normal; }
+  /* Two columns on phones. Three across leaves ~97px per stat, too narrow for
+     "$40.2B" and narrow enough that a label like "States/territories with feral
+     swine" spills into its neighbour. Two gives ~151px, which fits both. */
   .stat-row { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.6rem; }
+  /* A third stat would otherwise orphan itself into the left column; span it so
+     it centres under the pair above. */
+  .stat-row .stat:nth-child(3):last-child { grid-column: 1 / -1; }
   .stat .num { font-size: 2rem; }
+  .stat .label { overflow-wrap: break-word; }
   .paths, .news-grid, .value-grid { grid-template-columns: 1fr; }
   .people-grid, .subcommittees { grid-template-columns: 1fr; }
   .resource-grid { grid-template-columns: 1fr; }
