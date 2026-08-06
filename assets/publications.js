@@ -32,6 +32,14 @@
   var DATA_URL = 'assets/publications.csv';
   var PAGE_SIZE = 40;
 
+  /* Community submissions ("Suggest a study") — the Research Subcommittee's
+     published review sheet. Rows are shown only where Status is "Approved",
+     so the Subcommittee, not the site, is the gate. Merged with DATA_URL and
+     de-duplicated by DOI, which means a paper stays put once it is folded into
+     publications.csv. Set to '' to switch the pipeline off.
+     Setup: docs/research-submissions-setup.md */
+  var SUBMISSIONS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSgnGXcQcfWn32obr2j9aZR-0-MH68GWo84z3e3ymhe_4JNm2qA1rfS7ApPEVY09br5fW9RqyM0uCY-/pub?gid=0&single=true&output=csv';
+
   var CATS = [
     'Management & control',
     'Damage & economics',
@@ -88,15 +96,56 @@
     return /^https?:\/\//i.test(u) ? u : '';
   }
 
-  function toObjects(rows) {
+  /* Header aliases, so one renderer can read both the curated CSV (exact column
+     names) and the submissions sheet, whose headers come from a Google Form and
+     read like "Title of the study*" or "Journal or source". Each header claims
+     the first field it matches; a field is only claimed once. Submitter name and
+     email match nothing here, so contact details are never read, rendered, or
+     made searchable. */
+  var FIELDS = [
+    ['title', /title/],
+    ['doi', /\bdoi\b/],
+    ['url', /url|link/],
+    ['authors', /author/],
+    ['journal', /journal|source|publication/],
+    ['year', /year/],
+    ['category', /categ|theme/],
+    ['access', /access/],
+    ['keywords', /keyword|topic/],
+    ['region', /region|state|study area/],
+    ['note', /note|summary|description/],
+    ['featured', /featured/],
+    ['pdf', /\bpdf\b|filename/],
+    ['status', /status|approv/]
+  ];
+
+  function mapHeaders(head) {
+    var idx = {}, taken = {};
+    head.forEach(function (h, i) {
+      var k = norm(h);
+      for (var f = 0; f < FIELDS.length; f++) {
+        var name = FIELDS[f][0];
+        if (taken[name]) { continue; }
+        if (k === name || FIELDS[f][1].test(k)) { idx[name] = i; taken[name] = true; return; }
+      }
+    });
+    return idx;
+  }
+
+  function toObjects(rows, requireApproved) {
     if (!rows.length) { return []; }
-    var head = rows[0].map(function (x) { return norm(x); });
+    var idx = mapHeaders(rows[0]);
+    if (idx.title == null) { return []; }
     var out = [];
     for (var r = 1; r < rows.length; r++) {
       if (!rows[r] || !rows[r].length) { continue; }
       var o = {};
-      for (var c = 0; c < head.length; c++) { o[head[c]] = (rows[r][c] || '').trim(); }
+      FIELDS.forEach(function (f) {
+        o[f[0]] = idx[f[0]] != null ? (rows[r][idx[f[0]]] || '').trim() : '';
+      });
       if (!o.title) { continue; }
+      // The Subcommittee's review is the gate — unapproved rows never render.
+      if (requireApproved && norm(o.status) !== 'approved') { continue; }
       // The intake template ships with a grey guidance row and a worked example.
       // Skip both so a sheet published straight from the template stays clean:
       // guidance rows carry neither a year nor a link, examples are labelled.
@@ -275,14 +324,48 @@
   });
 
   // ---- load ----
+  function load(url, requireApproved, required) {
+    return fetch(url, { cache: 'no-store' })
+      .then(function (res) {
+        if (!res.ok) { throw new Error(url + ' ' + res.status); }
+        return res.text();
+      })
+      .then(function (csv) { return toObjects(parseCSV(csv), requireApproved); })
+      .catch(function (e) {
+        // A missing curated file is fatal; an unreachable submissions sheet is not.
+        if (required) { throw e; }
+        return [];
+      });
+  }
+
+  // De-duplicate by DOI, else by title, so an approved submission stops being a
+  // second copy the moment it is folded into publications.csv. The curated file
+  // is loaded first and therefore wins on any collision.
+  function dedupe(lists) {
+    var seen = {}, out = [];
+    lists.forEach(function (list) {
+      list.forEach(function (p) {
+        var doi = (p.doi || '').replace(/^https?:\/\/(dx\.)?doi\.org\//i, '').toLowerCase();
+        if (!doi) {
+          var m = /10\.\d{4,9}\/[^\s"?]+/.exec(p._url || '');
+          doi = m ? m[0].toLowerCase() : '';
+        }
+        var key = doi ? 'doi:' + doi : 'title:' + norm(p.title).replace(/[^a-z0-9]/g, '');
+        if (seen[key]) { return; }
+        seen[key] = true;
+        out.push(p);
+      });
+    });
+    return out;
+  }
+
   els.status.textContent = 'Loading the archive…';
-  fetch(DATA_URL, { cache: 'no-store' })
-    .then(function (res) {
-      if (!res.ok) { throw new Error('data ' + res.status); }
-      return res.text();
-    })
-    .then(function (csv) {
-      all = toObjects(parseCSV(csv));
+  Promise.all([
+    load(DATA_URL, false, true),
+    SUBMISSIONS_URL ? load(SUBMISSIONS_URL, true, false) : Promise.resolve([])
+  ])
+    .then(function (lists) {
+      all = dedupe(lists);
       all.sort(function (a, b) {
         return (b._year - a._year) || a.authors.localeCompare(b.authors);
       });

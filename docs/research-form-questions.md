@@ -1,6 +1,6 @@
 # Research Submission Form — build spec
 
-Copy-paste content for the Google Form that feeds the Research page. Build it at
+Copy-paste content for the Google Form that feeds the Publication archive. Build it at
 [forms.google.com](https://forms.google.com). Field names are chosen to match
 what the website looks for (see `research-submissions-setup.md`), so keep them
 close to as written. Fields marked **\*** are required.
@@ -15,7 +15,7 @@ Submit a Wild Pig Study
 ## Form description
 ```
 Suggest a peer-reviewed study or authoritative resource for the National Wild
-Pig Task Force Research page. Submissions are reviewed before they appear.
+Pig Task Force Publication archive. Submissions are reviewed by the Research Subcommittee before they appear.
 Questions marked * are required.
 ```
 
@@ -80,7 +80,7 @@ Questions marked * are required.
 
 - **Confirmation message** (Settings → Presentation → Confirmation message):
   ```
-  Thanks! Your submission has been received and will be reviewed before it appears on the Research page.
+  Thanks! Your submission has been received and will be reviewed before it appears in the Publication archive.
   ```
 - **Collect email addresses:** not required — the form already asks for an email
   in Q9. (Turn on only if you want Google's verified address too.)
@@ -91,7 +91,8 @@ Questions marked * are required.
 
 ## Why the exact category words matter
 
-The website files each approved study under the category heading on
-`research.html` whose name matches the submitted Category. If the words don't
-match one of the five above, the study stays in the sheet (unpublished) until
-the category is corrected. Keep the form options and the page headings in sync.
+The archive files each approved study under the theme matching the submitted
+Category. A category that doesn't match one of the five above still publishes,
+but groups under **Other** — visible rather than silently dropped, so it shows up
+in the theme filter as a prompt to fix it. Keep the form options and the five
+site headings in sync.

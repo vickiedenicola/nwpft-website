@@ -1,17 +1,30 @@
 # Research submissions — setup guide
 
-How to let people submit research articles, review them, and have approved
-ones appear automatically on the **Research** page.
+How to let people submit research articles, have the Research Subcommittee
+review them, and have approved ones appear automatically in the **Publication
+archive**.
 
 ```
-submitter → Google Form → Google Sheet (Status column)
-          → you get an email → you set Status = "Approved"
-          → the study appears on research.html (and is searchable)
+submitter → Google Form → review sheet (Status column)
+          → Subcommittee gets an email → sets Status = "Approved"
+          → the paper appears on publications.html (and is searchable)
 ```
 
-The website code is already in place (`assets/research-submissions.js`). It
-stays **dormant** until you paste your published-sheet link into it (Step 5).
-A column-format reference lives at `docs/research-submissions.sample.csv`.
+The approval gate belongs to the Subcommittee, so **share the response sheet
+with them** — whoever sets the Status column decides what publishes.
+
+The website code is already in place: `SUBMISSIONS_URL` in
+`assets/publications.js`. It stays **dormant** until you paste your
+published-sheet link into it (Step 5). A column-format reference lives at
+`docs/research-submissions.sample.csv`.
+
+Two notes on how this differs from the earlier setup:
+
+- Approved papers land in the **archive** (`publications.html`), not on the
+  Featured page. Featured is hand-written; promoting a paper there is a separate
+  editorial decision. See `docs/publication-archive.md`.
+- Entries are de-duplicated by DOI against `assets/publications.csv`, so a paper
+  already in the curated file will not appear twice.
 
 ---
 
@@ -41,8 +54,9 @@ note/summary, status), in any order.
 - Spread & human dimensions
 - Disease & health
 
-> A submission whose category doesn't match one of these is simply left in the
-> sheet (not published) until you fix it.
+> A submission whose category doesn't match one of these still publishes, but
+> groups under **Other** in the archive's theme filter — visible rather than
+> silently dropped, so it prompts a fix.
 
 ## Step 2 — Link responses to a Sheet
 
@@ -68,7 +82,7 @@ function onFormSubmit(e) {
   MailApp.sendEmail(
     to,
     'New research submission: ' + title,
-    'A new study was submitted for the NWPTF Research page.\n\n' + body +
+    'A new study was submitted for the NWPTF Publication archive.\n\n' + body +
     '\n\nTo publish it, open the responses sheet and set its Status to "Approved".\n' +
     'To decline, leave Status blank or delete the row.'
   );
@@ -84,11 +98,11 @@ event type **On form submit** → Save (authorize when prompted).
 1. In the responses sheet: **File → Share → Publish to web**.
 2. Under "Link", pick the **responses sheet/tab**, and choose **Comma-separated
    values (.csv)**. Click **Publish** and copy the link.
-3. In `assets/research-submissions.js`, paste it:
+3. In `assets/publications.js`, paste it:
    ```javascript
-   var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/XXXX/pub?output=csv';
+   var SUBMISSIONS_URL = 'https://docs.google.com/spreadsheets/d/e/XXXX/pub?output=csv';
    ```
-4. Commit the change. The Research page will now show approved submissions.
+4. Commit the change. The Publication archive will now show approved submissions.
 
 > Publishing to web exposes only the columns in that sheet. Keep submitter
 > name/email in the sheet (the site ignores them), but if you'd rather they
@@ -107,9 +121,13 @@ No code changes are ever needed after Step 5 — only the spreadsheet.
 
 ## How it behaves on the page
 
-- Approved entries are filed into their category, newest year first, mixed in
-  with the hand-curated studies.
-- Category counts ("10 studies") update automatically.
-- New entries are covered by the search box.
-- If the sheet is ever unreachable, the page simply shows the hand-curated list
+- Approved entries appear in the **Publication archive**, sorted newest first
+  alongside the curated papers, and tagged with their theme and access.
+- They are covered by the archive's search box and its theme, year, and access
+  filters.
+- A paper already in `assets/publications.csv` is not shown twice — entries are
+  de-duplicated by DOI, and the curated file wins.
+- If the sheet is ever unreachable, the archive simply renders the curated file
   — nothing breaks.
+- Approving a paper does **not** put it on the Featured page. That page is
+  hand-written; promoting a paper there is a separate editorial decision.

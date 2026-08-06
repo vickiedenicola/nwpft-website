@@ -360,12 +360,21 @@
 <script src="assets/layout.js"></script>
 <script>
 // Client-side search over the publication list. Re-queries the DOM on each
-// search, so any study added to the page later — by hand or by the submissions
-// loader below — is automatically searchable, with no index to maintain.
+// search, so any study added to the page later is automatically searchable,
+// with no index to maintain.
 (function () {
   var input = document.getElementById('pub-search-input');
   if (!input) return;
   var status = document.querySelector('.pub-search-status');
+
+  // Count each category from the markup rather than trusting a hand-typed
+  // number, so adding a study can't leave a stale "10 studies" label behind.
+  Array.prototype.forEach.call(document.querySelectorAll('.pub-cat'), function (c) {
+    var badge = c.querySelector('.pub-cat-count');
+    if (!badge) { return; }
+    var n = c.querySelectorAll('.pub').length;
+    badge.textContent = n + (n === 1 ? ' study' : ' studies');
+  });
 
   // Record each category's default open/closed state once (categories are stable).
   Array.prototype.forEach.call(document.querySelectorAll('.pub-cat'), function (c) {
@@ -414,10 +423,9 @@
     timer = setTimeout(run, 120);
   });
 
-  // Re-run an active search once the submissions loader injects approved entries.
+  // Kept so anything injected into this page later stays searchable.
   document.addEventListener('research:updated', function () { if (input.value.trim()) { run(); } });
 })();
 </script>
-<script src="assets/research-submissions.js"></script>
 </body>
 </html>

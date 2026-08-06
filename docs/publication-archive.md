@@ -74,13 +74,32 @@ After step 4 their edits appear on the site directly, with no code change and no
 deploy. The template's guidance and example rows are skipped automatically, so it
 can be published as-is.
 
-## Related
+## Community submissions
 
-`assets/research-submissions.js` pulls approved community submissions from the
-"Suggest a study" form's sheet into **`research.html`** — the featured page.
+The "Suggest a study" form feeds the **archive**, gated on the Research
+Subcommittee's approval:
 
-That predates the split and is worth revisiting: submissions arguably belong in
-the archive now, with the featured page reserved for deliberate editorial picks.
-Moving it needs a small change, because that loader inserts into the featured
-page's `.pub-cat` category blocks and the archive renders one flat list. Left as
-is for now so nothing breaks. See `docs/research-submissions-setup.md`.
+```
+submitter → Google Form → review sheet (Status column)
+          → Subcommittee sets Status = "Approved"
+          → the paper appears in the Publication archive
+```
+
+`SUBMISSIONS_URL` in `assets/publications.js` points at that sheet, published to
+the web as CSV. The archive loads it alongside `publications.csv`, keeps only
+rows whose Status is `Approved`, and de-duplicates by DOI — so once a submission
+is folded into `publications.csv` it stops being a second copy, and the curated
+file wins on any collision. Set `SUBMISSIONS_URL` to `''` to switch the pipeline
+off; an unreachable sheet is non-fatal and the curated archive still renders.
+
+Because the form's headers come from Google Forms and read like "Title of the
+study*", columns are matched by keyword rather than exact name. Submitter name
+and email match nothing, so contact details are never read, rendered, or made
+searchable.
+
+**Getting onto the Featured page is a separate, deliberate act.** `research.html`
+is hand-written HTML, so promoting a paper means writing the entry and its note
+and committing. That is intentional — approval puts a paper in the archive; it
+does not put it in front of every visitor.
+
+For the form and sheet setup, see `docs/research-submissions-setup.md`.
