@@ -75,6 +75,6 @@ Typography: Playfair Display (headings) and Source Sans 3 (body) loaded from Goo
 
 ## Pre-launch notes
 
-- The stat strip on `index.html` and `issue.html` carries two figures, both sourced in a footnote beneath it. Any figure added there needs a citation in that same footnote list. `.stat-row` auto-fits, so two or three both lay out correctly.
-- A population estimate ("6M+ feral swine in the U.S.") was removed in August 2026 — USDA was uncomfortable with the number. Do not reintroduce a national population figure without checking first.
+- The stat strip on `index.html` and `issue.html` carries three figures, each sourced in the footnote list beneath it. Any figure added there needs its own citation in that list. `.stat-row` auto-fits, so two or three both lay out correctly.
+- The "6M+" population figure comes from **Mayer 2014** (SRNL-STI-2014-00292, `10.2172/1169581`), a DOE Savannah River National Laboratory compilation — mean 6.3M, range 4.4–11.3M. It was briefly pulled in August 2026 because the markup credited it to USDA APHIS, which never published it; USDA's discomfort was with the misattribution, not the number. Keep the citation pointed at Mayer, and keep the 2014 vintage visible in the label — it is a 2014 estimate, not a current count.
 - News cards on the homepage are sample content, not live articles.
