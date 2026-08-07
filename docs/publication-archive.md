@@ -57,20 +57,49 @@ the `pdf` column.
 **Do not paste in publisher abstracts.** They are copyrighted. The `note` column
 is one sentence in our own words.
 
+## Two sources, and why
+
+`assets/publications.js` reads two constants:
+
+- **`DATA_URL`** — the archive of record. Ships pointing at `assets/publications.csv`
+  in this repo; point it at the Subcommittee's published sheet to hand the archive over.
+- **`FALLBACK_URL`** — a last-known-good snapshot, always the committed CSV. Used
+  **only** when `DATA_URL` returns no rows.
+
+The fallback matters once `DATA_URL` is a Google Sheet. An outage, an accidentally
+un-published sheet, or a botched edit that clears the header row would otherwise
+leave the archive completely blank, and the archive is the whole page. With the
+fallback, the worst case is a stale list instead of an empty one. Only the last
+resort is allowed to surface the error message.
+
+So once the sheet is live, **refresh `assets/publications.csv` from it
+periodically** — it is the disaster copy, and a year-old snapshot is a year-old
+disaster copy.
+
+While both constants name the same file, the fallback is skipped (no point
+fetching it twice).
+
 ## Adding papers
 
 Right now: edit `assets/publications.csv` and commit. Cloudflare Pages redeploys.
 
-To hand it over to the Research Subcommittee so they can publish without a
-redeploy:
+### Handing the archive to the Subcommittee
 
-1. Have them fill in `docs/NWPTF-publication-intake-template.xlsx`. Its columns
-   match this CSV exactly, by design.
-2. Upload it to Google Sheets.
-3. **File → Share → Publish to web →** pick the sheet, choose **CSV**.
-4. In `assets/publications.js`, change `DATA_URL` to that link.
+1. Upload `docs/NWPTF-archive-sheet.csv` to Google Drive and open it with Google
+   Sheets (Drive converts it). It already contains every paper in the archive, so
+   the sheet starts as a complete copy rather than an empty template. Put it
+   beside the submissions sheet and give the same editors access.
+2. **File → Share → Publish to web →** pick the sheet, choose **CSV**, Publish.
+3. In `assets/publications.js`, set `DATA_URL` to that published link. Leave
+   `FALLBACK_URL` on `assets/publications.csv`.
+4. Commit, then load `/publications` and confirm the paper count matches the sheet.
 
-After step 4 their edits appear on the site directly, with no code change and no
+Row 2 of that file is a grey reference row describing each column. The loader
+skips it — it has no four-digit year, no DOI-shaped `doi`, and no `http` url, which
+is the test a real row has to pass. Leave it in place; it is what stops seven
+editors having to remember the column rules.
+
+After step 3 their edits appear on the site directly, with no code change and no
 deploy. The template's guidance and example rows are skipped automatically, so it
 can be published as-is.
 

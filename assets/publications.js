@@ -29,7 +29,17 @@
 (function () {
   'use strict';
 
+  /* The archive of record. Point this at the Subcommittee's published sheet
+     (File > Share > Publish to web > CSV) to let them add papers without a
+     commit or a deploy; the column format is identical either way. */
   var DATA_URL = 'assets/publications.csv';
+
+  /* Last-known-good snapshot, committed in this repo. Used only if DATA_URL
+     returns nothing — a Google outage, an un-published sheet, or a botched edit
+     would otherwise leave the archive blank, and this is the whole page. Keep it
+     refreshed from the sheet periodically. Ignored while DATA_URL is the same file. */
+  var FALLBACK_URL = 'assets/publications.csv';
+
   var PAGE_SIZE = 40;
 
   /* Community submissions ("Suggest a study") — the Research Subcommittee's
@@ -359,9 +369,19 @@
     return out;
   }
 
+  // Try the archive of record; fall back to the committed snapshot if it yields
+  // nothing. Only the last resort is allowed to be fatal.
+  function loadCurated() {
+    var sameFile = !FALLBACK_URL || FALLBACK_URL === DATA_URL;
+    return load(DATA_URL, false, sameFile).then(function (rows) {
+      if (rows.length || sameFile) { return rows; }
+      return load(FALLBACK_URL, false, true);
+    });
+  }
+
   els.status.textContent = 'Loading the archive…';
   Promise.all([
-    load(DATA_URL, false, true),
+    loadCurated(),
     SUBMISSIONS_URL ? load(SUBMISSIONS_URL, true, false) : Promise.resolve([])
   ])
     .then(function (lists) {
