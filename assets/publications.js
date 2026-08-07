@@ -6,14 +6,18 @@
    theme, access, and free-text search.
 
    WHERE THE DATA COMES FROM
-     DATA_URL below. It ships pointing at the copy committed in
-     this repo (assets/publications.csv). To hand the archive
-     over to the Research Subcommittee, publish their Google
-     Sheet to the web as CSV and paste that link in instead —
-     the column format is identical, so nothing else changes
-     and no redeploy is needed to add a paper.
+     DATA_URL — the Subcommittee's "NWPTF-archive-sheet",
+     published to the web as CSV. Editing that sheet changes
+     the site; no commit and no deploy.
+     FALLBACK_URL — assets/publications.csv in this repo, used
+     only if the sheet returns nothing. Refresh it from the
+     sheet periodically; it is the disaster copy.
 
+     To move the archive to a different sheet:
        Sheet > File > Share > Publish to web > CSV
+     then paste that link into DATA_URL. Use File > Import
+     (not copy-paste) to load rows into a sheet — pasting CSV
+     text lands it all in column A.
 
    COLUMNS (matched by header name, case-insensitive, any order)
      title, authors, year, journal, category, access, url, doi,
@@ -29,10 +33,10 @@
 (function () {
   'use strict';
 
-  /* The archive of record. Point this at the Subcommittee's published sheet
-     (File > Share > Publish to web > CSV) to let them add papers without a
-     commit or a deploy; the column format is identical either way. */
-  var DATA_URL = 'assets/publications.csv';
+  /* The archive of record: the Research Subcommittee's "NWPTF-archive-sheet",
+     published to the web as CSV. They add and edit papers there and the change
+     appears here on the next page load — no commit, no deploy. */
+  var DATA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQua8ewRi0Z-p8UlkPK6nn8GcMY2793gwzm-vqzoFGSv_UaHn40WapHZ0p4AYRXMKp4OPmTPwOJYsCo/pub?gid=1830834541&single=true&output=csv';
 
   /* Last-known-good snapshot, committed in this repo. Used only if DATA_URL
      returns nothing — a Google outage, an un-published sheet, or a botched edit
