@@ -601,6 +601,13 @@ a.news-card:hover .news-thumb { transform: scale(1.04); }
 }
 .callout h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
 .callout p { color: var(--ink-soft); margin: 0; }
+.callout-book { display: flex; gap: 1.8rem; align-items: flex-start; }
+.callout-book .book-cover { flex-shrink: 0; }
+.callout-book .book-cover img {
+  display: block; width: 150px; height: auto;
+  border: 1px solid var(--line); border-radius: 3px;
+  box-shadow: 0 3px 10px rgba(43, 55, 35, 0.18);
+}
 
 /* Featured (highlighted) resource card */
 .resource-card.feature { display: block; border-left: 5px solid var(--rust); margin-bottom: 2rem; }
@@ -775,6 +782,8 @@ a.news-card:hover .news-thumb { transform: scale(1.04); }
   .hero-bg { background-size: auto 150%; background-position: center 85%; }
   /* Give the middle phrase its own line on narrow screens */
   .hero h1 .hero-line { display: block; white-space: nowrap; }
+  .callout-book { flex-direction: column; }
+  .callout-book .book-cover img { width: 130px; }
   /* Let the tan line sit on its own line and wrap, so it isn't clipped on phones */
   .hero h1 .accent { display: block; white-space: normal; }
   /* Two columns on phones. Three across leaves ~97px per stat, too narrow for

@@ -29,6 +29,7 @@ federal public-domain work, or used under a Creative Commons license.
 | `assets/news-screwworm.jpg` | Feral swine (invasive species) | USDA (USDAgov) | CC BY 2.0 |
 | `assets/news-research.jpg` | Feral swine on trail camera at night | USDA (USDAgov) | Public domain |
 | `assets/news-policy.jpg` | Feral swine foraging | USDA (USDAgov) | Public domain |
+| `assets/invasive-wild-pigs-book-cover.jpg` | Book cover, *Invasive Wild Pigs in North America* (research.html callout) | CRC Press / Taylor & Francis | Publisher cover art, used to promote the book alongside its discount flyer |
 
 ## Logo & favicon
 
