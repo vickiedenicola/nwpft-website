@@ -72,9 +72,32 @@ leave the archive completely blank, and the archive is the whole page. With the
 fallback, the worst case is a stale list instead of an empty one. Only the last
 resort is allowed to surface the error message.
 
-So once the sheet is live, **refresh `assets/publications.csv` from it
-periodically** — it is the disaster copy, and a year-old snapshot is a year-old
-disaster copy.
+The snapshot is refreshed automatically, so it does not go stale:
+`.github/workflows/refresh-archive-fallback.yml` runs `scripts/refresh_archive_fallback.py`
+every Monday, and commits `assets/publications.csv` when the sheet has changed.
+You can also trigger it from the repo's **Actions** tab (Run workflow) after a
+big batch of edits, rather than waiting for Monday.
+
+The script reads the sheet URL out of `publications.js`, so there is no second
+copy of it to drift.
+
+**It refuses to write unless the download passes every check**, because the
+moment the sheet breaks is the moment the fallback matters — a naive copy would
+overwrite a good snapshot with a Google sign-in page. It bails out if the
+response is HTML rather than CSV, if the header row is missing expected columns,
+if fewer than 40 papers come back, or if the count drops more than 25% against
+what is committed. Any of those turns the Actions run red and leaves the existing
+snapshot untouched, so a red run is a signal to look at the sheet, not at the
+snapshot. If a big legitimate drop ever happens, refresh by hand.
+
+For a manual refresh from a downloaded file:
+
+```
+python3 scripts/refresh_archive_fallback.py path/to/sheet.csv   # or - for stdin
+```
+
+Note: GitHub disables scheduled workflows in repositories with no pushes for 60
+days. If the refresh quietly stops, that is usually why — a manual run re-arms it.
 
 While both constants name the same file, the fallback is skipped (no point
 fetching it twice).

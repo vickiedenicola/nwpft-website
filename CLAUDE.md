@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Static website for the National Wild Pig Task Force (NWPTF) — a redesign of nwptf.org. Plain HTML, CSS, and vanilla JavaScript with no build step, no framework, and no package manager.
 
+The one script in the repo, `scripts/refresh_archive_fallback.py`, is **CI-only** — a scheduled GitHub Action runs it to refresh the publication archive's offline snapshot. It is not part of building or serving the site, uses only the Python standard library, and nothing in the browser depends on it. Serving the site is still "copy the files".
+
 ## Running locally
 
 Serve via a local HTTP server (required because pages load shared assets via relative paths):
