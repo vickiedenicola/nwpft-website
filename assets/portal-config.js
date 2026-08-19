@@ -11,6 +11,6 @@
  * notice instead of the forms.
  */
 window.NWPTF_SUPABASE = {
-  url: '',
-  anonKey: ''
+  url: 'https://umzvqtmbauyqxniaxrgs.supabase.co',
+  anonKey: 'sb_publishable_2_ZskFAKuUR65cMpqKccJg_nZXiF6G1'
 };
