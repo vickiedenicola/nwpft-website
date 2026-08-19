@@ -812,6 +812,7 @@ a.news-card:hover .news-thumb { transform: scale(1.04); }
 }
 
 /* ---- Member portal ---- */
+.portal-form[hidden], .portal-card [hidden] { display: none !important; }
 .portal-card {
   max-width: 680px;
   margin: 0 auto;
