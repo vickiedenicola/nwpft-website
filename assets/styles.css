@@ -825,6 +825,8 @@ a.news-card:hover .news-thumb { transform: scale(1.04); }
 .portal-card-narrow { max-width: 460px; }
 .portal-intro { color: var(--ink-soft); margin-bottom: 1.4rem; }
 .portal-heading { font-size: 1.35rem; margin-bottom: 0.9rem; }
+body[data-page="privacy"] .portal-heading { margin-top: 1.7rem; }
+body[data-page="privacy"] .portal-heading:first-of-type { margin-top: 0.6rem; }
 .portal-links { margin-top: 1.2rem; font-size: 0.95rem; }
 .portal-links a { font-weight: 700; }
 .portal-fineprint { font-size: 0.85rem; color: var(--ink-soft); }
