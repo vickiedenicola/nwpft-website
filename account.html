@@ -35,7 +35,6 @@
 
       <h2 class="portal-heading">My profile</h2>
       <p id="account-loading" class="portal-intro">Loading your profile&hellip;</p>
-      <div id="profile-status" class="portal-status"></div>
       <form id="profile-form" class="contact-form portal-form" novalidate hidden>
         <div class="form-row-2">
           <div class="form-field">
@@ -62,7 +61,7 @@
           </div>
           <div class="form-field">
             <label for="af-country">Country</label>
-            <input id="af-country" type="text" name="country" autocomplete="country-name">
+            <select id="af-country" name="country" autocomplete="country-name" data-country></select>
           </div>
         </div>
         <fieldset class="form-field check-field">
@@ -86,7 +85,10 @@
           <legend>Email preferences</legend>
           <div class="check-grid" data-checks="email_prefs"></div>
         </fieldset>
-        <button type="submit" class="btn btn-primary">Save profile</button>
+        <div class="portal-actions">
+          <button type="submit" class="btn btn-primary">Save profile</button>
+          <div id="profile-status" class="portal-status"></div>
+        </div>
       </form>
 
       <hr class="portal-rule">

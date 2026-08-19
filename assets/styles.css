@@ -863,6 +863,8 @@ a.news-card:hover .news-thumb { transform: scale(1.04); }
   margin-top: 0.2rem; accent-color: var(--rust); width: 1rem; height: 1rem; flex: none;
 }
 .check-note { margin-top: 0.8rem; }
+.portal-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.portal-actions .portal-status { margin-bottom: 0; padding: 0.55rem 0.9rem; }
 .form-field .optional { font-weight: 400; text-transform: none; letter-spacing: 0; }
 @media (max-width: 600px) {
   .portal-card { padding: 1.4rem; }

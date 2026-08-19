@@ -96,7 +96,7 @@
         '</div>' +
       '</div>' +
       '<div class="footer-bottom">' +
-        '<span>Copyright &copy; 2026 <a href="https://nwptf.org/" target="_blank" rel="noopener">National Wild Pig Task Force</a> &middot; <a href="credits.html">Image credits</a></span>' +
+        '<span>Copyright &copy; 2026 <a href="https://nwptf.org/" target="_blank" rel="noopener">National Wild Pig Task Force</a> &middot; <a href="credits.html">Image credits</a> &middot; <a href="privacy.html">Privacy</a></span>' +
         '<span>SCIENCE / COORDINATION / ACTION</span>' +
       '</div>' +
     '</div></footer>';
