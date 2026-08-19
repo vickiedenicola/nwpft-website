@@ -850,6 +850,7 @@ a.news-card:hover .news-thumb { transform: scale(1.04); }
   font-size: 0.82rem; font-weight: 700; letter-spacing: 0.04em;
   text-transform: uppercase; color: var(--ink-soft); padding: 0; margin-bottom: 0.55rem;
 }
+.check-hint { font-size: 0.85rem; color: var(--ink-soft); margin: -0.25rem 0 0.55rem; }
 .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem 1.2rem; }
 .check-grid-1col { grid-template-columns: 1fr; }
 .check-grid label, .check-single {

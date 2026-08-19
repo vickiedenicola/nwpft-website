@@ -22,6 +22,19 @@
     'Spread & human dimensions'
   ];
 
+  // NWPTF subcommittees a member can ask to join.
+  var COMMITTEES = ['Research', 'Policy', 'Communications', 'Applied Management'];
+
+  // Email preference categories. 'none' is special: it is exclusive and is
+  // stored as an empty email_prefs array (= send nothing).
+  var EMAIL_PREFS = [
+    { value: 'general', label: 'General NWPTF updates' },
+    { value: 'interests', label: 'News in my areas of interest' },
+    { value: 'subcommittee', label: 'Subcommittee news' },
+    { value: 'events', label: 'Conferences & events' },
+    { value: 'none', label: 'No emails' }
+  ];
+
   // Other working groups / associations a member may belong to.
   var AFFILIATIONS = [
     { value: 'NFSDMP', label: 'National Feral Swine Damage Management Program (USDA APHIS)' },
@@ -50,15 +63,34 @@
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
   }
 
-  // Fill every <div data-checks="interests|other_affiliations"> with checkboxes.
+  var CHECK_OPTIONS = {
+    interests: INTERESTS,
+    committees: COMMITTEES,
+    other_affiliations: AFFILIATIONS,
+    email_prefs: EMAIL_PREFS
+  };
+
+  // Fill every <div data-checks="..."> with its checkbox group.
   document.querySelectorAll('[data-checks]').forEach(function (box) {
     var name = box.getAttribute('data-checks');
-    var options = name === 'interests' ? INTERESTS : AFFILIATIONS;
+    var options = CHECK_OPTIONS[name] || [];
     box.innerHTML = options.map(function (opt) {
       var value = typeof opt === 'string' ? opt : opt.value;
       var label = typeof opt === 'string' ? opt : opt.label;
       return '<label><input type="checkbox" name="' + esc(name) + '" value="' + esc(value) + '"> <span>' + esc(label) + '</span></label>';
     }).join('');
+  });
+
+  // "No emails" is exclusive: checking it clears the others and vice versa.
+  document.querySelectorAll('[data-checks="email_prefs"]').forEach(function (box) {
+    box.addEventListener('change', function (e) {
+      var t = e.target;
+      if (!t || t.name !== 'email_prefs') return;
+      if (!t.checked) return;
+      box.querySelectorAll('input').forEach(function (i) {
+        if (t.value === 'none' ? i.value !== 'none' : i.value === 'none') i.checked = false;
+      });
+    });
   });
 
   function checkedValues(form, name) {
@@ -95,9 +127,10 @@
       phone: f.phone.value.trim(),
       country: f.country.value.trim(),
       interests: checkedValues(form, 'interests'),
+      committees: checkedValues(form, 'committees'),
       other_affiliations: checkedValues(form, 'other_affiliations'),
       other_affiliations_note: f.other_affiliations_note.value.trim(),
-      email_opt_in: f.email_opt_in.checked
+      email_prefs: checkedValues(form, 'email_prefs').filter(function (v) { return v !== 'none'; })
     };
   }
 
@@ -110,6 +143,7 @@
   async function initSignup() {
     if (await currentSession()) { location.replace('account.html'); return; }
     var form = el('signup-form');
+    setChecked(form, 'email_prefs', ['general', 'interests', 'subcommittee', 'events']);
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
       var f = form.elements;
@@ -185,9 +219,11 @@
     f.phone.value = p.phone || '';
     f.country.value = p.country || '';
     f.other_affiliations_note.value = p.other_affiliations_note || '';
-    f.email_opt_in.checked = p.email_opt_in !== false;
     setChecked(form, 'interests', p.interests);
+    setChecked(form, 'committees', p.committees);
     setChecked(form, 'other_affiliations', p.other_affiliations);
+    setChecked(form, 'email_prefs',
+      (p.email_prefs && p.email_prefs.length) ? p.email_prefs : ['none']);
     el('account-loading').hidden = true;
     form.hidden = false;
 

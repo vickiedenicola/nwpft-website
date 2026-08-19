@@ -50,7 +50,10 @@ Portal pages are `noindex` and intentionally left out of `sitemap.xml`.
 `public.profiles`, one row per user (`id = auth.users.id`):
 first_name, last_name, title, affiliation (company/agency/university), phone,
 country, email (mirror, synced by trigger), `interests text[]`,
-`email_opt_in bool`, `other_affiliations text[]` (National Feral Swine Damage Management Program / AFWA / SEAFWA / MAFWA / EUROBOAR),
+`committees text[]` (Research / Policy / Communications / Applied Management),
+`email_prefs text[]` (general / interests / subcommittee / events — empty
+array means "no emails"), `other_affiliations text[]` (National Feral Swine
+Damage Management Program / AFWA / SEAFWA / MAFWA / EUROBOAR),
 `other_affiliations_note` (free-text other working groups), role
 (member/admin), timestamps.
 
@@ -76,11 +79,17 @@ Do **not** import plaintext passwords. Use invites:
 
 ## Exporting the mailing list
 
-The `mailing_list` view returns everyone who opted in (admins see all rows):
+The `mailing_list` view returns everyone receiving at least one email
+category (admins see all rows):
 
 ```sql
-select * from mailing_list;                                   -- everyone opted in
-select * from mailing_list where 'Disease & health' = any(interests);
+select * from mailing_list;                                   -- anyone getting email
+select * from mailing_list where 'general' = any(email_prefs);
+select * from mailing_list where 'events' = any(email_prefs); -- conference blast
+select * from mailing_list where 'interests' = any(email_prefs)
+                              and 'Disease & health' = any(interests);
+select * from mailing_list where 'subcommittee' = any(email_prefs)
+                              and 'Policy' = any(committees);
 select * from mailing_list where country <> 'United States';  -- international slice
 ```
 
