@@ -66,20 +66,13 @@
         </div>
         <fieldset class="form-field check-field">
           <legend>Areas of interest</legend>
+          <p class="check-hint">Pick as many as you like.</p>
           <div class="check-grid" data-checks="interests"></div>
         </fieldset>
         <fieldset class="form-field check-field">
           <legend>Please include me in these NWPTF committees</legend>
           <p class="check-hint">Pick as many as you like.</p>
           <div class="check-grid" data-checks="committees"></div>
-        </fieldset>
-        <fieldset class="form-field check-field">
-          <legend>Other affiliations</legend>
-          <div class="check-grid check-grid-1col" data-checks="other_affiliations"></div>
-          <div class="form-field check-note">
-            <label for="af-aff-note">Other <span class="optional">(optional)</span></label>
-            <input id="af-aff-note" type="text" name="other_affiliations_note">
-          </div>
         </fieldset>
         <fieldset class="form-field check-field">
           <legend>Email preferences</legend>
@@ -114,15 +107,18 @@
       </form>
 
       <hr class="portal-rule">
-      <p class="portal-fineprint">Want your profile removed entirely? <a href="contact.html">Contact us</a> and we&rsquo;ll delete your account.</p>
+      <h2 class="portal-heading">Remove my membership</h2>
+      <p class="portal-fineprint">This permanently deletes your profile and takes you off every NWPTF list. There is no undo. (You can also just switch email preferences to &ldquo;No emails&rdquo; above and stay a member.)</p>
+      <div id="delete-status" class="portal-status"></div>
+      <button id="delete-btn" type="button" class="btn btn-ghost btn-danger">Remove my membership</button>
     </div>
   </div>
 </section>
 
 <div data-layout="footer"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.3/dist/umd/supabase.min.js" integrity="sha384-l8ah+VgaWtk1mvOe9VC+OirC6qHFF4yH7l7mKRidV9MSti3E9F463bMp6ZVN4kuC" crossorigin="anonymous"></script>
-<script src="assets/portal-config.js?v=20260819b"></script>
-<script src="assets/portal.js?v=20260819b"></script>
+<script src="assets/portal-config.js?v=20260819c"></script>
+<script src="assets/portal.js?v=20260819c"></script>
 <script src="assets/layout.js"></script>
 </body>
 </html>

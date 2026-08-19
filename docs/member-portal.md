@@ -52,10 +52,9 @@ first_name, last_name, title, affiliation (company/agency/university), phone,
 country, email (mirror, synced by trigger), `interests text[]`,
 `committees text[]` (Research / Policy / Communications / Applied Management),
 `email_prefs text[]` (general / interests / subcommittee / events — empty
-array means "no emails"), `other_affiliations text[]` (National Feral Swine
-Damage Management Program / AFWA / SEAFWA / MAFWA / EUROBOAR),
-`other_affiliations_note` (free-text other working groups), role
-(member/admin), timestamps.
+array means "no emails"), role (member/admin), timestamps. (An
+"other affiliations" field existed briefly and was removed on chair
+feedback 2026-08-19.)
 
 RLS: members read/update only their own row (and cannot change `role` or
 `email` — enforced by column-level grants); admins read all rows. Profile rows
@@ -99,8 +98,16 @@ export) is still an open decision.
 
 ## Deleting an account
 
-Member deletion is admin-only (members are told to contact us): Dashboard →
-Authentication → Users → delete the user. The profile row cascades.
+Members remove themselves with the "Remove my membership" button on
+`account.html`, which calls the Cloudflare Pages function
+`functions/api/delete-account.js`. That function needs a one-time setup:
+Cloudflare Pages dashboard → the site's Settings → Environment variables →
+add an **encrypted** variable `SUPABASE_SECRET_KEY` holding the "Secret key"
+(`sb_secret_...`) from the Supabase project's API Keys page. Until it is set,
+the button reports a friendly failure and members can use the contact form.
+
+Admins can also delete anyone: Dashboard → Authentication → Users → delete
+the user. Either way the profile row cascades away with the auth user.
 
 ## Still open
 

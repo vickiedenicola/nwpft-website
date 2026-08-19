@@ -61,13 +61,16 @@ and the footer.
 ### Member portal
 
 Free member profiles (name, title, affiliation, phone, country, areas of
-interest, email opt-in, other affiliations) that feed an interest-segmented
+interest, committees, granular email preferences) that feed an interest-segmented
 international mailing list. Supabase handles auth/DB/emails via
-`@supabase/supabase-js` from CDN — no build step, no server code. Row-level
-security protects the data; the anon key in `assets/portal-config.js` is safe
-to commit. The interest/affiliation checkbox lists live only in the
-`INTERESTS`/`AFFILIATIONS` arrays at the top of `assets/portal.js`. Setup,
-roster invites, and mailing-list export: `docs/member-portal.md`.
+`@supabase/supabase-js` from CDN — no build step; the only server code is
+`functions/api/delete-account.js` (Cloudflare Pages function for
+self-service membership removal, needs the `SUPABASE_SECRET_KEY` env var in
+the Cloudflare dashboard). Row-level security protects the data; the anon
+key in `assets/portal-config.js` is safe to commit. The checkbox option
+lists live only in the `INTERESTS`/`COMMITTEES`/`EMAIL_PREFS` arrays at the
+top of `assets/portal.js`. Setup, roster invites, and mailing-list export:
+`docs/member-portal.md`.
 
 ### Styling
 

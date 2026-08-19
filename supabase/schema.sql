@@ -19,8 +19,6 @@ create table if not exists public.profiles (
   interests               text[] not null default '{}',
   committees              text[] not null default '{}',       -- Research / Policy / Communications / Applied Management
   email_prefs             text[] not null default '{}',       -- general / interests / subcommittee / events; empty = no emails
-  other_affiliations      text[] not null default '{}',       -- NFSDMP / AFWA / SEAFWA / MAFWA / EUROBOAR
-  other_affiliations_note text not null default '',           -- free-text "other working groups"
   role                    text not null default 'member' check (role in ('member','admin')),
   created_at              timestamptz not null default now(),
   updated_at              timestamptz not null default now()
@@ -32,10 +30,10 @@ alter table public.profiles enable row level security;
 -- Members may never set their own role, and email is managed by trigger only.
 revoke insert, update on public.profiles from anon, authenticated;
 grant insert (id, email, first_name, last_name, title, affiliation, phone, country,
-              interests, committees, email_prefs, other_affiliations, other_affiliations_note)
+              interests, committees, email_prefs)
   on public.profiles to authenticated;
 grant update (first_name, last_name, title, affiliation, phone, country,
-              interests, committees, email_prefs, other_affiliations, other_affiliations_note)
+              interests, committees, email_prefs)
   on public.profiles to authenticated;
 
 -- ---- Admin check (security definer avoids recursive RLS lookups) ----
@@ -70,7 +68,7 @@ as $$
 begin
   insert into public.profiles (
     id, email, first_name, last_name, title, affiliation, phone, country,
-    interests, committees, email_prefs, other_affiliations, other_affiliations_note
+    interests, committees, email_prefs
   ) values (
     new.id,
     coalesce(new.email, ''),
@@ -82,9 +80,7 @@ begin
     coalesce(new.raw_user_meta_data->>'country', ''),
     coalesce((select array_agg(x) from jsonb_array_elements_text(new.raw_user_meta_data->'interests') as t(x)), '{}'),
     coalesce((select array_agg(x) from jsonb_array_elements_text(new.raw_user_meta_data->'committees') as t(x)), '{}'),
-    coalesce((select array_agg(x) from jsonb_array_elements_text(new.raw_user_meta_data->'email_prefs') as t(x)), '{}'),
-    coalesce((select array_agg(x) from jsonb_array_elements_text(new.raw_user_meta_data->'other_affiliations') as t(x)), '{}'),
-    coalesce(new.raw_user_meta_data->>'other_affiliations_note', '')
+    coalesce((select array_agg(x) from jsonb_array_elements_text(new.raw_user_meta_data->'email_prefs') as t(x)), '{}')
   )
   on conflict (id) do nothing;
   return new;
@@ -134,8 +130,7 @@ create trigger profiles_touch_updated_at
 create or replace view public.mailing_list
 with (security_invoker = true) as
   select email, first_name, last_name, title, affiliation, country,
-         interests, committees, email_prefs,
-         other_affiliations, other_affiliations_note
+         interests, committees, email_prefs
     from public.profiles
    where cardinality(email_prefs) > 0;
 

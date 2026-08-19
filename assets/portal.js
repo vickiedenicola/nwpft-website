@@ -35,15 +35,6 @@
     { value: 'none', label: 'No emails' }
   ];
 
-  // Other working groups / associations a member may belong to.
-  var AFFILIATIONS = [
-    { value: 'NFSDMP', label: 'National Feral Swine Damage Management Program (USDA APHIS)' },
-    { value: 'AFWA', label: 'AFWA — Association of Fish & Wildlife Agencies' },
-    { value: 'SEAFWA', label: 'SEAFWA — Southeastern Assoc. of Fish & Wildlife Agencies' },
-    { value: 'MAFWA', label: 'MAFWA — Midwest Assoc. of Fish & Wildlife Agencies' },
-    { value: 'EUROBOAR', label: 'EUROBOAR — European wild boar research network' }
-  ];
-
   // Country dropdown: North America pinned first, then everywhere else.
   var COUNTRIES_TOP = ['United States', 'Canada', 'Mexico'];
   var COUNTRIES = 'Afghanistan|Albania|Algeria|Andorra|Angola|Antigua & Barbuda|Argentina|Armenia|Australia|Austria|Azerbaijan|Bahamas|Bahrain|Bangladesh|Barbados|Belarus|Belgium|Belize|Benin|Bhutan|Bolivia|Bosnia & Herzegovina|Botswana|Brazil|Brunei|Bulgaria|Burkina Faso|Burundi|Cabo Verde|Cambodia|Cameroon|Central African Republic|Chad|Chile|China|Colombia|Comoros|Congo (Republic)|Congo (DRC)|Costa Rica|Cote d\'Ivoire|Croatia|Cuba|Cyprus|Czechia|Denmark|Djibouti|Dominica|Dominican Republic|Ecuador|Egypt|El Salvador|Equatorial Guinea|Eritrea|Estonia|Eswatini|Ethiopia|Fiji|Finland|France|Gabon|Gambia|Georgia|Germany|Ghana|Greece|Grenada|Guatemala|Guinea|Guinea-Bissau|Guyana|Haiti|Honduras|Hungary|Iceland|India|Indonesia|Iran|Iraq|Ireland|Israel|Italy|Jamaica|Japan|Jordan|Kazakhstan|Kenya|Kiribati|Kuwait|Kyrgyzstan|Laos|Latvia|Lebanon|Lesotho|Liberia|Libya|Liechtenstein|Lithuania|Luxembourg|Madagascar|Malawi|Malaysia|Maldives|Mali|Malta|Marshall Islands|Mauritania|Mauritius|Micronesia|Moldova|Monaco|Mongolia|Montenegro|Morocco|Mozambique|Myanmar|Namibia|Nauru|Nepal|Netherlands|New Zealand|Nicaragua|Niger|Nigeria|North Korea|North Macedonia|Norway|Oman|Pakistan|Palau|Panama|Papua New Guinea|Paraguay|Peru|Philippines|Poland|Portugal|Qatar|Romania|Russia|Rwanda|Saint Kitts & Nevis|Saint Lucia|Saint Vincent & the Grenadines|Samoa|San Marino|Sao Tome & Principe|Saudi Arabia|Senegal|Serbia|Seychelles|Sierra Leone|Singapore|Slovakia|Slovenia|Solomon Islands|Somalia|South Africa|South Korea|South Sudan|Spain|Sri Lanka|Sudan|Suriname|Sweden|Switzerland|Syria|Taiwan|Tajikistan|Tanzania|Thailand|Timor-Leste|Togo|Tonga|Trinidad & Tobago|Tunisia|Turkiye|Turkmenistan|Tuvalu|Uganda|Ukraine|United Arab Emirates|United Kingdom|Uruguay|Uzbekistan|Vanuatu|Vatican City|Venezuela|Vietnam|Yemen|Zambia|Zimbabwe'.split('|');
@@ -70,7 +61,6 @@
   var CHECK_OPTIONS = {
     interests: INTERESTS,
     committees: COMMITTEES,
-    other_affiliations: AFFILIATIONS,
     email_prefs: EMAIL_PREFS
   };
 
@@ -141,8 +131,6 @@
       country: f.country.value,
       interests: checkedValues(form, 'interests'),
       committees: checkedValues(form, 'committees'),
-      other_affiliations: checkedValues(form, 'other_affiliations'),
-      other_affiliations_note: f.other_affiliations_note.value.trim(),
       email_prefs: checkedValues(form, 'email_prefs').filter(function (v) { return v !== 'none'; })
     };
   }
@@ -237,10 +225,8 @@
       f.country.appendChild(extra);
       f.country.value = p.country;
     }
-    f.other_affiliations_note.value = p.other_affiliations_note || '';
     setChecked(form, 'interests', p.interests);
     setChecked(form, 'committees', p.committees);
-    setChecked(form, 'other_affiliations', p.other_affiliations);
     setChecked(form, 'email_prefs',
       (p.email_prefs && p.email_prefs.length) ? p.email_prefs : ['none']);
     el('account-loading').hidden = true;
@@ -266,6 +252,36 @@
       setStatus(emailStatus,
         'Check your inbox — confirmation links were sent to your old and new addresses. ' +
         'The change completes once confirmed.', 'success');
+    });
+
+    // Remove membership entirely (via the Cloudflare Pages function,
+    // which verifies the session and deletes the auth user; profile
+    // row cascades). Works only on the deployed site, not localhost.
+    el('delete-btn').addEventListener('click', async function () {
+      var sure = window.confirm(
+        'Permanently remove your NWPTF membership?\n\n' +
+        'This deletes your profile and takes you off every mailing list. It cannot be undone.');
+      if (!sure) return;
+      var deleteStatus = el('delete-status');
+      setStatus(deleteStatus, 'Removing your membership…');
+      var sess = await sb.auth.getSession();
+      var token = sess.data && sess.data.session && sess.data.session.access_token;
+      var resp = null;
+      try {
+        resp = await fetch('api/delete-account', {
+          method: 'POST',
+          headers: { Authorization: 'Bearer ' + token }
+        });
+      } catch (err) { /* network failure handled below */ }
+      if (!resp || !resp.ok) {
+        setStatus(deleteStatus,
+          'Something went wrong removing your account. Please use the contact form and we will remove it for you.',
+          'error');
+        return;
+      }
+      await sb.auth.signOut();
+      setStatus(deleteStatus, 'Your membership has been removed. Sorry to see you go.', 'success');
+      setTimeout(function () { location.replace('index.html'); }, 2500);
     });
 
     // Change password (while signed in).

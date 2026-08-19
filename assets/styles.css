@@ -834,6 +834,8 @@ a.news-card:hover .news-thumb { transform: scale(1.04); }
   flex-wrap: wrap; margin-bottom: 1.4rem; font-size: 0.95rem; color: var(--ink-soft);
 }
 .btn-small { padding: 0.45rem 1rem; font-size: 0.8rem; }
+.btn-danger { border-color: var(--rust); color: var(--rust); }
+.btn-danger:hover { background: var(--rust); color: #fff; }
 .portal-status {
   display: none;
   border-radius: 10px;
