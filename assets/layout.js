@@ -50,6 +50,7 @@
     '<div class="topbar"><div class="wrap">' +
       '<span class="topbar-left">Science-based control of invasive wild pigs across North America</span>' +
       '<span class="topbar-right">' +
+        '<a class="topbar-feedback" href="login.html">Member Login</a>' +
         '<a class="topbar-feedback" href="feedback.html">Site Feedback</a>' +
         '<span class="topbar-connect">Connect</span>' +
         socialRow('topbar-social') +
@@ -87,6 +88,7 @@
           '<a href="events.html">Events</a>' +
           '<a href="governance.html">Governance</a>' +
           '<a href="about.html">About</a>' +
+          '<a href="signup.html">Become a member</a>' +
         '</div>' +
         '<div class="footer-col">' +
           '<h4>Connect</h4>' +

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My account | National Wild Pig Task Force</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg"><link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="assets/styles.css?v=20260819">
+</head>
+<body data-page="account">
+<div data-layout="header"></div>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="wrap">
+    <div class="kicker">Members</div>
+    <h1>My account</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="portal-card">
+      <div class="portal-meta">
+        <span>Signed in as <strong id="account-email"></strong></span>
+        <button id="signout-btn" type="button" class="btn btn-ghost btn-small">Sign out</button>
+      </div>
+      <div id="portal-status" class="portal-status"></div>
+
+      <h2 class="portal-heading">My profile</h2>
+      <p id="account-loading" class="portal-intro">Loading your profile&hellip;</p>
+      <div id="profile-status" class="portal-status"></div>
+      <form id="profile-form" class="contact-form portal-form" novalidate hidden>
+        <div class="form-row-2">
+          <div class="form-field">
+            <label for="af-first">First name</label>
+            <input id="af-first" type="text" name="first_name" autocomplete="given-name" required>
+          </div>
+          <div class="form-field">
+            <label for="af-last">Last name</label>
+            <input id="af-last" type="text" name="last_name" autocomplete="family-name" required>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="af-title">Title / position</label>
+          <input id="af-title" type="text" name="title" autocomplete="organization-title">
+        </div>
+        <div class="form-field">
+          <label for="af-affiliation">Company / affiliation</label>
+          <input id="af-affiliation" type="text" name="affiliation" autocomplete="organization">
+        </div>
+        <div class="form-row-2">
+          <div class="form-field">
+            <label for="af-phone">Phone <span class="optional">(optional)</span></label>
+            <input id="af-phone" type="tel" name="phone" autocomplete="tel">
+          </div>
+          <div class="form-field">
+            <label for="af-country">Country</label>
+            <input id="af-country" type="text" name="country" autocomplete="country-name">
+          </div>
+        </div>
+        <fieldset class="form-field check-field">
+          <legend>Areas of interest</legend>
+          <div class="check-grid" data-checks="interests"></div>
+        </fieldset>
+        <fieldset class="form-field check-field">
+          <legend>Other affiliations</legend>
+          <div class="check-grid check-grid-1col" data-checks="other_affiliations"></div>
+          <div class="form-field check-note">
+            <label for="af-aff-note">Other <span class="optional">(optional)</span></label>
+            <input id="af-aff-note" type="text" name="other_affiliations_note">
+          </div>
+        </fieldset>
+        <div class="form-field check-field">
+          <label class="check-single"><input type="checkbox" name="email_opt_in"> <span>Email me Task Force updates relevant to my areas of interest</span></label>
+        </div>
+        <button type="submit" class="btn btn-primary">Save profile</button>
+      </form>
+
+      <hr class="portal-rule">
+      <h2 class="portal-heading">Change email</h2>
+      <div id="email-status" class="portal-status"></div>
+      <form id="email-form" class="contact-form portal-form" novalidate>
+        <div class="form-field">
+          <label for="ef-email">New email</label>
+          <input id="ef-email" type="email" name="new_email" autocomplete="email" required>
+        </div>
+        <button type="submit" class="btn btn-dark">Update email</button>
+      </form>
+
+      <hr class="portal-rule">
+      <h2 class="portal-heading">Change password</h2>
+      <div id="password-status" class="portal-status"></div>
+      <form id="password-form" class="contact-form portal-form" novalidate>
+        <div class="form-field">
+          <label for="pf-password">New password</label>
+          <input id="pf-password" type="password" name="new_password" autocomplete="new-password" minlength="8" required>
+        </div>
+        <button type="submit" class="btn btn-dark">Update password</button>
+      </form>
+
+      <hr class="portal-rule">
+      <p class="portal-fineprint">Want your profile removed entirely? <a href="contact.html">Contact us</a> and we&rsquo;ll delete your account.</p>
+    </div>
+  </div>
+</section>
+
+<div data-layout="footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.3/dist/umd/supabase.min.js" integrity="sha384-l8ah+VgaWtk1mvOe9VC+OirC6qHFF4yH7l7mKRidV9MSti3E9F463bMp6ZVN4kuC" crossorigin="anonymous"></script>
+<script src="assets/portal-config.js"></script>
+<script src="assets/portal.js"></script>
+<script src="assets/layout.js"></script>
+</body>
+</html>

@@ -810,3 +810,59 @@ a.news-card:hover .news-thumb { transform: scale(1.04); }
   .footer-bottom { flex-direction: column; gap: 0.8rem; }
   .topbar-left { display: none; }
 }
+
+/* ---- Member portal ---- */
+.portal-card {
+  max-width: 680px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 2.2rem;
+  box-shadow: 0 10px 26px rgba(43,55,35,0.07);
+}
+.portal-card-narrow { max-width: 460px; }
+.portal-intro { color: var(--ink-soft); margin-bottom: 1.4rem; }
+.portal-heading { font-size: 1.35rem; margin-bottom: 0.9rem; }
+.portal-links { margin-top: 1.2rem; font-size: 0.95rem; }
+.portal-links a { font-weight: 700; }
+.portal-fineprint { font-size: 0.85rem; color: var(--ink-soft); }
+.portal-rule { border: 0; border-top: 1px solid var(--line); margin: 1.8rem 0; }
+.portal-meta {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  flex-wrap: wrap; margin-bottom: 1.4rem; font-size: 0.95rem; color: var(--ink-soft);
+}
+.btn-small { padding: 0.45rem 1rem; font-size: 0.8rem; }
+.portal-status {
+  display: none;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--bone);
+  padding: 0.8rem 1rem;
+  font-size: 0.95rem;
+  margin-bottom: 1.2rem;
+}
+.portal-status.error { border-color: #c65a37; background: #fbeee8; color: #7c3316; }
+.portal-status.success { border-color: var(--olive); background: #eef2e6; color: var(--moss-deep); }
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+.check-field { border: 0; padding: 0; margin: 0; }
+.check-field legend {
+  font-size: 0.82rem; font-weight: 700; letter-spacing: 0.04em;
+  text-transform: uppercase; color: var(--ink-soft); padding: 0; margin-bottom: 0.55rem;
+}
+.check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem 1.2rem; }
+.check-grid-1col { grid-template-columns: 1fr; }
+.check-grid label, .check-single {
+  display: flex; align-items: flex-start; gap: 0.55rem;
+  font-size: 0.95rem; font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--ink);
+  cursor: pointer;
+}
+.check-grid input[type="checkbox"], .check-single input[type="checkbox"] {
+  margin-top: 0.2rem; accent-color: var(--rust); width: 1rem; height: 1rem; flex: none;
+}
+.check-note { margin-top: 0.8rem; }
+.form-field .optional { font-weight: 400; text-transform: none; letter-spacing: 0; }
+@media (max-width: 600px) {
+  .portal-card { padding: 1.4rem; }
+  .form-row-2, .check-grid { grid-template-columns: 1fr; }
+}

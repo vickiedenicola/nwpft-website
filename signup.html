@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Become a member | National Wild Pig Task Force</title>
+<meta name="description" content="Create a free National Wild Pig Task Force member profile to join the international wild pig research and management network.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg"><link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="assets/styles.css?v=20260819">
+</head>
+<body data-page="signup">
+<div data-layout="header"></div>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="wrap">
+    <div class="kicker">Membership</div>
+    <h1>Become a member</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="portal-card">
+      <p class="portal-intro">Membership is free and open to anyone working on wild pigs — research, management, policy, or outreach, anywhere in the world. Your profile keeps you on the Task Force contact list and lets us reach you about the topics you care about. You can update or opt out at any time.</p>
+      <div id="portal-status" class="portal-status"></div>
+      <form id="signup-form" class="contact-form portal-form" novalidate>
+        <div class="form-row-2">
+          <div class="form-field">
+            <label for="sf-first">First name</label>
+            <input id="sf-first" type="text" name="first_name" autocomplete="given-name" required>
+          </div>
+          <div class="form-field">
+            <label for="sf-last">Last name</label>
+            <input id="sf-last" type="text" name="last_name" autocomplete="family-name" required>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="sf-title">Title / position</label>
+          <input id="sf-title" type="text" name="title" autocomplete="organization-title" placeholder="e.g. Wildlife Biologist">
+        </div>
+        <div class="form-field">
+          <label for="sf-affiliation">Company / affiliation</label>
+          <input id="sf-affiliation" type="text" name="affiliation" autocomplete="organization" placeholder="Agency, university, or company">
+        </div>
+        <div class="form-row-2">
+          <div class="form-field">
+            <label for="sf-phone">Phone <span class="optional">(optional)</span></label>
+            <input id="sf-phone" type="tel" name="phone" autocomplete="tel">
+          </div>
+          <div class="form-field">
+            <label for="sf-country">Country</label>
+            <input id="sf-country" type="text" name="country" autocomplete="country-name" placeholder="e.g. United States">
+          </div>
+        </div>
+        <fieldset class="form-field check-field">
+          <legend>Areas of interest</legend>
+          <div class="check-grid" data-checks="interests"></div>
+        </fieldset>
+        <fieldset class="form-field check-field">
+          <legend>Other affiliations</legend>
+          <div class="check-grid check-grid-1col" data-checks="other_affiliations"></div>
+          <div class="form-field check-note">
+            <label for="sf-aff-note">Other <span class="optional">(optional)</span></label>
+            <input id="sf-aff-note" type="text" name="other_affiliations_note" placeholder="Any other working group or network">
+          </div>
+        </fieldset>
+        <div class="form-field check-field">
+          <label class="check-single"><input type="checkbox" name="email_opt_in" checked> <span>Email me Task Force updates relevant to my areas of interest</span></label>
+        </div>
+        <hr class="portal-rule">
+        <div class="form-field">
+          <label for="sf-email">Email</label>
+          <input id="sf-email" type="email" name="email" autocomplete="email" required>
+        </div>
+        <div class="form-row-2">
+          <div class="form-field">
+            <label for="sf-password">Password</label>
+            <input id="sf-password" type="password" name="password" autocomplete="new-password" minlength="8" required>
+          </div>
+          <div class="form-field">
+            <label for="sf-password2">Confirm password</label>
+            <input id="sf-password2" type="password" name="password2" autocomplete="new-password" minlength="8" required>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Create my profile</button>
+      </form>
+      <p class="portal-links">Already a member? <a href="login.html">Sign in</a></p>
+    </div>
+  </div>
+</section>
+
+<div data-layout="footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.3/dist/umd/supabase.min.js" integrity="sha384-l8ah+VgaWtk1mvOe9VC+OirC6qHFF4yH7l7mKRidV9MSti3E9F463bMp6ZVN4kuC" crossorigin="anonymous"></script>
+<script src="assets/portal-config.js"></script>
+<script src="assets/portal.js"></script>
+<script src="assets/layout.js"></script>
+</body>
+</html>

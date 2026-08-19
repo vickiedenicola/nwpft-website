@@ -40,6 +40,7 @@ Pages do **not** contain their own header or footer markup. Instead, each page i
 | `about.html` | `about` | Page hero, prose content, value cards, CTA |
 | `governance.html` | — | Subcommittees and objectives |
 | `contact.html`, `credits.html`, `feedback.html`, `styleguide.html` | — | Supporting pages |
+| `signup.html`, `login.html`, `account.html`, `reset-password.html` | `signup` / `login` / `account` / `reset` | **Member portal** — Supabase-backed, all logic in `assets/portal.js`, keys in `assets/portal-config.js`, schema in `supabase/schema.sql`. See `docs/member-portal.md`. Pages are `noindex` and stay out of `sitemap.xml`. |
 
 ### Research section
 
@@ -56,6 +57,17 @@ archive over to a published Google Sheet, is in `docs/publication-archive.md`.
 To add papers, edit `assets/publications.csv` — not the HTML. The main nav keeps a
 single "Research" link to `research.html`; the archive is reached from that page
 and the footer.
+
+### Member portal
+
+Free member profiles (name, title, affiliation, phone, country, areas of
+interest, email opt-in, other affiliations) that feed an interest-segmented
+international mailing list. Supabase handles auth/DB/emails via
+`@supabase/supabase-js` from CDN — no build step, no server code. Row-level
+security protects the data; the anon key in `assets/portal-config.js` is safe
+to commit. The interest/affiliation checkbox lists live only in the
+`INTERESTS`/`AFFILIATIONS` arrays at the top of `assets/portal.js`. Setup,
+roster invites, and mailing-list export: `docs/member-portal.md`.
 
 ### Styling
 
