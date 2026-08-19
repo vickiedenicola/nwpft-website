@@ -1,8 +1,9 @@
 /*
  * NWPTF member portal - signup / login / account / password-reset logic.
  *
- * Runs on the four portal pages, routed by <body data-page="...">
- * (signup | login | account | reset). Talks to Supabase via the
+ * Runs on the portal pages, routed by <body data-page="...">
+ * (signup | login | account). Sign-in is passwordless: members get a
+ * one-time email link (Supabase OTP). Talks to Supabase via the
  * supabase-js v2 CDN bundle loaded on each page; project keys live in
  * assets/portal-config.js. Database schema: supabase/schema.sql.
  *
@@ -147,18 +148,12 @@
     setChecked(form, 'email_prefs', ['general', 'interests', 'subcommittee', 'events']);
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
-      var f = form.elements;
-      if (f.password.value.length < 8) {
-        setStatus(statusBox, 'Please choose a password of at least 8 characters.', 'error'); return;
-      }
-      if (f.password.value !== f.password2.value) {
-        setStatus(statusBox, 'The two passwords do not match.', 'error'); return;
-      }
-      setStatus(statusBox, 'Creating your account…');
-      var res = await sb.auth.signUp({
-        email: f.email.value.trim(),
-        password: f.password.value,
+      var email = form.elements.email.value.trim();
+      setStatus(statusBox, 'Creating your profile…');
+      var res = await sb.auth.signInWithOtp({
+        email: email,
         options: {
+          shouldCreateUser: true,
           data: profileFields(form),
           emailRedirectTo: HERE + 'account.html'
         }
@@ -166,8 +161,8 @@
       if (res.error) { setStatus(statusBox, res.error.message, 'error'); return; }
       form.hidden = true;
       setStatus(statusBox,
-        'Almost done — we sent a confirmation link to ' + f.email.value.trim() +
-        '. Open it to activate your account, then sign in.', 'success');
+        'One more step — we emailed a sign-in link to ' + email +
+        '. Click it and you are in. No password needed, ever.', 'success');
     });
   }
 
@@ -177,13 +172,22 @@
     var form = el('login-form');
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
-      setStatus(statusBox, 'Signing in…');
-      var res = await sb.auth.signInWithPassword({
-        email: form.elements.email.value.trim(),
-        password: form.elements.password.value
+      var email = form.elements.email.value.trim();
+      setStatus(statusBox, 'Sending your sign-in link…');
+      var res = await sb.auth.signInWithOtp({
+        email: email,
+        options: { shouldCreateUser: false, emailRedirectTo: HERE + 'account.html' }
       });
-      if (res.error) { setStatus(statusBox, res.error.message, 'error'); return; }
-      location.replace('account.html');
+      if (res.error) {
+        var friendly = /not allowed|not found|signup/i.test(res.error.message)
+          ? 'We could not find a member profile with that email. Check the spelling, or use "Become a member" below.'
+          : res.error.message;
+        setStatus(statusBox, friendly, 'error'); return;
+      }
+      form.hidden = true;
+      setStatus(statusBox,
+        'Check your inbox — a sign-in link is on its way to ' + email +
+        '. It works once and expires after an hour.', 'success');
     });
   }
 
@@ -284,60 +288,9 @@
       setTimeout(function () { location.replace('index.html'); }, 2500);
     });
 
-    // Change password (while signed in).
-    var pwForm = el('password-form');
-    pwForm.addEventListener('submit', async function (e) {
-      e.preventDefault();
-      var pwStatus = el('password-status');
-      var pw = pwForm.elements.new_password.value;
-      if (pw.length < 8) { setStatus(pwStatus, 'Please choose a password of at least 8 characters.', 'error'); return; }
-      var r = await sb.auth.updateUser({ password: pw });
-      if (r.error) { setStatus(pwStatus, r.error.message, 'error'); return; }
-      pwForm.reset();
-      setStatus(pwStatus, 'Password updated.', 'success');
-    });
-  }
-
-  // ---------------------------------------------------------- password reset
-  function initReset() {
-    var requestSec = el('reset-request');
-    var setSec = el('reset-set');
-    function showSetForm() { requestSec.hidden = true; setSec.hidden = false; }
-
-    // Arriving from the emailed recovery link.
-    if (/type=recovery/.test(location.hash)) showSetForm();
-    sb.auth.onAuthStateChange(function (event) {
-      if (event === 'PASSWORD_RECOVERY') showSetForm();
-    });
-
-    el('reset-request-form').addEventListener('submit', async function (e) {
-      e.preventDefault();
-      var email = el('reset-request-form').elements.email.value.trim();
-      setStatus(statusBox, 'Sending…');
-      var r = await sb.auth.resetPasswordForEmail(email, { redirectTo: HERE + 'reset-password.html' });
-      if (r.error) { setStatus(statusBox, r.error.message, 'error'); return; }
-      setStatus(statusBox, 'If that address has an account, a reset link is on its way.', 'success');
-    });
-
-    el('reset-set-form').addEventListener('submit', async function (e) {
-      e.preventDefault();
-      var form = el('reset-set-form').elements;
-      if (form.new_password.value.length < 8) {
-        setStatus(statusBox, 'Please choose a password of at least 8 characters.', 'error'); return;
-      }
-      if (form.new_password.value !== form.new_password2.value) {
-        setStatus(statusBox, 'The two passwords do not match.', 'error'); return;
-      }
-      var r = await sb.auth.updateUser({ password: form.new_password.value });
-      if (r.error) { setStatus(statusBox, r.error.message, 'error'); return; }
-      el('reset-set').hidden = true;
-      setStatus(statusBox, 'Password updated — you are signed in.', 'success');
-      el('reset-done').hidden = false;
-    });
   }
 
   if (page === 'signup') initSignup();
   else if (page === 'login') initLogin();
   else if (page === 'account') initAccount();
-  else if (page === 'reset') initReset();
 })();

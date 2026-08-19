@@ -40,7 +40,7 @@ Pages do **not** contain their own header or footer markup. Instead, each page i
 | `about.html` | `about` | Page hero, prose content, value cards, CTA |
 | `governance.html` | — | Subcommittees and objectives |
 | `contact.html`, `credits.html`, `feedback.html`, `styleguide.html` | — | Supporting pages |
-| `signup.html`, `login.html`, `account.html`, `reset-password.html` | `signup` / `login` / `account` / `reset` | **Member portal** — Supabase-backed, all logic in `assets/portal.js`, keys in `assets/portal-config.js`, schema in `supabase/schema.sql`. See `docs/member-portal.md`. Pages are `noindex` and stay out of `sitemap.xml`. |
+| `signup.html`, `login.html`, `account.html` | `signup` / `login` / `account` | **Member portal** — Supabase-backed, passwordless (one-time email sign-in links), all logic in `assets/portal.js`, keys in `assets/portal-config.js`, schema in `supabase/schema.sql`. See `docs/member-portal.md`. `reset-password.html` is a legacy stub. Pages are `noindex` and stay out of `sitemap.xml`. |
 
 ### Research section
 

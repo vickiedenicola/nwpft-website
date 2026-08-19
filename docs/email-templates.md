@@ -8,8 +8,9 @@ filled in by Supabase — leave them exactly as written.
 Sender identity (name + members@nwptf.org address) comes from the SMTP
 settings, not from these templates.
 
-The "Magic Link" template is unused (the portal is password-based) — leave
-it as is.
+The portal signs members in with one-time email links (no passwords), so the
+**Magic Link** template below is the one members see most; the "Reset
+password" template is now unused and can be left however it is.
 
 ---
 
@@ -119,6 +120,34 @@ Confirm your new email for the NWPTF member portal
     <p style="color:#23271d;font-size:15px;line-height:1.55;">Confirm the change:</p>
     <p style="text-align:center;margin:28px 0;">
       <a href="{{ .ConfirmationURL }}" style="background:#a8552e;color:#ffffff;text-decoration:none;padding:13px 30px;border-radius:8px;font-weight:bold;display:inline-block;">Confirm email change</a>
+    </p>
+    <p style="font-size:12px;color:#4a5040;">Button not working? Copy and paste this link into your browser:<br>{{ .ConfirmationURL }}</p>
+    <p style="font-size:12px;color:#4a5040;margin-top:28px;">If you didn&rsquo;t request this, you can safely ignore this email &mdash; nothing will change.</p>
+  </div>
+  <p style="text-align:center;font-size:12px;color:#4a5040;margin-top:16px;">National Wild Pig Task Force &middot; <a href="https://nwptf.org" style="color:#a8552e;">nwptf.org</a></p>
+</div>
+```
+
+---
+
+## Magic Link (the everyday sign-in email)
+
+**Subject:**
+
+```
+Your NWPTF sign-in link
+```
+
+**Message body:**
+
+```html
+<div style="background:#f4ede0;padding:32px 16px;font-family:Arial,Helvetica,sans-serif;">
+  <div style="max-width:520px;margin:0 auto;background:#ffffff;border-radius:12px;padding:32px;border:1px solid #e3ddcf;">
+    <img src="https://nwptf.org/assets/nwptf-logo.png" alt="National Wild Pig Task Force" width="200" style="display:block;margin:0 auto 24px;">
+    <h2 style="color:#2b3723;font-size:20px;margin:0 0 14px;">Here&rsquo;s your sign-in link</h2>
+    <p style="color:#23271d;font-size:15px;line-height:1.55;">Click below to sign in to your National Wild Pig Task Force member profile. The link works once and expires after an hour.</p>
+    <p style="text-align:center;margin:28px 0;">
+      <a href="{{ .ConfirmationURL }}" style="background:#a8552e;color:#ffffff;text-decoration:none;padding:13px 30px;border-radius:8px;font-weight:bold;display:inline-block;">Sign me in</a>
     </p>
     <p style="font-size:12px;color:#4a5040;">Button not working? Copy and paste this link into your browser:<br>{{ .ConfirmationURL }}</p>
     <p style="font-size:12px;color:#4a5040;margin-top:28px;">If you didn&rsquo;t request this, you can safely ignore this email &mdash; nothing will change.</p>

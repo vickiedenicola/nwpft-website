@@ -13,10 +13,10 @@ jsDelivr CDN; row-level security (RLS) in Postgres is what protects the data.
 
 | File | Purpose |
 |---|---|
-| `signup.html` | Become a member — collects the full profile + password |
-| `login.html` | Sign in (linked as "Member Login" in the topbar) |
-| `account.html` | Profile editor + change email / password / sign out |
-| `reset-password.html` | Request a reset link and set a new password |
+| `signup.html` | Become a member — collects the full profile; no password (sign-in is by one-time email link) |
+| `login.html` | Sign in — enter email, receive a one-time sign-in link (linked as "Member Login" in the topbar) |
+| `account.html` | Profile editor + change email / remove membership / sign out |
+| `reset-password.html` | Legacy stub — explains there are no passwords and points to login |
 | `assets/portal.js` | All portal logic, routed by `data-page`; also the **single source of truth for the interest and affiliation checkbox lists** |
 | `assets/portal-config.js` | Supabase project URL + anon key (blank until configured) |
 | `supabase/schema.sql` | Database schema: `profiles` table, RLS, triggers |
@@ -34,7 +34,8 @@ Portal pages are `noindex` and intentionally left out of `sitemap.xml`.
    - *URL Configuration*: set Site URL to `https://nwptf.org` and add redirect
      URLs `https://nwptf.org/account.html`, `https://nwptf.org/reset-password.html`
      (plus `http://localhost:8000/...` equivalents for local testing).
-   - *Providers → Email*: leave "Confirm email" ON.
+   - *Providers → Email*: leave "Confirm email" ON. Sign-in is passwordless
+     (one-time email links via Supabase OTP); no password settings matter.
 4. **Paste the keys** — Project Settings → API: copy the project URL and the
    `anon public` key into `assets/portal-config.js`. The anon key is safe to
    commit; **never** put the `service_role` key in the repo.
