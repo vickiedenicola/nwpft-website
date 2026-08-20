@@ -179,7 +179,8 @@
       form.hidden = true;
       setStatus(statusBox,
         'One more step — we emailed a sign-in link to ' + email +
-        '. Click it and you are in. No password needed, ever.', 'success');
+        '. Click it and you are in. No password needed, ever. ' +
+        'If it has not arrived in a couple of minutes, check your spam or junk folder.', 'success');
     });
   }
 
@@ -204,7 +205,8 @@
       form.hidden = true;
       setStatus(statusBox,
         'Check your inbox — a sign-in link is on its way to ' + email +
-        '. It works once and expires after an hour.', 'success');
+        '. It works once and expires after an hour. ' +
+        'Not there? Check your spam or junk folder.', 'success');
     });
   }
 

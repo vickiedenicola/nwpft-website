@@ -67,7 +67,13 @@
         navLink('resources.html', 'Resources', 'resources') +
         navLink('research.html', 'Research', 'research') +
         navLink('events.html', 'Events', 'events') +
-        navLink('about.html', 'About', 'about') +
+        '<div class="nav-drop">' +
+          navLink('about.html', 'About', 'about') +
+          '<div class="nav-drop-menu">' +
+            '<a href="about.html">About the Task Force</a>' +
+            '<a href="governance.html">Objectives &amp; Governance</a>' +
+          '</div>' +
+        '</div>' +
       '</nav>' +
     '</div></header>';
 

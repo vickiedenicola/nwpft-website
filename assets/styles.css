@@ -154,6 +154,24 @@ img { max-width: 100%; display: block; }
   transition: color 0.2s;
 }
 .site-nav a:hover, .site-nav a.active { color: var(--rust); }
+.nav-drop { position: relative; display: inline-flex; align-items: center; }
+.nav-drop > a::after { content: " \25BE"; font-size: 0.7em; }
+.nav-drop-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 230px;
+  padding: 0.45rem 0;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 14px 30px rgba(43, 55, 35, 0.14);
+  z-index: 60;
+}
+.nav-drop:hover .nav-drop-menu,
+.nav-drop:focus-within .nav-drop-menu { display: block; }
+.nav-drop-menu a { display: block; padding: 0.55rem 1.1rem; }
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -774,6 +792,20 @@ a.news-card:hover .news-thumb { transform: scale(1.04); }
     border-bottom: 1px solid var(--line);
   }
   .site-nav a:last-child { border-bottom: none; }
+  .nav-drop { display: block; }
+  .nav-drop > a { display: block; }
+  .nav-drop > a::after { content: ""; }
+  .nav-drop-menu {
+    display: block;
+    position: static;
+    min-width: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+  .nav-drop-menu a { padding-left: 3.2rem; }
   /* On phones the video never loads; hide it so its poster doesn't cover
      the responsive hero background image. */
   .hero-video { display: none; }
