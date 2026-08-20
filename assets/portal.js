@@ -158,10 +158,58 @@
     return res.data ? res.data.session : null;
   }
 
+  // A consumed/expired sign-in link lands on account.html with the error
+  // in the URL hash (corporate mail scanners pre-click links and use them
+  // up). Detect it so we can explain instead of silently bouncing.
+  function hashError() {
+    var h = location.hash || '';
+    if (/error_code=otp_expired/.test(h)) return 'expired';
+    if (/error=access_denied/.test(h)) return 'expired';
+    if (/[#&]error=/.test(h)) return 'other';
+    return null;
+  }
+
+  // 6-digit sign-in code entry (the scanner-proof path). Present on the
+  // signup and login pages; revealed after an email is requested, or via
+  // the "already have a code" link.
+  function revealCodeForm(email) {
+    var cf = el('code-form');
+    if (!cf) return;
+    cf.hidden = false;
+    if (email) cf.elements.email.value = email;
+  }
+  function initCodeForm() {
+    var cf = el('code-form');
+    if (!cf) return;
+    cf.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var email = cf.elements.email.value.trim();
+      var token = cf.elements.code.value.trim();
+      setStatus(statusBox, 'Checking your code…');
+      var r = await sb.auth.verifyOtp({ email: email, token: token, type: 'email' });
+      if (r.error) {
+        setStatus(statusBox,
+          'That code did not work. Codes expire after an hour, and requesting a new email replaces the old code — use the one from the newest email.',
+          'error');
+        return;
+      }
+      location.replace('account.html');
+    });
+    var tog = el('code-toggle');
+    if (tog) {
+      tog.addEventListener('click', function (e) {
+        e.preventDefault();
+        revealCodeForm('');
+        cf.elements.email.focus();
+      });
+    }
+  }
+
   // ---------------------------------------------------------- signup
   async function initSignup() {
     if (await currentSession()) { location.replace('account.html'); return; }
     var form = el('signup-form');
+    initCodeForm();
     setChecked(form, 'email_prefs', ['general', 'interests', 'events']);
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
@@ -177,9 +225,10 @@
       });
       if (res.error) { setStatus(statusBox, res.error.message, 'error'); return; }
       form.hidden = true;
+      revealCodeForm(email);
       setStatus(statusBox,
-        'One more step — we emailed a sign-in link to ' + email +
-        '. Click it and you are in. No password needed, ever. ' +
+        'One more step — we emailed you at ' + email +
+        '. Click the sign-in link in it, or type the 6-digit code from that email below. ' +
         'If it has not arrived in a couple of minutes, check your spam or junk folder.', 'success');
     });
   }
@@ -188,6 +237,12 @@
   async function initLogin() {
     if (await currentSession()) { location.replace('account.html'); return; }
     var form = el('login-form');
+    initCodeForm();
+    if (/(^|[?&])expired=1/.test(location.search)) {
+      setStatus(statusBox,
+        'That sign-in link was already used or has expired. Some organizations\u2019 email security opens links automatically and uses them up — request a fresh email below, then type the 6-digit code from it instead of clicking the link.',
+        'error');
+    }
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
       var email = form.elements.email.value.trim();
@@ -203,15 +258,17 @@
         setStatus(statusBox, friendly, 'error'); return;
       }
       form.hidden = true;
+      revealCodeForm(email);
       setStatus(statusBox,
-        'Check your inbox — a sign-in link is on its way to ' + email +
-        '. It works once and expires after an hour. ' +
+        'Check your inbox — an email is on its way to ' + email +
+        '. Click its sign-in link, or type the 6-digit code from it below. ' +
         'Not there? Check your spam or junk folder.', 'success');
     });
   }
 
   // ---------------------------------------------------------- account
   async function initAccount() {
+    if (hashError()) { location.replace('login.html?expired=1'); return; }
     var session = await currentSession();
     if (!session) { location.replace('login.html'); return; }
     var user = session.user;

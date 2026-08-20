@@ -34,6 +34,8 @@ Welcome to the National Wild Pig Task Force — confirm your email
     <p style="text-align:center;margin:28px 0;">
       <a href="{{ .ConfirmationURL }}" style="background:#a8552e;color:#ffffff;text-decoration:none;padding:13px 30px;border-radius:8px;font-weight:bold;display:inline-block;">Confirm my email</a>
     </p>
+    <p style="color:#23271d;font-size:15px;line-height:1.55;">If the button doesn&rsquo;t work (some organizations&rsquo; email security blocks one-time links), enter this sign-in code on the website instead:</p>
+    <p style="text-align:center;margin:10px 0 24px;"><strong style="font-size:26px;letter-spacing:6px;color:#2b3723;">{{ .Token }}</strong></p>
     <p style="font-size:12px;color:#4a5040;">Button not working? Copy and paste this link into your browser:<br>{{ .ConfirmationURL }}</p>
     <p style="font-size:12px;color:#4a5040;margin-top:28px;">If you didn&rsquo;t request this, you can safely ignore this email &mdash; nothing will change.</p>
   </div>
@@ -149,6 +151,8 @@ Your NWPTF sign-in link
     <p style="text-align:center;margin:28px 0;">
       <a href="{{ .ConfirmationURL }}" style="background:#a8552e;color:#ffffff;text-decoration:none;padding:13px 30px;border-radius:8px;font-weight:bold;display:inline-block;">Sign me in</a>
     </p>
+    <p style="color:#23271d;font-size:15px;line-height:1.55;">If the button doesn&rsquo;t work (some organizations&rsquo; email security blocks one-time links), enter this sign-in code on the website instead:</p>
+    <p style="text-align:center;margin:10px 0 24px;"><strong style="font-size:26px;letter-spacing:6px;color:#2b3723;">{{ .Token }}</strong></p>
     <p style="font-size:12px;color:#4a5040;">Button not working? Copy and paste this link into your browser:<br>{{ .ConfirmationURL }}</p>
     <p style="font-size:12px;color:#4a5040;margin-top:28px;">If you didn&rsquo;t request this, you can safely ignore this email &mdash; nothing will change.</p>
   </div>
