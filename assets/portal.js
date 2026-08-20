@@ -189,7 +189,7 @@
     cf.addEventListener('submit', async function (e) {
       e.preventDefault();
       var email = codeEmail();
-      var token = cf.elements.code.value.trim();
+      var token = cf.elements.code.value.replace(/\D/g, '');
       if (!email) {
         setStatus(statusBox, 'Type your email in the box above first, then the code.', 'error');
         return;
@@ -237,7 +237,7 @@
       revealCodeForm();
       setStatus(statusBox,
         'One more step — we emailed you at ' + email +
-        '. Click the sign-in link in it, or type the 6-digit code from that email below. ' +
+        '. Click the sign-in link in it, or type the sign-in code from that email below. ' +
         'If it has not arrived in a couple of minutes, check your spam or junk folder.', 'success');
     });
   }
@@ -249,7 +249,7 @@
     initCodeForm();
     if (/(^|[?&])expired=1/.test(location.search)) {
       setStatus(statusBox,
-        'That sign-in link was already used or has expired. Some organizations\u2019 email security opens links automatically and uses them up — request a fresh email below, then type the 6-digit code from it instead of clicking the link.',
+        'That sign-in link was already used or has expired. Some organizations\u2019 email security opens links automatically and uses them up — request a fresh email below, then type the sign-in code from it instead of clicking the link.',
         'error');
     }
     form.addEventListener('submit', async function (e) {
@@ -269,7 +269,7 @@
       revealCodeForm();
       setStatus(statusBox,
         'Check your inbox — an email is on its way to ' + email +
-        '. Click its sign-in link, or type the 6-digit code from it below. ' +
+        '. Click its sign-in link, or type the sign-in code from it below. ' +
         'Not there? Check your spam or junk folder.', 'success');
     });
   }
