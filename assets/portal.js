@@ -321,6 +321,7 @@
       (p.email_prefs && p.email_prefs.length) ? p.email_prefs : ['none']);
     el('account-loading').hidden = true;
     form.hidden = false;
+    if (p.role === 'admin') el('admin-link').hidden = false;
 
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
@@ -376,7 +377,95 @@
 
   }
 
+  // ---------------------------------------------------------- admin roster
+  async function initAdmin() {
+    var session = await currentSession();
+    if (!session) { location.replace('login.html'); return; }
+    var res = await sb.from('profiles').select('*').order('last_name');
+    if (res.error) { setStatus(statusBox, 'Could not load the roster: ' + res.error.message, 'error'); return; }
+    var rows = res.data || [];
+    var mine = rows.filter(function (r) { return r.id === session.user.id; })[0];
+    if (!mine || mine.role !== 'admin') { el('admin-gate').hidden = false; return; }
+    el('admin-app').hidden = false;
+
+    // Filter dropdowns reflect the option lists plus whatever countries exist
+    function fillSelect(id, values) {
+      var sel = el(id);
+      values.forEach(function (v) {
+        var o = document.createElement('option');
+        o.value = o.textContent = v;
+        sel.appendChild(o);
+      });
+    }
+    fillSelect('roster-interest', INTERESTS);
+    fillSelect('roster-committee', COMMITTEES);
+    fillSelect('roster-country', Array.from(new Set(rows.map(function (r) { return r.country; }).filter(Boolean))).sort());
+
+    function matches(r) {
+      var q = el('roster-search').value.trim().toLowerCase();
+      if (q) {
+        var hay = [r.first_name, r.last_name, r.email, r.title, r.affiliation].join(' ').toLowerCase();
+        if (hay.indexOf(q) === -1) return false;
+      }
+      var iv = el('roster-interest').value;
+      if (iv && (r.interests || []).indexOf(iv) === -1) return false;
+      var cv = el('roster-committee').value;
+      if (cv && (r.committees || []).indexOf(cv) === -1) return false;
+      var pv = el('roster-pref').value;
+      if (pv === 'none') { if ((r.email_prefs || []).length) return false; }
+      else if (pv && (r.email_prefs || []).indexOf(pv) === -1) return false;
+      var kv = el('roster-country').value;
+      if (kv && r.country !== kv) return false;
+      return true;
+    }
+
+    var current = [];
+    function render() {
+      current = rows.filter(matches);
+      el('roster-body').innerHTML = current.map(function (r) {
+        var prefs = (r.email_prefs || []).length ? r.email_prefs.join('; ') : 'No emails';
+        return '<tr>' +
+          '<td>' + esc((r.first_name + ' ' + r.last_name).trim() || '(no name)') + (r.role === 'admin' ? ' <span class="roster-admin">admin</span>' : '') + '</td>' +
+          '<td>' + esc(r.email) + '</td>' +
+          '<td>' + esc(r.title) + '</td>' +
+          '<td>' + esc(r.affiliation) + '</td>' +
+          '<td>' + esc(r.country) + '</td>' +
+          '<td>' + esc((r.roles || []).join('; ') + (r.roles_other ? '; ' + r.roles_other : '')) + '</td>' +
+          '<td>' + esc((r.interests || []).join('; ')) + '</td>' +
+          '<td>' + esc((r.committees || []).join('; ')) + '</td>' +
+          '<td>' + esc(prefs) + '</td>' +
+          '<td>' + esc((r.created_at || '').slice(0, 10)) + '</td>' +
+        '</tr>';
+      }).join('');
+      el('roster-count').textContent = 'Showing ' + current.length + ' of ' + rows.length + ' members';
+    }
+
+    ['roster-search', 'roster-interest', 'roster-committee', 'roster-pref', 'roster-country'].forEach(function (id) {
+      el(id).addEventListener('input', render);
+    });
+    render();
+
+    el('roster-csv').addEventListener('click', function () {
+      var cols = ['first_name', 'last_name', 'email', 'title', 'affiliation', 'phone', 'country',
+                  'roles', 'roles_other', 'interests', 'committees', 'email_prefs', 'created_at'];
+      function cell(v) {
+        if (Array.isArray(v)) v = v.join('; ');
+        v = v == null ? '' : String(v);
+        return '"' + v.replace(/"/g, '""') + '"';
+      }
+      var csv = cols.join(',') + '\n' + current.map(function (r) {
+        return cols.map(function (c) { return cell(r[c]); }).join(',');
+      }).join('\n');
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+      a.download = 'nwptf-members.csv';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+  }
+
   if (page === 'signup') initSignup();
   else if (page === 'login') initLogin();
   else if (page === 'account') initAccount();
+  else if (page === 'admin') initAdmin();
 })();

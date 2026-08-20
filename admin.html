@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Member roster | National Wild Pig Task Force</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg"><link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="assets/styles.css?v=20260820e">
+</head>
+<body data-page="admin">
+<div data-layout="header"></div>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="wrap">
+    <div class="kicker">Admin</div>
+    <h1>Member roster</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="portal-card portal-card-wide">
+      <div id="portal-status" class="portal-status"></div>
+      <p id="admin-gate" class="portal-intro" hidden>This page is for Task Force administrators. Your own profile lives on <a href="account.html">your account page</a>.</p>
+
+      <div id="admin-app" hidden>
+        <div class="roster-tools">
+          <input id="roster-search" type="search" placeholder="Search name, email, affiliation&hellip;">
+          <select id="roster-interest"><option value="">Any interest</option></select>
+          <select id="roster-committee"><option value="">Any subcommittee</option></select>
+          <select id="roster-pref">
+            <option value="">Any email preference</option>
+            <option value="general">General updates</option>
+            <option value="interests">Areas of interest</option>
+            <option value="events">Conferences &amp; events</option>
+            <option value="none">No emails</option>
+          </select>
+          <select id="roster-country"><option value="">Any country</option></select>
+          <span id="roster-count" class="roster-count"></span>
+          <button id="roster-csv" type="button" class="btn btn-dark btn-small">Download CSV</button>
+        </div>
+        <div class="roster-wrap">
+          <table class="roster-table">
+            <thead>
+              <tr><th>Name</th><th>Email</th><th>Title</th><th>Affiliation</th><th>Country</th><th>Roles</th><th>Interests</th><th>Subcommittees</th><th>Email prefs</th><th>Joined</th></tr>
+            </thead>
+            <tbody id="roster-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div data-layout="footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.3/dist/umd/supabase.min.js" integrity="sha384-l8ah+VgaWtk1mvOe9VC+OirC6qHFF4yH7l7mKRidV9MSti3E9F463bMp6ZVN4kuC" crossorigin="anonymous"></script>
+<script src="assets/portal-config.js?v=20260820e"></script>
+<script src="assets/portal.js?v=20260820e"></script>
+<script src="assets/layout.js"></script>
+</body>
+</html>

@@ -17,6 +17,7 @@ jsDelivr CDN; row-level security (RLS) in Postgres is what protects the data.
 | `login.html` | Sign in — enter email, receive a one-time sign-in link (linked as "Member Login" in the topbar) |
 | `account.html` | Profile editor + change email / remove membership / sign out |
 | `reset-password.html` | Legacy stub — explains there are no passwords and points to login |
+| `admin.html` | Admin-only member roster: search, segment filters, CSV export (linked from the account page for admins) |
 | `assets/portal.js` | All portal logic, routed by `data-page`; also the **single source of truth for the interest and affiliation checkbox lists** |
 | `assets/portal-config.js` | Supabase project URL + anon key (blank until configured) |
 | `supabase/schema.sql` | Database schema: `profiles` table, RLS, triggers |
@@ -118,4 +119,3 @@ the user. Either way the profile row cascades away with the auth user.
 - Email tool choice (Brevo recommended) and SMTP hookup.
 - Open self-signup vs. admin-approval "pending" state — currently **open**
   (no dues as of 2026-06-18).
-- Optional admin roster/export page on the site (spec phase 5).
