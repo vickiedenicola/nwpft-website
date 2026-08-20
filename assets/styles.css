@@ -868,6 +868,11 @@ body[data-page="privacy"] .portal-heading:first-of-type { margin-top: 0.6rem; }
   flex-wrap: wrap; margin-bottom: 1.4rem; font-size: 0.95rem; color: var(--ink-soft);
 }
 .btn-small { padding: 0.45rem 1rem; font-size: 0.8rem; }
+/* Ghost buttons sit on white inside portal cards - re-ink them */
+.portal-card .btn-ghost { border-color: var(--olive); color: var(--olive); }
+.portal-card .btn-ghost:hover { background: var(--olive); border-color: var(--olive); color: #fff; }
+.portal-card .btn-danger { border-color: var(--rust); color: var(--rust); }
+.portal-card .btn-danger:hover { background: var(--rust); color: #fff; }
 .btn-danger { border-color: var(--rust); color: var(--rust); }
 .btn-danger:hover { background: var(--rust); color: #fff; }
 .portal-status {
