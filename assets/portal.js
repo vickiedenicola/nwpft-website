@@ -172,19 +172,28 @@
   // 6-digit sign-in code entry (the scanner-proof path). Present on the
   // signup and login pages; revealed after an email is requested, or via
   // the "already have a code" link.
-  function revealCodeForm(email) {
+  function revealCodeForm() {
     var cf = el('code-form');
     if (!cf) return;
     cf.hidden = false;
-    if (email) cf.elements.email.value = email;
+  }
+  // The code pairs with the email it was sent to, but the member already
+  // typed that email into the main form on this page - reuse it.
+  function codeEmail() {
+    var main = el('login-form') || el('signup-form');
+    return main ? main.elements.email.value.trim() : '';
   }
   function initCodeForm() {
     var cf = el('code-form');
     if (!cf) return;
     cf.addEventListener('submit', async function (e) {
       e.preventDefault();
-      var email = cf.elements.email.value.trim();
+      var email = codeEmail();
       var token = cf.elements.code.value.trim();
+      if (!email) {
+        setStatus(statusBox, 'Type your email in the box above first, then the code.', 'error');
+        return;
+      }
       setStatus(statusBox, 'Checking your code…');
       var r = await sb.auth.verifyOtp({ email: email, token: token, type: 'email' });
       if (r.error) {
@@ -199,8 +208,8 @@
     if (tog) {
       tog.addEventListener('click', function (e) {
         e.preventDefault();
-        revealCodeForm('');
-        cf.elements.email.focus();
+        revealCodeForm();
+        cf.elements.code.focus();
       });
     }
   }
@@ -225,7 +234,7 @@
       });
       if (res.error) { setStatus(statusBox, res.error.message, 'error'); return; }
       form.hidden = true;
-      revealCodeForm(email);
+      revealCodeForm();
       setStatus(statusBox,
         'One more step — we emailed you at ' + email +
         '. Click the sign-in link in it, or type the 6-digit code from that email below. ' +
@@ -257,8 +266,7 @@
           : res.error.message;
         setStatus(statusBox, friendly, 'error'); return;
       }
-      form.hidden = true;
-      revealCodeForm(email);
+      revealCodeForm();
       setStatus(statusBox,
         'Check your inbox — an email is on its way to ' + email +
         '. Click its sign-in link, or type the 6-digit code from it below. ' +
