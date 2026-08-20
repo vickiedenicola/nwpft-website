@@ -117,7 +117,7 @@ create trigger on_auth_user_email_changed
 -- ---- Maintain updated_at on every profile edit ----
 create or replace function public.touch_updated_at()
 returns trigger
-language plpgsql
+language plpgsql set search_path = public
 as $$
 begin
   new.updated_at = now();
@@ -137,6 +137,13 @@ with (security_invoker = true) as
          interests, committees, email_prefs, roles, roles_other
     from public.profiles
    where cardinality(email_prefs) > 0;
+
+-- ---- Lock down direct calls to the helper functions ----
+revoke execute on function public.handle_new_user() from public, anon, authenticated;
+revoke execute on function public.handle_user_email_change() from public, anon, authenticated;
+revoke execute on function public.touch_updated_at() from public, anon, authenticated;
+revoke execute on function public.is_admin() from public, anon;
+grant execute on function public.is_admin() to authenticated;
 
 -- ============================================================
 -- AFTER RUNNING: promote the site admin (must have signed up first):
