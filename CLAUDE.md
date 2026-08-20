@@ -68,7 +68,7 @@ international mailing list. Supabase handles auth/DB/emails via
 self-service membership removal, needs the `SUPABASE_SECRET_KEY` env var in
 the Cloudflare dashboard). Row-level security protects the data; the anon
 key in `assets/portal-config.js` is safe to commit. The checkbox option
-lists live only in the `INTERESTS`/`COMMITTEES`/`EMAIL_PREFS` arrays at the
+lists live only in the `INTERESTS`/`COMMITTEES`/`ROLES`/`EMAIL_PREFS` arrays at the
 top of `assets/portal.js`. Setup, roster invites, and mailing-list export:
 `docs/member-portal.md`.
 

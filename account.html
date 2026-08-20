@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="assets/styles.css?v=20260819e">
+<link rel="stylesheet" href="assets/styles.css?v=20260819f">
 </head>
 <body data-page="account">
 <div data-layout="header"></div>
@@ -65,12 +65,22 @@
           </div>
         </div>
         <fieldset class="form-field check-field">
+          <legend>How would you describe your role regarding wild pigs?</legend>
+          <p class="check-hint">Select all that apply.</p>
+          <div class="check-grid" data-checks="roles"></div>
+          <div class="form-field check-note">
+            <label for="af-role-other">Other <span class="optional">(optional)</span></label>
+            <input id="af-role-other" type="text" name="roles_other">
+          </div>
+        </fieldset>
+        <fieldset class="form-field check-field">
           <legend>Areas of interest</legend>
           <p class="check-hint">Pick as many as you like.</p>
           <div class="check-grid" data-checks="interests"></div>
         </fieldset>
         <fieldset class="form-field check-field">
-          <legend>Please include me in these NWPTF committees</legend>
+          <legend>Please include me in these NWPTF subcommittees</legend>
+          <p class="check-hint">Selecting a subcommittee adds you to that subcommittee&rsquo;s mailing list. While active participation is not required, you will be invited to attend meetings, provide feedback, and help complete tasks assigned to that subcommittee.</p>
           <div class="check-grid" data-checks="committees"></div>
         </fieldset>
         <fieldset class="form-field check-field">
@@ -106,7 +116,7 @@
 <div data-layout="footer"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.3/dist/umd/supabase.min.js" integrity="sha384-l8ah+VgaWtk1mvOe9VC+OirC6qHFF4yH7l7mKRidV9MSti3E9F463bMp6ZVN4kuC" crossorigin="anonymous"></script>
 <script src="assets/portal-config.js?v=20260819d"></script>
-<script src="assets/portal.js?v=20260819d"></script>
+<script src="assets/portal.js?v=20260819f"></script>
 <script src="assets/layout.js"></script>
 </body>
 </html>

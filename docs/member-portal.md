@@ -50,10 +50,14 @@ Portal pages are `noindex` and intentionally left out of `sitemap.xml`.
 
 `public.profiles`, one row per user (`id = auth.users.id`):
 first_name, last_name, title, affiliation (company/agency/university), phone,
-country, email (mirror, synced by trigger), `interests text[]`,
-`committees text[]` (Research / Policy / Communications / Applied Management),
-`email_prefs text[]` (general / interests / subcommittee / events — empty
-array means "no emails"), role (member/admin), timestamps. (An
+country, email (mirror, synced by trigger), `roles text[]` + `roles_other`
+(researcher / land manager / policy maker / student / officials / producer /
+removal professional / outreach / private entity), `interests text[]`,
+`committees text[]` (the NWPTF subcommittees: Research / Policy /
+Communications / Applied Management — always called "subcommittees" in the
+UI), `email_prefs text[]` (general / interests / events — empty array means
+"no emails"; subcommittee mailings are keyed off `committees` membership
+itself, not a preference), role (member/admin), timestamps. (An
 "other affiliations" field existed briefly and was removed on chair
 feedback 2026-08-19.)
 
@@ -88,8 +92,7 @@ select * from mailing_list where 'general' = any(email_prefs);
 select * from mailing_list where 'events' = any(email_prefs); -- conference blast
 select * from mailing_list where 'interests' = any(email_prefs)
                               and 'Disease & health' = any(interests);
-select * from mailing_list where 'subcommittee' = any(email_prefs)
-                              and 'Policy' = any(committees);
+select * from mailing_list where 'Policy' = any(committees);  -- a subcommittee's list
 select * from mailing_list where country <> 'United States';  -- international slice
 ```
 

@@ -26,12 +26,26 @@
   // NWPTF subcommittees a member can ask to join.
   var COMMITTEES = ['Research', 'Policy', 'Communications', 'Applied Management'];
 
+  // Professional roles regarding wild pigs (multi-select + free-text other).
+  var ROLES = [
+    'Researcher',
+    'Land manager',
+    'Policy maker',
+    'Student',
+    'State official',
+    'Federal official',
+    'Agricultural producer',
+    'Wild pig removal professional',
+    'Outreach specialist',
+    'Private entity'
+  ];
+
   // Email preference categories. 'none' is special: it is exclusive and is
-  // stored as an empty email_prefs array (= send nothing).
+  // stored as an empty email_prefs array (= send nothing). Subcommittee
+  // mailings are not a preference: joining a subcommittee IS the list.
   var EMAIL_PREFS = [
     { value: 'general', label: 'General NWPTF updates' },
     { value: 'interests', label: 'News in my areas of interest' },
-    { value: 'subcommittee', label: 'Subcommittee news' },
     { value: 'events', label: 'Conferences & events' },
     { value: 'none', label: 'No emails' }
   ];
@@ -62,6 +76,7 @@
   var CHECK_OPTIONS = {
     interests: INTERESTS,
     committees: COMMITTEES,
+    roles: ROLES,
     email_prefs: EMAIL_PREFS
   };
 
@@ -130,6 +145,8 @@
       affiliation: f.affiliation.value.trim(),
       phone: f.phone.value.trim(),
       country: f.country.value,
+      roles: checkedValues(form, 'roles'),
+      roles_other: f.roles_other.value.trim(),
       interests: checkedValues(form, 'interests'),
       committees: checkedValues(form, 'committees'),
       email_prefs: checkedValues(form, 'email_prefs').filter(function (v) { return v !== 'none'; })
@@ -145,7 +162,7 @@
   async function initSignup() {
     if (await currentSession()) { location.replace('account.html'); return; }
     var form = el('signup-form');
-    setChecked(form, 'email_prefs', ['general', 'interests', 'subcommittee', 'events']);
+    setChecked(form, 'email_prefs', ['general', 'interests', 'events']);
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
       var email = form.elements.email.value.trim();
@@ -229,6 +246,8 @@
       f.country.appendChild(extra);
       f.country.value = p.country;
     }
+    f.roles_other.value = p.roles_other || '';
+    setChecked(form, 'roles', p.roles);
     setChecked(form, 'interests', p.interests);
     setChecked(form, 'committees', p.committees);
     setChecked(form, 'email_prefs',
