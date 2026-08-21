@@ -198,7 +198,7 @@
       var r = await sb.auth.verifyOtp({ email: email, token: token, type: 'email' });
       if (r.error) {
         setStatus(statusBox,
-          'That code did not work. Codes expire after an hour, and requesting a new email replaces the old code — use the one from the newest email.',
+          'That code did not work. Codes expire after an hour, and requesting a new email replaces the old code. Use the code from the newest email.',
           'error');
         return;
       }
@@ -236,8 +236,8 @@
       form.hidden = true;
       revealCodeForm();
       setStatus(statusBox,
-        'One more step — we emailed you at ' + email +
-        '. Click the sign-in link in it, or type the sign-in code from that email below. ' +
+        'One more step: we emailed a sign-in code to ' + email +
+        '. Type it below. ' +
         'If it has not arrived in a couple of minutes, check your spam or junk folder.', 'success');
     });
   }
@@ -249,13 +249,13 @@
     initCodeForm();
     if (/(^|[?&])expired=1/.test(location.search)) {
       setStatus(statusBox,
-        'That sign-in link was already used or has expired. Some organizations\u2019 email security opens links automatically and uses them up — request a fresh email below, then type the sign-in code from it instead of clicking the link.',
+        'That sign-in link has already been used or has expired. Sign-in emails now carry a code instead of a link: request a fresh email below, then type the code from it.',
         'error');
     }
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
       var email = form.elements.email.value.trim();
-      setStatus(statusBox, 'Sending your sign-in link…');
+      setStatus(statusBox, 'Sending your sign-in code…');
       var res = await sb.auth.signInWithOtp({
         email: email,
         options: { shouldCreateUser: false, emailRedirectTo: HERE + 'account.html' }
@@ -268,8 +268,8 @@
       }
       revealCodeForm();
       setStatus(statusBox,
-        'Check your inbox — an email is on its way to ' + email +
-        '. Click its sign-in link, or type the sign-in code from it below. ' +
+        'Check your inbox: an email with your sign-in code is on its way to ' + email +
+        '. Type the code below. ' +
         'Not there? Check your spam or junk folder.', 'success');
     });
   }
