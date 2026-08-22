@@ -72,15 +72,27 @@ segments match the site's literature taxonomy. To change either checkbox list,
 edit the `INTERESTS` / `AFFILIATIONS` arrays at the top of `assets/portal.js` —
 existing rows keep whatever values they stored (they're plain text arrays).
 
-## Onboarding the existing roster (~60–125 people)
+## Onboarding the existing roster (142 people, decided 2026-08-22)
 
-Do **not** import plaintext passwords. Use invites:
+Use `scripts/import_roster.py` with the legacy membership spreadsheet
+(name / email / organization / title / subcommittees). It creates each
+member as a pre-confirmed auth user with those fields in `user_metadata`,
+so the `handle_new_user` trigger builds their profile row. **No email is
+sent by the import** — members sign in later with the normal one-time
+code flow, and the chair's announcement email tells them to review and
+complete their profile (country, roles, interests, email preferences are
+not in the sheet). Imported profiles default `email_prefs` to all three
+categories, matching what the legacy list already sent them.
 
-- Dashboard → Authentication → Users → "Invite user" (fine at this volume), or
-  the admin API (`auth.admin.inviteUserByEmail`) from a one-off local script
-  using the service-role key.
-- Each person gets a branded "set your password" email; when they first visit
-  `account.html` they complete the rest of their profile.
+```sh
+export SUPABASE_SECRET_KEY='sb_secret_...'   # Project Settings → API keys; never commit
+python3 scripts/import_roster.py path/to/roster.xlsx           # dry run
+python3 scripts/import_roster.py path/to/roster.xlsx --apply
+```
+
+The dry run lists every create/skip (already-registered emails are
+skipped, so it is safe to re-run). Invite-link emails were deliberately
+avoided: agency mail scanners pre-click links (see docs/email-templates.md).
 
 ## Exporting the mailing list
 
