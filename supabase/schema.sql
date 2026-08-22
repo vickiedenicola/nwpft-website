@@ -39,7 +39,13 @@ grant update (first_name, last_name, title, affiliation, phone, country,
   on public.profiles to authenticated;
 
 -- ---- Admin check (security definer avoids recursive RLS lookups) ----
-create or replace function public.is_admin()
+-- Lives in the `private` schema so PostgREST does not expose it as an
+-- /rest/v1/rpc endpoint (Supabase lint 0029). Members still need EXECUTE
+-- because the RLS policies below evaluate it on their queries.
+create schema if not exists private;
+grant usage on schema private to authenticated;
+
+create or replace function private.is_admin()
 returns boolean
 language sql stable security definer set search_path = public
 as $$
@@ -57,9 +63,9 @@ create policy "Members read own profile"   on public.profiles for select using (
 create policy "Members insert own profile" on public.profiles for insert with check (auth.uid() = id);
 create policy "Members update own profile" on public.profiles for update
   using (auth.uid() = id) with check (auth.uid() = id);
-create policy "Admins read all profiles"   on public.profiles for select using (public.is_admin());
+create policy "Admins read all profiles"   on public.profiles for select using (private.is_admin());
 create policy "Admins update all profiles" on public.profiles for update
-  using (public.is_admin()) with check (public.is_admin());
+  using (private.is_admin()) with check (private.is_admin());
 
 -- ---- Auto-create a profile row when a user signs up ----
 -- Signup metadata (raw_user_meta_data) is written by assets/portal.js.
@@ -142,8 +148,13 @@ with (security_invoker = true) as
 revoke execute on function public.handle_new_user() from public, anon, authenticated;
 revoke execute on function public.handle_user_email_change() from public, anon, authenticated;
 revoke execute on function public.touch_updated_at() from public, anon, authenticated;
-revoke execute on function public.is_admin() from public, anon;
-grant execute on function public.is_admin() to authenticated;
+revoke execute on function private.is_admin() from public, anon;
+grant execute on function private.is_admin() to authenticated;
+
+-- Drop the old public copy of is_admin (pre-2026-08-22 schema versions
+-- created it there, where PostgREST exposed it as an RPC endpoint).
+-- The policies above no longer reference it, so this drop is safe.
+drop function if exists public.is_admin();
 
 -- ============================================================
 -- AFTER RUNNING: promote the site admin (must have signed up first):
