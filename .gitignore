@@ -1,4 +1,1 @@
-# Local-only working files
-assets/_old/
-.claude/
-.DS_Store
+scripts/__pycache__/
