@@ -48,6 +48,7 @@ export async function onRequestPost(context) {
 function json(body, status) {
   return new Response(JSON.stringify(body), {
     status,
-    headers: { 'Content-Type': 'application/json' }
+    // _headers does not cover Pages Functions responses, so no-store lives here.
+    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
   });
 }
