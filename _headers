@@ -1,0 +1,27 @@
+# Cloudflare Pages security headers.
+#
+# The CSP allowlist mirrors exactly what the site loads; update it when adding
+# a new external script, style, font, or fetch target, or the browser will
+# silently block the resource:
+#   script-src   assets/*.js + supabase-js (jsDelivr) + Google Analytics
+#   style-src    styles.css + Google Fonts CSS + inline style="" attributes
+#   font-src     Google Fonts font files
+#   connect-src  Supabase (portal) + published Google Sheets CSVs (publication
+#                archive; docs.google.com 307s to *.googleusercontent.com) + GA4
+#   form-action  Formspree (contact + feedback forms)
+# No inline <script> blocks or inline event handlers anywhere — keep it that
+# way, or the CSP blocks them (that strictness is the point: injected script
+# can't run).
+
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://cdn.jsdelivr.net/npm/@supabase/ https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; media-src 'self'; connect-src 'self' https://umzvqtmbauyqxniaxrgs.supabase.co https://docs.google.com https://*.googleusercontent.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; form-action 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'none'; object-src 'none'; upgrade-insecure-requests
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Cross-Origin-Opener-Policy: same-origin
+
+# API responses are per-user and must never be cached.
+/api/*
+  Cache-Control: no-store

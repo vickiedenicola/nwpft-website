@@ -6,7 +6,7 @@
 <title>Resources | National Wild Pig Task Force</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 <meta name="description" content="Guides, research, data, and events for managing invasive wild pigs, curated by the National Wild Pig Task Force.">
 <link rel="canonical" href="https://nwptf.org/resources">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg"><link rel="icon" href="favicon.ico" sizes="any">
@@ -199,21 +199,6 @@
 
 <div data-layout="footer"></div>
 <script src="assets/layout.js"></script>
-<script>
-(function () {
-  var bar = document.getElementById('filterBar');
-  var cards = document.querySelectorAll('#resourceGrid .resource-card');
-  bar.addEventListener('click', function (e) {
-    var btn = e.target.closest('.filter-btn');
-    if (!btn) return;
-    bar.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
-    btn.classList.add('active');
-    var f = btn.getAttribute('data-filter');
-    cards.forEach(function (c) {
-      c.style.display = (f === 'all' || c.getAttribute('data-type') === f) ? '' : 'none';
-    });
-  });
-})();
-</script>
+<script src="assets/resource-filter.js"></script>
 </body>
 </html>

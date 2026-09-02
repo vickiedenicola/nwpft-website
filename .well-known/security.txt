@@ -1,0 +1,6 @@
+# Security contact for nwptf.org (RFC 9116).
+# Please report vulnerabilities privately; we appreciate responsible disclosure.
+Contact: mailto:communications@nwptf.org
+Expires: 2027-09-01T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://nwptf.org/.well-known/security.txt
