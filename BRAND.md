@@ -57,7 +57,7 @@ avoid light text below ~78% opacity for normal-size copy (WCAG AA 4.5:1).
 
 ## Imagery
 
-- Authentic U.S. feral-swine and NWPTF photography (animals, damage, trapping,
+- Authentic U.S. wild-pig and NWPTF photography (animals, damage, trapping,
   meetings). Avoid graphic/bloody content.
 - Photo bands carry a moss-green scrim so headings stay readable.
 - Sourcing & licensing tracked in `IMAGE_CREDITS.md` and `credits.html`.
@@ -93,7 +93,11 @@ academic jargon where a plain word works; sound like we're proving we belong;
 (both primary), 3) landowners (tertiary). Write for the first two by default;
 when landowners are the point, name them directly.
 
-Use "wild pigs" / "feral swine" interchangeably; both are accepted.
+**Terminology:** always call the animal "wild pigs" in our own writing. Do not
+use "feral swine", "feral hogs", "wild hogs", or "wild boar" except inside
+proper nouns and titles we don't control (e.g., USDA APHIS National Feral Swine
+Damage Management Program, SEAFWA Wild Hog Working Group, publication titles)
+or when explicitly listing the synonyms readers may know.
 
 ### By channel
 
