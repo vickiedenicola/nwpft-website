@@ -5,9 +5,13 @@ visual version lives at [`styleguide.html`](styleguide.html).
 
 ## Logo
 
-- **File:** `assets/nwptf-logo.png` (full color) with a 2× Retina variant
-  (`nwptf-logo@2x.png`), wired via `srcset`.
-- A brown wild-pig illustration paired with the wordmark; "PIG" is set in tan.
+- **File:** `assets/nwptf-logo.svg` (full color, used in the header and footer).
+  Raster fallbacks `assets/nwptf-logo.png` / `nwptf-logo@2x.png` exist for
+  contexts that can't use SVG (emails, share cards). A one-color variant lives at
+  `assets/nwptf-logo-bw.svg` for print/single-color uses.
+- A brown wild-pig illustration walking through the stacked wordmark
+  (NATIONAL / WILD PIG / TASK FORCE) in black. Master vector/EPS/AI files live
+  outside the repo with the design source files.
 - **On light backgrounds:** use the logo directly (e.g., the header).
 - **On dark backgrounds:** place the full-color logo on a **bone "chip"**
   (bone background, ~14–20px padding, 6px radius) rather than recoloring it — see
