@@ -104,7 +104,14 @@ fetching it twice).
 
 ## Adding papers
 
-Right now: edit `assets/publications.csv` and commit. Cloudflare Pages redeploys.
+Add the paper as a row in the Subcommittee's archive sheet — the published sheet
+`DATA_URL` points at. Edits there appear on the site directly, with no commit and
+no deploy.
+
+**Do not add papers to `assets/publications.csv`.** Since the handover it is only
+the fallback snapshot: the site never reads it while the sheet is up, and the
+Monday refresh workflow overwrites it from the sheet — so a row added by hand
+never renders and is gone within a week.
 
 ### Handing the archive to the Subcommittee
 

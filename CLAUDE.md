@@ -35,7 +35,7 @@ Pages do **not** contain their own header or footer markup. Instead, each page i
 | `issue.html` | `issue` | The Issue — background on wild pig impacts |
 | `resources.html` | `resources` | Page hero, filter bar + resource cards with inline JS filter logic |
 | `research.html` | `research` | **Featured research** — hand-written curated studies in static HTML, grouped in `<details>` category blocks, with an inline search script |
-| `publications.html` | `research` | **Publication archive** — the full literature collection, rendered from `assets/publications.csv` by `assets/publications.js` with theme/year/access filters and paging |
+| `publications.html` | `research` | **Publication archive** — the full literature collection, rendered by `assets/publications.js` from the Subcommittee's Google Sheet (`DATA_URL`), with `assets/publications.csv` as the fallback snapshot, with theme/year/access filters and paging |
 | `events.html` | `events` | Meetings and conferences |
 | `about.html` | `about` | Page hero, prose content, value cards, CTA |
 | `governance.html` | — | Subcommittees and objectives |
@@ -54,7 +54,11 @@ free to read is not permission to republish. Never paste in publisher abstracts;
 the `note` column is one original sentence. Full detail, including how to hand the
 archive over to a published Google Sheet, is in `docs/publication-archive.md`.
 
-To add papers, edit `assets/publications.csv` — not the HTML. The main nav keeps a
+To add papers, add a row to the Research Subcommittee's archive Google Sheet (the
+published-CSV link in `DATA_URL` at the top of `assets/publications.js`) — not the
+HTML, and not `assets/publications.csv`: the committed CSV is only the fallback
+snapshot, and a scheduled Action overwrites it from the sheet every Monday, so a
+row added there never renders and does not survive. The main nav keeps a
 single "Research" link to `research.html`; the archive is reached from that page
 and the footer.
 
