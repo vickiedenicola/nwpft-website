@@ -51,9 +51,18 @@
       c.hidden = visible === 0;
       if (visible > 0) { c.setAttribute('open', ''); }
     });
-    status.textContent = matches
-      ? matches + (matches === 1 ? ' study matches “' : ' studies match “') + raw + '”'
-      : 'No studies match “' + raw + '”. Try fewer or different terms.';
+    if (matches) {
+      status.textContent = matches +
+        (matches === 1 ? ' featured study matches “' : ' featured studies match “') + raw + '”';
+    } else {
+      // Zero hits here doesn't mean zero anywhere — hand the query to the
+      // full archive. Built with DOM nodes so the typed text is never HTML.
+      status.textContent = 'No featured studies match “' + raw + '”. ';
+      var link = document.createElement('a');
+      link.href = 'publications.html?q=' + encodeURIComponent(raw);
+      link.textContent = 'Search the full archive for “' + raw + '” →';
+      status.appendChild(link);
+    }
   }
 
   var timer;

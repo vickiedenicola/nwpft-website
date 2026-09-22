@@ -395,6 +395,10 @@
       });
       if (!all.length) { throw new Error('no rows'); }
       buildControls();
+      // A ?q= in the URL pre-fills the search — this is how the Featured
+      // research page hands off a query that matched nothing there.
+      var q = new URLSearchParams(location.search).get('q');
+      if (q) { els.search.value = q; }
       root.hidden = false;
       apply();
     })
