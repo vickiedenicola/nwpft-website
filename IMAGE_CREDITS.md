@@ -33,7 +33,7 @@ federal public-domain work, or used under a Creative Commons license.
 
 ## Logo & favicon
 
-- `assets/nwptf-logo.png` / `nwptf-logo@2x.png` — the official NWPTF mark, at full resolution.
+- `assets/nwptf-logo.png` / `nwptf-logo@2x.png` — the official NWPTF mark (October 2026 version).
 - `assets/favicon.svg` (with `favicon.ico`, `assets/favicon-32.png`, `assets/apple-touch-icon.png`) — boar-head icon derived from the NWPTF mark.
 
 ## Attribution notes

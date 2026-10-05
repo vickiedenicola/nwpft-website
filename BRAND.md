@@ -7,7 +7,9 @@ visual version lives at [`styleguide.html`](styleguide.html).
 
 - **File:** `assets/nwptf-logo.png` (full color) with a 2× Retina variant
   (`nwptf-logo@2x.png`), wired via `srcset`.
-- A brown wild-pig illustration paired with the wordmark; "PIG" is set in tan.
+- A brown wild-pig illustration walking above the stacked black wordmark
+  (NATIONAL / WILD PIG / TASK FORCE), adopted October 2026. Only a raster master
+  exists in the repo; ask the designer for vector files for print.
 - **On light backgrounds:** use the logo directly (e.g., the header).
 - **On dark backgrounds:** place the full-color logo on a **bone "chip"**
   (bone background, ~14–20px padding, 6px radius) rather than recoloring it — see
