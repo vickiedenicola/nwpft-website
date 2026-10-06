@@ -936,6 +936,14 @@ body[data-page="privacy"] .portal-heading:first-of-type { margin-top: 0.6rem; }
 .portal-actions .portal-status { margin-bottom: 0; padding: 0.55rem 0.9rem; }
 .form-field .optional { font-weight: 400; text-transform: none; letter-spacing: 0; }
 @media (max-width: 600px) {
+  /* Fit the top bar on phones: drop the CONNECT label, tighten spacing,
+     and let the icons wrap under the links on the narrowest screens. */
+  .topbar .wrap { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .topbar-right { flex: 1; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem 0.9rem; }
+  .topbar-feedback { white-space: nowrap; }
+  .topbar-connect { display: none; }
+  .topbar-social { gap: 0.4rem; }
+  .topbar-social a { width: 28px; height: 28px; }
   .portal-card { padding: 1.4rem; }
   .form-row-2, .check-grid { grid-template-columns: 1fr; }
 }
