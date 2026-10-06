@@ -640,6 +640,10 @@ a.news-card:hover .news-thumb { transform: scale(1.04); }
 .sg-meta strong { display: block; margin-bottom: 0.15rem; }
 .sg-meta code { font-size: 0.78rem; color: var(--ink-soft); }
 .sg-row { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin: 1.2rem 0; }
+.sg-dl-title { font-size: 1.05rem; margin: 2rem 0 0.4rem; }
+.sg-downloads { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1rem; }
+.sg-downloads .btn-ghost { color: var(--ink); border-color: var(--line); }
+.sg-downloads .btn-ghost:hover { background: var(--bone); }
 
 /* Research page: tighter intro under the hero */
 .section-intro { padding-top: 3.25rem; padding-bottom: 3.25rem; }

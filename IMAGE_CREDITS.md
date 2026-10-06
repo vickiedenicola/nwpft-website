@@ -33,8 +33,9 @@ federal public-domain work, or used under a Creative Commons license.
 
 ## Logo & favicon
 
-- `assets/nwptf-logo.png` / `nwptf-logo@2x.png` — the official NWPTF mark (October 2026 version).
-- `assets/favicon.svg` (with `favicon.ico`, `assets/favicon-32.png`, `assets/apple-touch-icon.png`) — boar-head icon derived from the NWPTF mark.
+- `assets/nwptf-logo.svg` (with PNG exports `nwptf-logo.png` / `nwptf-logo@2x.png`) — the official NWPTF mark (October 2026 version).
+- `assets/favicon.svg` (with `favicon.ico`, `assets/favicon-32.png`, `assets/apple-touch-icon.png`) — pig-head icon cropped from the vector NWPTF mark.
+- `assets/brand/` — downloadable logo and icon kit (vector masters from the designer plus exports).
 
 ## Attribution notes
 - **iStock** images are used under a standard iStock license; no public attribution is required.

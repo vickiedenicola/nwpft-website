@@ -16,7 +16,8 @@ The current production site is at [nwptf.org](https://nwptf.org/). This reposito
 └── assets/
     ├── styles.css           Shared stylesheet
     ├── layout.js            Injects the shared header and footer on every page
-    ├── nwptf-logo.png       Logo, transparent background (header; footer on a bone chip; @2x alongside)
+    ├── nwptf-logo.svg       Logo, vector (header; footer on a bone chip); PNG exports alongside
+    ├── brand/               Downloadable logo/icon kit, linked from styleguide.html
     └── nwptf-pig.jpg        Photography
 ```
 

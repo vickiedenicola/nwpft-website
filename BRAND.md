@@ -5,19 +5,27 @@ visual version lives at [`styleguide.html`](styleguide.html).
 
 ## Logo
 
-- **File:** `assets/nwptf-logo.png` (full color) with a 2× Retina variant
-  (`nwptf-logo@2x.png`), wired via `srcset`.
-- A brown wild-pig illustration walking above the stacked black wordmark
-  (NATIONAL / WILD PIG / TASK FORCE), adopted October 2026. Only a raster master
-  exists in the repo; ask the designer for vector files for print.
+- **File:** `assets/nwptf-logo.svg` (full color, vector) — used in the header,
+  footer, and style guide. `nwptf-logo.png` / `nwptf-logo@2x.png` are PNG
+  exports of the same file for places that can't take SVG (email, slides).
+- A brown wild-pig illustration walking above the stacked dark-brown wordmark
+  (NATIONAL / WILD PIG / TASK FORCE), adopted October 2026. Colors: pig
+  `#7b5421`, outline and wordmark `#332414`.
+- **Print / design masters:** the designer's `.ai`, `.eps`, and `.svg` files
+  are kept outside this repo. Use those for print; the repo SVG is a
+  web-cleaned copy.
 - **On light backgrounds:** use the logo directly (e.g., the header).
 - **On dark backgrounds:** place the full-color logo on a **bone "chip"**
   (bone background, ~14–20px padding, 6px radius) rather than recoloring it — see
   the footer. This keeps the pig and wordmark crisp. (A recolored light variant
   exists but is deprecated because the pig's detail washes out.)
 - **Don't:** recolor, stretch, add effects, or place the logo directly on a busy/dark photo.
-- **Favicon / app icon:** `favicon.ico`, `assets/favicon-32.png`,
-  `assets/apple-touch-icon.png` — the pig mark on a bone background.
+- **Favicon / app icon:** `assets/favicon.svg`, `favicon.ico`, `assets/favicon-32.png`,
+  `assets/apple-touch-icon.png` — the pig's head cropped from the vector logo, on a
+  bone background.
+- **Downloads:** `assets/brand/` holds the logo and icon files people can download
+  (SVG, EPS, AI, PNG, JPG, plus `nwptf-logo-kit.zip` with everything). The style
+  guide links to them. Rebuild the zip if any file in that folder changes.
 
 ## Color palette
 
