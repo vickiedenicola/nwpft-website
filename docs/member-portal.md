@@ -113,6 +113,26 @@ Run in the SQL editor and use "Download CSV", then import into the email tool.
 Whether opt-ins should *sync* automatically to the email tool (vs. periodic CSV
 export) is still an open decision.
 
+## Bot protection (CAPTCHA)
+
+The signup and sign-in forms carry a Cloudflare Turnstile check, so scripts
+can't create junk profiles or fire off sign-in emails. Most people never see
+it; Turnstile only shows a box when it is unsure. Setup, in this order:
+
+1. **Cloudflare dashboard → Turnstile → Add widget.** Hostnames `nwptf.org`
+   and `www.nwptf.org`, widget mode **Managed**. It gives a *site key* and a
+   *secret key*.
+2. **Put the site key in `assets/portal-config.js`** (`captchaSiteKey`) and
+   deploy. The site key is public and safe to commit.
+3. **Then** Supabase → Authentication → Attack Protection → enable CAPTCHA
+   protection, provider Turnstile, paste the *secret* key. Doing this before
+   step 2 is live makes every signup and sign-in fail.
+
+To switch it off: disable it in Supabase first, then clear `captchaSiteKey`.
+Local testing: Cloudflare's test site key `1x00000000000000000000AA` always
+passes; don't commit it. The CSP in `_headers` allows
+`challenges.cloudflare.com` for this.
+
 ## Deleting an account
 
 Members remove themselves with the "Remove my membership" button on

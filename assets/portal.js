@@ -73,6 +73,35 @@
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
   }
 
+  // ---------------------------------------------------------- captcha
+  // Cloudflare Turnstile guards the two forms that send sign-in emails.
+  // Once CAPTCHA protection is on in Supabase (Authentication > Attack
+  // Protection), those requests are refused without a fresh token. With no
+  // captchaSiteKey in portal-config.js the forms work without one.
+  // Turnstile's script calls this when it loads (?onload= on the pages).
+  var captcha = { id: null, token: '' };
+  window.nwptfCaptchaReady = function () {
+    var box = document.querySelector('[data-captcha]');
+    if (!box || !cfg.captchaSiteKey || !window.turnstile) return;
+    captcha.id = window.turnstile.render(box, {
+      sitekey: cfg.captchaSiteKey,
+      appearance: 'interaction-only',
+      callback: function (t) { captcha.token = t; },
+      'expired-callback': function () { captcha.token = ''; },
+      'error-callback': function () { captcha.token = ''; }
+    });
+  };
+  function captchaWaiting() { return !!cfg.captchaSiteKey && !captcha.token; }
+  function captchaToken() { return cfg.captchaSiteKey ? captcha.token : undefined; }
+  // Tokens are single-use: get a new one after every attempt.
+  function resetCaptcha() {
+    captcha.token = '';
+    if (captcha.id !== null && window.turnstile) window.turnstile.reset(captcha.id);
+  }
+  var CAPTCHA_WAIT = 'One moment: we are still checking that you are not a bot. ' +
+    'Try again in a few seconds, or refresh the page if this keeps happening.';
+  function captchaFailed(err) { return /captcha/i.test(err.message || ''); }
+
   var CHECK_OPTIONS = {
     interests: INTERESTS,
     committees: COMMITTEES,
@@ -223,16 +252,22 @@
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
       var email = form.elements.email.value.trim();
+      if (captchaWaiting()) { setStatus(statusBox, CAPTCHA_WAIT, 'error'); return; }
       setStatus(statusBox, 'Creating your profile…');
       var res = await sb.auth.signInWithOtp({
         email: email,
         options: {
           shouldCreateUser: true,
           data: profileFields(form),
-          emailRedirectTo: HERE + 'account.html'
+          emailRedirectTo: HERE + 'account.html',
+          captchaToken: captchaToken()
         }
       });
-      if (res.error) { setStatus(statusBox, res.error.message, 'error'); return; }
+      resetCaptcha();
+      if (res.error) {
+        setStatus(statusBox, captchaFailed(res.error) ? CAPTCHA_WAIT : res.error.message, 'error');
+        return;
+      }
       form.hidden = true;
       revealCodeForm();
       setStatus(statusBox,
@@ -255,13 +290,20 @@
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
       var email = form.elements.email.value.trim();
+      if (captchaWaiting()) { setStatus(statusBox, CAPTCHA_WAIT, 'error'); return; }
       setStatus(statusBox, 'Sending your sign-in code…');
       var res = await sb.auth.signInWithOtp({
         email: email,
-        options: { shouldCreateUser: false, emailRedirectTo: HERE + 'account.html' }
+        options: {
+          shouldCreateUser: false,
+          emailRedirectTo: HERE + 'account.html',
+          captchaToken: captchaToken()
+        }
       });
+      resetCaptcha();
       if (res.error) {
-        var friendly = /not allowed|not found|signup/i.test(res.error.message)
+        var friendly = captchaFailed(res.error) ? CAPTCHA_WAIT
+          : /not allowed|not found|signup/i.test(res.error.message)
           ? 'We could not find a member profile with that email. Check the spelling, or use "Become a member" below.'
           : res.error.message;
         setStatus(statusBox, friendly, 'error'); return;
