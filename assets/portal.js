@@ -227,7 +227,7 @@
       var r = await sb.auth.verifyOtp({ email: email, token: token, type: 'email' });
       if (r.error) {
         setStatus(statusBox,
-          'That code did not work. Codes expire after an hour, and requesting a new email replaces the old code. Use the code from the newest email.',
+          'That code did not work. Codes expire after 30 minutes, and requesting a new email replaces the old code. Use the code from the newest email.',
           'error');
         return;
       }

@@ -8,6 +8,10 @@ filled in by Supabase — leave them exactly as written.
 Sender identity (name + members@nwptf.org address) comes from the SMTP
 settings, not from these templates.
 
+Codes expire after **30 minutes** (Authentication → Sign In / Providers →
+Email → Email OTP Expiration = 1800 seconds, set 2026-10-07). The templates
+and the error message in `assets/portal.js` say so; change all three together.
+
 The portal signs members in with one-time email codes (no passwords), so the
 **Magic Link or OTP** template below is the one members see most; the "Reset
 password" template is now unused and can be left however it is.
@@ -39,7 +43,7 @@ Welcome to the National Wild Pig Task Force — confirm your email
     <img src="https://nwptf.org/assets/nwptf-logo.png" alt="National Wild Pig Task Force" width="200" style="display:block;margin:0 auto 24px;">
     <h2 style="color:#2b3723;font-size:20px;margin:0 0 14px;">One step to activate your membership</h2>
     <p style="color:#23271d;font-size:15px;line-height:1.55;">Thanks for joining the National Wild Pig Task Force &mdash; a network of researchers, managers, and policy professionals working on wild pigs around the world.</p>
-    <p style="color:#23271d;font-size:15px;line-height:1.55;">Type this code on the page where you signed up to confirm your email and activate your member profile. The code works once and expires after an hour.</p>
+    <p style="color:#23271d;font-size:15px;line-height:1.55;">Type this code on the page where you signed up to confirm your email and activate your member profile. The code works once and expires after 30 minutes.</p>
     <p style="text-align:center;margin:24px 0;"><strong style="font-size:26px;letter-spacing:6px;color:#2b3723;">{{ .Token }}</strong></p>
     <p style="font-size:12px;color:#4a5040;">Requesting a new email cancels this code &mdash; always use the one from the newest email. If you didn&rsquo;t request this, you can safely ignore this email.</p>
   </div>
@@ -153,7 +157,7 @@ Your NWPTF sign-in code
   <div style="max-width:520px;margin:0 auto;background:#ffffff;border-radius:12px;padding:32px;border:1px solid #e3ddcf;">
     <img src="https://nwptf.org/assets/nwptf-logo.png" alt="National Wild Pig Task Force" width="200" style="display:block;margin:0 auto 24px;">
     <h2 style="color:#2b3723;font-size:20px;margin:0 0 14px;">Here&rsquo;s your sign-in code</h2>
-    <p style="color:#23271d;font-size:15px;line-height:1.55;">Type this code into the sign-in page on nwptf.org to access your National Wild Pig Task Force member profile. The code works once and expires after an hour.</p>
+    <p style="color:#23271d;font-size:15px;line-height:1.55;">Type this code into the sign-in page on nwptf.org to access your National Wild Pig Task Force member profile. The code works once and expires after 30 minutes.</p>
     <p style="text-align:center;margin:24px 0;"><strong style="font-size:26px;letter-spacing:6px;color:#2b3723;">{{ .Token }}</strong></p>
     <p style="font-size:12px;color:#4a5040;">Requesting a new email cancels this code &mdash; always use the one from the newest email. If you didn&rsquo;t request this, you can safely ignore this message.</p>
   </div>
