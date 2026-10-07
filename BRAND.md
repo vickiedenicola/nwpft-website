@@ -24,7 +24,8 @@ visual version lives at [`styleguide.html`](styleguide.html).
   `assets/apple-touch-icon.png` — the pig's head cropped from the vector logo, on a
   bone background.
 - **Downloads:** `assets/brand/` holds the logo and icon files people can download
-  (SVG, EPS, AI, PNG, JPG, plus `nwptf-logo-kit.zip` with everything). The style
+  (SVG, EPS, PNG, JPG, plus `nwptf-logo-kit.zip` with everything). The `.ai` master
+  is left out until the designer re-saves it as PDF-compatible. The style
   guide links to them. Rebuild the zip if any file in that folder changes.
 
 ## Color palette
