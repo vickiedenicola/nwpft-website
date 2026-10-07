@@ -11,7 +11,7 @@ visual version lives at [`styleguide.html`](styleguide.html).
 - A brown wild-pig illustration walking above the stacked dark-brown wordmark
   (NATIONAL / WILD PIG / TASK FORCE), adopted October 2026. Colors: pig
   `#7b5421`, outline and wordmark `#332414`.
-- **Print / design masters:** the designer's `.ai`, `.eps`, and `.svg` files
+- **Print / design masters:** the designer's `.ai`, `.eps`, `.pdf`, and `.svg` files
   are kept outside this repo. Use those for print; the repo SVG is a
   web-cleaned copy.
 - **On light backgrounds:** use the logo directly (e.g., the header).
@@ -24,8 +24,9 @@ visual version lives at [`styleguide.html`](styleguide.html).
   `assets/apple-touch-icon.png` — the pig's head cropped from the vector logo, on a
   bone background.
 - **Downloads:** `assets/brand/` holds the logo and icon files people can download
-  (SVG, EPS, PNG, JPG, plus `nwptf-logo-kit.zip` with everything). The `.ai` master
-  is left out until the designer re-saves it as PDF-compatible. The style
+  (SVG, EPS, PDF, PNG, JPG, plus `nwptf-logo-kit.zip` with everything). The PDF
+  is the logo page of the designer's PDF export; the designer's `.ai` is not
+  published because it opens only in Illustrator. The style
   guide links to them. Rebuild the zip if any file in that folder changes.
 
 ## Color palette
