@@ -109,9 +109,64 @@ select * from mailing_list where 'Policy' = any(committees);  -- a subcommittee'
 select * from mailing_list where country <> 'United States';  -- international slice
 ```
 
-Run in the SQL editor and use "Download CSV", then import into the email tool.
-Whether opt-ins should *sync* automatically to the email tool (vs. periodic CSV
-export) is still an open decision.
+Run in the SQL editor and use "Download CSV" (set the row limit to "No limit"
+first; the editor stops at 100 rows by default). Once the Brevo sync below is
+live, Brevo lists stay current on their own and this export is only needed
+for one-off slices.
+
+## Brevo sync
+
+Supabase is the source of truth for who gets which emails; Brevo copies it.
+Two Cloudflare Pages functions do the work:
+
+- `functions/api/brevo-sync.js`: a Supabase Database Webhook sends every
+  change to `profiles` here. Each `email_prefs` category maps to one Brevo
+  list (the `LISTS` table at the top of the file): members are added to the
+  lists they chose and removed from the rest. An email change moves the
+  Brevo contact to the new address; a deleted account deletes the contact.
+- `functions/api/brevo-unsubscribe.js`: a Brevo webhook calls this when
+  someone clicks unsubscribe in a campaign. It clears that member's
+  `email_prefs`, so their account page shows "No emails", and that update
+  flows back through `brevo-sync.js` and removes them from every list.
+
+Known gap: someone who unsubscribed in Brevo and later ticks email boxes on
+the website is added back to the lists, but Brevo keeps them blocklisted
+until an admin unblocks the contact in Brevo.
+
+### Setup, in this order
+
+1. **Brevo lists.** Contacts → Lists, folder *NWPTF Active List*:
+   *NWPTF – Events* (ID 3), *NWPTF – General* (ID 6), *NWPTF – Interests*
+   (ID 7). The IDs live in `LISTS` in `brevo-sync.js`; a new category needs
+   a new list and an entry there (a `null` ID is skipped).
+2. **Brevo API key.** Settings → SMTP & API → API keys & MCP → Generate
+   API key: name *NWPTF website sync*, no expiration, Restricted with only
+   **Contacts: All**, MCP off. Leave Brevo's "block unauthorized IPs" off:
+   Cloudflare has no fixed IPs. Brevo expires a key after 90 days unused,
+   so if the site goes three months with no profile changes the sync
+   stops; "Last used on" on that page shows it, and the fix is a new key.
+3. **Cloudflare secrets.** Pages → the site → Settings → Environment
+   variables → add **encrypted** variables `BREVO_API_KEY` (step 2) and
+   `BREVO_SYNC_SECRET` (a long random string, e.g. from
+   `openssl rand -hex 32`). `SUPABASE_SECRET_KEY` is already there for
+   account deletion. Redeploy so the functions see them.
+4. **Supabase webhook.** Database → Webhooks → Create: table `profiles`,
+   events Insert, Update and Delete, type HTTP Request, method POST, URL
+   `https://nwptf.org/api/brevo-sync`, timeout 5000 ms, and an HTTP header
+   `x-sync-secret` set to the `BREVO_SYNC_SECRET` value.
+5. **Brevo webhook.** Settings → Webhooks → Marketing → Add: URL
+   `https://nwptf.org/api/brevo-unsubscribe?key=<BREVO_SYNC_SECRET>`, event
+   *Unsubscribed* only.
+6. **Backfill.** Run `update profiles set updated_at = now();` in the SQL
+   editor. Every row fires the webhook once, which fills the new lists and
+   fixes anything that drifted.
+7. **Test** with a throwaway account: sign up, change preferences, change
+   email, remove the account, and watch each step land in Brevo. Then
+   unsubscribe from a test campaign and check the account page shows
+   "No emails".
+
+Failed deliveries show up under Database → Webhooks (and in the
+`net._http_response` table); re-running step 6 is always safe.
 
 ## Bot protection (CAPTCHA)
 
@@ -148,6 +203,5 @@ the user. Either way the profile row cascades away with the auth user.
 
 ## Still open
 
-- Email tool choice (Brevo recommended) and SMTP hookup.
 - Open self-signup vs. admin-approval "pending" state — currently **open**
   (no dues as of 2026-06-18).

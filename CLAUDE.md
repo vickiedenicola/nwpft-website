@@ -68,9 +68,11 @@ Free member profiles (name, title, affiliation, phone, country, areas of
 interest, committees, granular email preferences) that feed an interest-segmented
 international mailing list. Supabase handles auth/DB/emails via
 `@supabase/supabase-js` from CDN — no build step; the only server code is
-`functions/api/delete-account.js` (Cloudflare Pages function for
-self-service membership removal, needs the `SUPABASE_SECRET_KEY` env var in
-the Cloudflare dashboard). Row-level security protects the data; the anon
+three Cloudflare Pages functions in `functions/api/`: `delete-account.js`
+(self-service membership removal, needs the `SUPABASE_SECRET_KEY` env var in
+the Cloudflare dashboard) and `brevo-sync.js` / `brevo-unsubscribe.js`
+(keep Brevo lists mirroring `email_prefs`, with Supabase as the source of
+truth; setup under "Brevo sync" in `docs/member-portal.md`). Row-level security protects the data; the anon
 key in `assets/portal-config.js` is safe to commit. The checkbox option
 lists live only in the `INTERESTS`/`COMMITTEES`/`ROLES`/`EMAIL_PREFS` arrays at the
 top of `assets/portal.js`. Setup, roster invites, and mailing-list export:
