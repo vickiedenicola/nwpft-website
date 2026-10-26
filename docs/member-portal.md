@@ -157,9 +157,19 @@ until an admin unblocks the contact in Brevo.
 5. **Brevo webhook.** Settings → Webhooks → Marketing → Add: URL
    `https://nwptf.org/api/brevo-unsubscribe?key=<BREVO_SYNC_SECRET>`, event
    *Unsubscribed* only.
-6. **Backfill.** Run `update profiles set updated_at = now();` in the SQL
-   editor. Every row fires the webhook once, which fills the new lists and
-   fixes anything that drifted.
+6. **Backfill.** Touch every row so each fires the webhook once, which
+   fills the lists and fixes anything that drifted. Do it in batches of
+   about 15 a few seconds apart; touching all rows at once sends ~150
+   requests together and Cloudflare answers most of them with 502:
+
+   ```sql
+   with b as (select id from profiles order by id limit 15 offset 0)
+   update profiles p set updated_at = now() from b where p.id = b.id;
+   -- then offset 15, 30, ... until it updates 0 rows
+   ```
+
+   Done 2026-10-26: all 147 profiles synced (General 145, Interests 143,
+   Events 145; 2 profiles with no email choices skipped).
 7. **Test** with a throwaway account: sign up, change preferences, change
    email, remove the account, and watch each step land in Brevo. Then
    unsubscribe from a test campaign and check the account page shows
