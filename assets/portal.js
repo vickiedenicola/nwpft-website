@@ -304,7 +304,7 @@
       if (res.error) {
         var friendly = captchaFailed(res.error) ? CAPTCHA_WAIT
           : /not allowed|not found|signup/i.test(res.error.message)
-          ? 'We could not find a member profile with that email. Check the spelling, or use "Become a member" below.'
+          ? 'We could not find a member profile with that email. Check the spelling, or use "Become a member" to create one.'
           : res.error.message;
         setStatus(statusBox, friendly, 'error'); return;
       }

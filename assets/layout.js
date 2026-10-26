@@ -36,6 +36,22 @@
       '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="' + ICONS.email + '"/></svg>' +
     '</a>';
   }
+  // Signed in? supabase-js keeps the session in localStorage under
+  // "sb-<project>-auth-token", so the header can tell without loading it.
+  function signedIn() {
+    try {
+      for (var i = 0; i < localStorage.length; i++) {
+        if (/^sb-.+-auth-token$/.test(localStorage.key(i))) return true;
+      }
+    } catch (e) {}
+    return false;
+  }
+  function memberLink() {
+    return signedIn()
+      ? '<a class="topbar-feedback" href="account.html">My Account</a>'
+      : '<a class="topbar-feedback" href="login.html">Join or Sign In</a>';
+  }
+
   function socialRow(cls) {
     return '<span class="' + cls + '">' +
       mailA() +
@@ -50,7 +66,7 @@
     '<div class="topbar"><div class="wrap">' +
       '<span class="topbar-left">Science-based control of invasive wild pigs across North America</span>' +
       '<span class="topbar-right">' +
-        '<a class="topbar-feedback" href="login.html">Member Login</a>' +
+        memberLink() +
         '<a class="topbar-feedback" href="feedback.html">Site Feedback</a>' +
         '<span class="topbar-connect">Connect</span>' +
         socialRow('topbar-social') +

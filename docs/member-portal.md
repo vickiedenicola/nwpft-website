@@ -14,7 +14,7 @@ jsDelivr CDN; row-level security (RLS) in Postgres is what protects the data.
 | File | Purpose |
 |---|---|
 | `signup.html` | Become a member — collects the full profile; no password (sign-in is by one-time email link) |
-| `login.html` | Sign in — enter email, receive a one-time sign-in link (linked as "Member Login" in the topbar) |
+| `login.html` | Sign in — enter email, receive a one-time sign-in link (linked from the topbar as "Join or Sign In", or "My Account" when signed in) |
 | `account.html` | Profile editor + change email / remove membership / sign out |
 | `reset-password.html` | Legacy stub — explains there are no passwords and points to login |
 | `admin.html` | Admin-only member roster: search, segment filters, CSV export (linked from the account page for admins) |

@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css?v=20261007a">
+<link rel="stylesheet" href="assets/styles.css?v=20261026a">
 </head>
 <body data-page="login">
 <div data-layout="header"></div>
@@ -21,13 +21,20 @@
   <div class="page-hero-bg"></div>
   <div class="wrap">
     <div class="kicker">Members</div>
-    <h1>Sign in</h1>
+    <h1>Join or sign in</h1>
   </div>
 </section>
 
 <section class="section">
   <div class="wrap">
-    <div class="portal-card portal-card-narrow">
+   <div class="portal-pair">
+    <div class="portal-card portal-card-join">
+      <h2 class="portal-heading">New here? Become a member</h2>
+      <p class="portal-intro">Membership is free and open to anyone working on wild pigs, anywhere in the world. Tell us what you work on and choose what you hear about. It takes about two minutes.</p>
+      <a class="btn btn-primary" href="signup.html">Become a member</a>
+    </div>
+    <div class="portal-card">
+      <h2 class="portal-heading">Already a member? Sign in</h2>
       <p class="portal-intro">No passwords here. Enter the email on your member profile and we&rsquo;ll send you a one-time sign-in code.</p>
       <div id="portal-status" class="portal-status"></div>
       <form id="login-form" class="contact-form portal-form" novalidate>
@@ -46,15 +53,15 @@
         <button type="submit" class="btn btn-dark">Sign in with code</button>
       </form>
       <p class="portal-links"><a href="#" id="code-toggle">Already have a sign-in code? Enter it here</a></p>
-      <p class="portal-links">New to the Task Force? <a href="signup.html">Become a member</a></p>
     </div>
+   </div>
   </div>
 </section>
 
 <div data-layout="footer"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.3/dist/umd/supabase.min.js" integrity="sha384-l8ah+VgaWtk1mvOe9VC+OirC6qHFF4yH7l7mKRidV9MSti3E9F463bMp6ZVN4kuC" crossorigin="anonymous"></script>
 <script src="assets/portal-config.js?v=20261007b"></script>
-<script src="assets/portal.js?v=20261007b"></script>
+<script src="assets/portal.js?v=20261026a"></script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&amp;onload=nwptfCaptchaReady" async defer></script>
 <script src="assets/layout.js"></script>
 </body>
